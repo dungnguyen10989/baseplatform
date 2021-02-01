@@ -1,0 +1,15 @@
+NSCameraUsageDescription = "To scan QR code/ barcode for payment, please allow MoMo to access your camera.";
+NSContactsUsageDescription = "Please allow MoMo to access your Contacts to select phone numbers faster.";
+NSFaceIDUsageDescription = "Please allow MoMo to use your FaceID to log in.";
+NSHealthShareUsageDescription = "To count your steps, please allow MoMo to access your Health feature.";
+NSHealthUpdateUsageDescription = "To count your steps, please allow MoMo to access your Health feature.";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Please allow MoMo to access your current location to find the nearest.";
+NSLocationAlwaysUsageDescription = "Please allow MoMo to access your current location to find the nearest.";
+NSLocationUsageDescription = "Please allow MoMo to access your current location to find the nearest.";
+NSLocationWhenInUseUsageDescription = "Please allow MoMo to access your current location to find the nearest.";
+NSPhotoLibraryAddUsageDescription = "To save images, please allow MoMo to access your Photo library.";
+NSPhotoLibraryUsageDescription = "To upload photos from your phone, please allow MoMo to access your Photo library.";
+NSBioIDCancelUsageDescription = "Skip";
+NSBioIDTouchIDUsageDescription = "Use TouchID to unlock MoMo";
+NSBioIDFaceIDUsageDescription = "Use FaceID to unlock MoMo";
+

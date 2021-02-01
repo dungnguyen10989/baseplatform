@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "637667981426",
+    "firebase_url": "https://baseplatform-f2661-default-rtdb.firebaseio.com",
+    "project_id": "baseplatform-f2661",
+    "storage_bucket": "baseplatform-f2661.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637667981426:android:41fe3b6fa36369bd36aaeb",
+        "android_client_info": {
+          "package_name": "com.baseplatform"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "637667981426-9u5hc51v8okle4p0gp3ptuiokcbfftj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdiLn-sW3VMyVasfz3TU5191lHwsObc80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "637667981426-9u5hc51v8okle4p0gp3ptuiokcbfftj4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "637667981426-qhosah8rvu4r8icmb8n5pak2jae2p3e2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dungnguyen.baseplatform"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

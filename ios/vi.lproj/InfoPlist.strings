@@ -1,0 +1,14 @@
+NSCameraUsageDescription = "Cho phép MoMo truy cập tính năng Camera để chụp ảnh, quét mã thanh toán QRCode, BarCode.";
+NSContactsUsageDescription = "Cho phép MoMo truy cập Danh bạ để đồng bộ danh bạ và truy cập danh bạ nhanh hơn.";
+NSFaceIDUsageDescription = "Cho phép MoMo truy cập FaceID để có thể đăng nhập bằng FaceID.";
+NSHealthShareUsageDescription = "Cho phép MoMo truy cập tính năng Health để đếm bước chân.";
+NSHealthUpdateUsageDescription = "Cho phép MoMo truy cập tính năng Health để đếm bước chân.";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Cho phép MoMo truy cập Vị trí để hiển thị vị trí hiện tại và tìm địa điểm gần đây nhất.";
+NSLocationAlwaysUsageDescription = "Cho phép MoMo truy cập Vị trí để hiển thị vị trí hiện tại và tìm địa điểm gần đây nhất.";
+NSLocationUsageDescription = "Cho phép MoMo truy cập Vị trí để hiển thị vị trí hiện tại và tìm địa điểm gần đây nhất.";
+NSLocationWhenInUseUsageDescription = "Cho phép MoMo truy cập Vị trí để hiển thị vị trí hiện tại và tìm địa điểm gần đây nhất.";
+NSPhotoLibraryAddUsageDescription = "Cho phép MoMo truy cập Thư viện hình ảnh để có thể lưu hình ảnh.";
+NSPhotoLibraryUsageDescription = "Cho phép MoMo truy cập Thư viện hình ảnh để cập nhật hình ảnh đại diện hay lựa chọn upload hình ảnh.";
+NSBioIDCancelUsageDescription = "Bỏ qua";
+NSBioIDTouchIDUsageDescription = "Sử dụng TouchID để mở khóa MoMo";
+NSBioIDFaceIDUsageDescription = "Sử dụng FaceID để mở khóa MoMo";
