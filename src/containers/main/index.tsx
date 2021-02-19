@@ -4,24 +4,18 @@ import React, {
   useCallback,
   memo,
   useRef,
+  useEffect,
 } from 'react';
 import { WebView, WebViewNavigation } from 'react-native-webview';
-import {
-  ScrollView,
-  RefreshControl,
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, View, Image, Text, TextInput } from 'react-native';
 import { IStack } from 'screen-props';
-import { _mBaseSchema, _mFeatureSchema, _mPostSchema } from '@database/schemas';
 import { _t } from '@i18n';
 import { assets } from '@assets';
-import { colors, dims, variants } from '@values';
-import { PopupManager } from '@utils/popup';
+import { colors, constants, variants } from '@values';
+import { PopupPrototype } from '@utils';
+import { routes } from '@navigator/routes';
+import { UIKit } from '@uikit';
+import Header from '@containers/header';
 
 interface Props extends IStack {}
 const defaultUri = 'https://remitano.com/btc/vn';
@@ -36,6 +30,12 @@ const ListPost = memo((props: Props) => {
   const [canGoBack, setCanGoBack] = useState(false);
   const [canGoForward, setCanGoForward] = useState(false);
 
+  useEffect(() => {
+    props.navigation.setOptions({
+      header: (p) => <Header {...p} />,
+    });
+  }, [props.navigation]);
+
   const onSubmitEditing = useCallback(() => {
     if (uriSearch) {
       const enhance = uriSearch.startsWith('http')
@@ -46,8 +46,9 @@ const ListPost = memo((props: Props) => {
     }
   }, [uriSearch]);
 
-  const onChangeText = useCallback((text: string) => {
-    setUriSearch(text);
+  const onPress = useCallback(() => {
+    // PopupPrototype.showProtectedOverlay();
+    // props.navigation.navigate(routes.webview);
   }, []);
 
   const onRefresh = useCallback(() => {
@@ -56,7 +57,7 @@ const ListPost = memo((props: Props) => {
   }, [webviewRef.current]);
 
   const onLoadStart = useCallback(() => {
-    // PopupManager.showProtectedOverlay();
+    // PopupPrototype.showProtectedOverlay();
   }, []);
 
   const onLoadEnd = useCallback(() => {
@@ -102,81 +103,15 @@ const ListPost = memo((props: Props) => {
   }, [webviewRef.current]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerWrapper}>
-        <View style={styles.headerContainer}>
-          <TouchableOpacity
-            style={styles.backWrapper}
-            onPress={onBack}
-            disabled={!canGoBack}>
-            <Image
-              source={assets.icon.ic_back}
-              style={[
-                styles.iconBack,
-                !canGoBack ? styles.disabled : undefined,
-              ]}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.backWrapper}
-            onPress={omnForward}
-            disabled={!canGoForward}>
-            <Image
-              source={assets.icon.ic_back}
-              style={[
-                styles.iconBack,
-                styles.iconForward,
-                !canGoForward ? styles.disabled : undefined,
-              ]}
-            />
-          </TouchableOpacity>
-
-          <View style={styles.inputContainer}>
-            <Image source={assets.icon.ic_search} style={styles.iconSearch} />
-
-            <TextInput
-              ref={inputRef}
-              style={styles.input}
-              value={uriSearch}
-              onChangeText={onChangeText}
-              returnKeyType="go"
-              autoCapitalize="none"
-              autoCorrect={false}
-              blurOnSubmit
-              keyboardType="url"
-              clearButtonMode="never"
-              placeholder={_t('enterAddress')}
-              onSubmitEditing={onSubmitEditing}
-              selectTextOnFocus
-            />
-
-            {uriSearch ? (
-              <TouchableOpacity onPress={onClear}>
-                <Image source={assets.icon.ic_close} style={styles.iconClose} />
-              </TouchableOpacity>
-            ) : null}
-          </View>
-        </View>
-      </View>
-
-      <ScrollView
-        contentContainerStyle={styles.container}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        <WebView
-          ref={webviewRef}
-          source={{ uri }}
-          onLoadStart={onLoadStart}
-          onLoadEnd={onLoadEnd}
-          renderLoading={renderLoading}
-          renderError={renderError}
-          style={styles.webview}
-          onNavigationStateChange={onNavigationStateChange}
-        />
-      </ScrollView>
-    </View>
+    <UIKit.View style={styles.container}>
+      {/* <Header {...props} /> */}
+      <UIKit.Button
+        title="next"
+        onPress={() => {
+          props.navigation.navigate(routes.productDetail);
+        }}
+      />
+    </UIKit.View>
   );
 });
 
@@ -185,6 +120,7 @@ export default ListPost;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.background,
   },
   webview: {
     flexGrow: -1,
@@ -204,16 +140,18 @@ const styles = StyleSheet.create({
     borderColor: colors.silver,
     justifyContent: 'flex-end',
     backgroundColor: colors.white,
-    paddingBottom: dims.halfPadding,
-    paddingHorizontal: dims.dfPadding,
-    paddingTop: dims.isAndroid ? dims.halfPadding : dims.statusBarHeight,
+    paddingBottom: constants.halfPadding,
+    paddingHorizontal: constants.dfPadding,
+    paddingTop: constants.isAndroid
+      ? constants.halfPadding
+      : constants.statusBarHeight,
   },
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   backWrapper: {
-    marginRight: dims.halfPadding,
+    marginRight: constants.halfPadding,
   },
   iconBack: {
     width: 20,
@@ -237,14 +175,14 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 2,
     borderColor: colors.silver,
-    paddingHorizontal: dims.halfPadding,
+    paddingHorizontal: constants.halfPadding,
   },
   input: {
     flex: 1,
-    paddingVertical: dims.halfPadding,
+    paddingVertical: constants.halfPadding,
     color: colors.gray,
     height: 40,
-    marginHorizontal: dims.halfPadding,
+    marginHorizontal: constants.halfPadding,
   },
   iconSearch: {
     width: variants.h4,

@@ -1,3 +1,4 @@
 import Overlay from './overlay';
+import Dialog from './dialog';
 
-export { Overlay };
+export { Overlay, Dialog };

@@ -1,6 +1,6 @@
 import DtoFeature from '@database/models/dto-feature';
 import { Database, Q } from '@nozbe/watermelondb';
-import { PrototypeManager } from '@utils/prototype';
+import { JsonPrototype } from '@utils';
 import { TABLES } from './schema';
 import SchemaManager from './schema-base';
 
@@ -31,7 +31,7 @@ export default class FeatureSchemaManager extends SchemaManager<DtoFeature> {
           return resolve(undefined);
         }
         const { params } = feature;
-        const paramsObj = PrototypeManager.json.tryParse(params);
+        const paramsObj = JsonPrototype.tryParse(params);
         this.log(`[GET FEATURE PARAMS ${code}] SUCCESS`, paramsObj);
         resolve(paramsObj);
       } catch (error) {
@@ -42,4 +42,4 @@ export default class FeatureSchemaManager extends SchemaManager<DtoFeature> {
   };
 }
 
-export const _mFeatureSchema = new FeatureSchemaManager(TABLES.FEATURE);
+export const mFeatureSchema = new FeatureSchemaManager(TABLES.FEATURE);

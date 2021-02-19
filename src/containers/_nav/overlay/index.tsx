@@ -1,15 +1,28 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import LottieView from 'lottie-react-native';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  DeviceEventEmitter,
+} from 'react-native';
 import { IOverlay, IStack } from 'screen-props';
 import { assets } from '@assets';
-import { colors, dims, variants } from '@values';
+import { colors, constants, events, variants } from '@values';
 
 interface Props extends IStack {}
 
 export default memo((props: Props) => {
   const params: IOverlay | undefined = props.route.params;
   const { style, img, label } = params || {};
+
+  // const dismissOverlay = useCallback(() => props.navigation.pop(), []);
+  // useEffect(() => {
+  //   DeviceEventEmitter.addListener(events.dismissOverlay, dismissOverlay);
+  //   return () =>
+  //     DeviceEventEmitter.removeListener(events.dismissOverlay, dismissOverlay);
+  // }, []);
 
   return (
     <View style={styles.container}>
@@ -27,14 +40,14 @@ export default memo((props: Props) => {
   );
 });
 
-const size = Math.min(dims.width, dims.height) / 4;
+const size = Math.min(constants.width, constants.height) / 4;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: dims.dfPadding,
+    padding: constants.dfPadding,
   },
   spinnerWrapper: {
     width: size,

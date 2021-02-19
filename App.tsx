@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import DatabaseProvider from '@nozbe/watermelondb/DatabaseProvider';
 import database from './src/database';
 import MainStackScreen from './src/navigator';

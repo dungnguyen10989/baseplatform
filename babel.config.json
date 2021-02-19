@@ -28,6 +28,8 @@
           "@navigator/": ["./src/navigator/"],
           "@services": ["./src/services"],
           "@services/": ["./src/services/"],
+          "@uikit": ["./src/components/uikit"],
+          "@uikit/": ["./src/components/uikit/"],
           "@utils": ["./src/utils"],
           "@utils/": ["./src/utils/"],
           "@values": ["./src/values"],

@@ -3,7 +3,7 @@ const wrapper = (
   ...args: any[]
 ) => {
   const logger =
-    action === 'log'
+    action === 'log' || action === 'logErr'
       ? console.log
       : action === 'warn'
       ? console.warn

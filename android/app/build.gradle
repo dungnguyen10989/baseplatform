@@ -2,6 +2,8 @@ apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 import com.android.build.OutputFile
 
@@ -17,6 +19,19 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+//    productFlavors {
+//        dev {
+//            applicationIdSuffix ".dev"
+//            resValue "string", "CodePushDeploymentKey", "QJ9Ofsg-fMV55Nx5rSx5EbnCZIxilld3zMakR"
+//            resValue "string", "app_name", "G Life Dev"
+//        }
+//        prod {
+//            applicationIdSuffix ""
+//            resValue "string", "CodePushDeploymentKey", "fXAkg_cJqQq9H3NnW2pyqX-kHADlhWL1V07uz"
+//            resValue "string", "app_name", "G Life"
+//        }
+//    }
+//
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -29,6 +44,8 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+        resValue "string", "CodePushDeploymentKey", "fXAkg_cJqQq9H3NnW2pyqX-kHADlhWL1V07uz"
+        // resValue "string", "app_name", "G Life"
     }
     splits {
         abi {

@@ -1,7 +1,5 @@
-import { _mFeatureSchema } from './schema-feature';
+import { mFeatureSchema } from './schema-feature';
+import { mBaseSchema } from './schema-base';
+import { mConfigSchema } from './schema-config';
 
-import { _mBaseSchema } from './schema-base';
-import { _mUserSchema } from './schema-user';
-import { _mPostSchema } from './schema-post';
-
-export { _mFeatureSchema, _mBaseSchema, _mPostSchema, _mUserSchema };
+export { mFeatureSchema, mBaseSchema, mConfigSchema };

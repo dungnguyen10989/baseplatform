@@ -2,8 +2,9 @@
 import { isString } from 'lodash';
 import i18n from 'i18n-js';
 import moment from 'moment';
+import { ConsoleUtils } from './log';
 
-class ArrayManager {
+class ArrayPrototype {
   static standardizedByUnique = (arr: Array<any>, uniqueId = 'id') => {
     return arr.reduce<Array<any>>((result, item) => {
       if (!result.find((i) => i[uniqueId] === item[uniqueId])) {
@@ -14,7 +15,7 @@ class ArrayManager {
   };
 }
 
-class StringManager {
+class StringPrototype {
   static isLetter = (s: string) => {
     if (isString(s) && s.length === 1) {
       return RegExp(/^\p{L}/, 'u').test(s);
@@ -25,14 +26,14 @@ class StringManager {
   static capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
   static isUpperCase = (s: string) => {
-    if (!StringManager.isLetter(s)) {
+    if (!StringPrototype.isLetter(s)) {
       return false;
     }
     return s.toUpperCase() === s;
   };
 
   static isLowerCase = (s: string) => {
-    if (!StringManager.isLetter(s)) {
+    if (!StringPrototype.isLetter(s)) {
       return false;
     }
     return s.toLowerCase() === s;
@@ -42,8 +43,8 @@ class StringManager {
     const arr = [...key];
     arr.forEach((item, index) => {
       if (
-        StringManager.isUpperCase(item) &&
-        StringManager.isLowerCase(arr[index - 1])
+        StringPrototype.isUpperCase(item) &&
+        StringPrototype.isLowerCase(arr[index - 1])
       ) {
         arr[index] = `${comma}${item}`;
       }
@@ -63,12 +64,12 @@ class StringManager {
           const value = obj[key];
           if (isString(value)) {
             const additional = nestedKey ? `${nestedKey}${comma}` : '';
-            obj[key] = `${prefix}${additional}${StringManager.standardizedKey(
+            obj[key] = `${prefix}${additional}${StringPrototype.standardizedKey(
               key,
               comma,
             )}`.toUpperCase();
           } else {
-            StringManager.mapKeyToValue(obj[key], key, prefix, comma);
+            StringPrototype.mapKeyToValue(obj[key], key, prefix, comma);
           }
         }
         resolve(true);
@@ -110,26 +111,35 @@ class StringManager {
     }
     const locale = i18n.currentLocale();
     const s = moment(date).locale(locale).format('dddd, Do MMMM, YYYY');
-    return StringManager.capitalize(s);
+    return StringPrototype.capitalize(s);
   };
 
-  static normalizeVNPhone = (phone: string, isRevert?: boolean) => {
+  static normalizeVNPhone = (
+    phone: string,
+    isRevert?: boolean,
+    prefix = '84',
+  ) => {
     if (!phone || !isString(phone)) {
       return '';
     }
     if (isRevert) {
-      return phone.startsWith('+84') ? phone.replace(/^.{3}/g, '0') : phone;
+      return phone.startsWith(prefix) ? phone.replace(/^.{3}/g, '0') : phone;
     }
-    return phone.startsWith('0') ? phone.replace(/^.{1}/g, '+84') : phone;
+    return phone.startsWith('0') ? phone.replace(/^.{1}/g, prefix) : phone;
   };
 
   static genBase64 = (
     data: string | null | undefined,
     backup?: string | null | undefined,
   ) => (data ? `data:image/jpg;base64,${data}` : backup);
+
+  static toCurrency = (_amount: string | number, currency = ' đ') => {
+    const amount = typeof _amount === 'string' ? parseFloat(_amount) : _amount;
+    return amount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + currency;
+  };
 }
 
-class NumberManager {
+class NumberPrototype {
   static uuidv4 = () => {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
       const r = (Math.random() * 16) | 0,
@@ -142,7 +152,7 @@ class NumberManager {
     Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-class JsonManager {
+class JsonPrototype {
   static tryParse = (jsonStr: any) => {
     if (!jsonStr) {
       return undefined;
@@ -166,4 +176,4 @@ class JsonManager {
   };
 }
 
-export { StringManager, NumberManager, JsonManager, ArrayManager };
+export { StringPrototype, NumberPrototype, JsonPrototype, ArrayPrototype };

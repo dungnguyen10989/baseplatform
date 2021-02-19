@@ -1,5 +1,5 @@
 import { Database, Model, Q, Query } from '@nozbe/watermelondb';
-import { ConsoleUtils } from '../../utils/log';
+import { ConsoleUtils } from '@utils/log';
 import { Subscription } from 'rxjs';
 
 const updateObj = (target = {}, creatorObj = {}) => {
@@ -176,4 +176,4 @@ class BaseSchema {
   };
 }
 
-export const _mBaseSchema = new BaseSchema();
+export const mBaseSchema = new BaseSchema();

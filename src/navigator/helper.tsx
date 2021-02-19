@@ -9,7 +9,7 @@ import {
   NavigationContainerRef,
 } from '@react-navigation/native';
 import { ConsoleUtils } from '@utils/log';
-import { ROUTES } from './routes';
+import { routes } from './routes';
 
 type NavProps = NavigationProp<any>;
 type NavState = NavigationState<any>;
@@ -22,7 +22,7 @@ const log = (title: string, message?: any) => {
 };
 
 export class NavManager {
-  static push = (nav: NavProps, route: keyof typeof ROUTES, params?: any) => {
+  static push = (nav: NavProps, route: keyof typeof routes, params?: any) => {
     try {
       nav.navigate(route, params);
       log(
