@@ -19,12 +19,21 @@ import {
 import ActionSheet from 'react-native-action-sheet';
 import Toast from 'react-native-simple-toast';
 import { PermissionsManager } from './permissions';
-import ImageCropPicker, { Image } from 'react-native-image-crop-picker';
+import ImageCropPicker, {
+  Image,
+  Options,
+} from 'react-native-image-crop-picker';
 import { ConsoleUtils } from './log';
 import { StackActions } from '@react-navigation/native';
 
+type PossibleArray<S, T> = S extends { multiple: true } ? T[] : T;
+
 type Response =
   | { success: true; images: Image[] }
+  | { success: false; error: string | Error };
+
+type ResponseSingle =
+  | { success: true; images: Image }
   | { success: false; error: string | Error };
 
 const showOverlay = (params?: IOverlay) => {
@@ -52,6 +61,16 @@ const GRAVITY = {
   center: Toast.CENTER,
   bottom: Toast.BOTTOM,
 };
+
+// const options: Options = {
+//   writeTempFile: true,
+//   mediaType: 'photo',
+//   includeBase64: true,
+//   compressImageQuality: 0.8,
+//   width: 960,
+//   height: 1280,
+//   multiple,
+// }
 
 export class PopupPrototype {
   static showOverlay = () => showOverlay();
@@ -95,7 +114,10 @@ export class PopupPrototype {
     staticClass.showActionSheetWithOptions(options, callback);
   };
 
-  static showCameraSheet = (title = ''): Promise<Response> => {
+  private static showCameraSheet = (
+    title = '',
+    multiple = false,
+  ): Promise<any> => {
     return new Promise((resolve) => {
       const callback = async (index: number) => {
         if (index > 1) {
@@ -114,15 +136,17 @@ export class PopupPrototype {
               ? ImageCropPicker.openCamera
               : ImageCropPicker.openPicker;
 
-            const images = await action({
+            const options: Options = {
               writeTempFile: true,
               mediaType: 'photo',
               includeBase64: true,
               compressImageQuality: 0.8,
               width: 960,
               height: 1280,
-              multiple: true,
-            });
+              multiple,
+            };
+
+            const images = (await action(options)) as any;
             resolve({ success: true, images });
           } else {
             PopupPrototype.alert(
@@ -148,6 +172,13 @@ export class PopupPrototype {
       );
     });
   };
+
+  static showCameraSheetMultiple = (title?: string): Promise<Response> =>
+    PopupPrototype.showCameraSheet(title, true);
+
+  static showCameraSheetSingle = (title?: string): Promise<ResponseSingle> =>
+    PopupPrototype.showCameraSheet(title, false);
+
   static showShareActionSheetWithOptions = (
     options: ShareOption,
     failureCallback: (error: Error) => void,

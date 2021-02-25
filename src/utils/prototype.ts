@@ -133,9 +133,21 @@ class StringPrototype {
     backup?: string | null | undefined,
   ) => (data ? `data:image/jpg;base64,${data}` : backup);
 
-  static toCurrency = (_amount: string | number, currency = ' đ') => {
-    const amount = typeof _amount === 'string' ? parseFloat(_amount) : _amount;
-    return amount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + currency;
+  static toCurrency = (
+    _amount: string | number,
+    fixedCount = 2,
+    currency = ' đ',
+  ) => {
+    try {
+      const amount =
+        typeof _amount === 'string' ? parseFloat(_amount) : _amount;
+      return (
+        amount.toFixed(fixedCount).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') +
+        currency
+      );
+    } catch (error) {
+      return '';
+    }
   };
 }
 
@@ -176,4 +188,12 @@ class JsonPrototype {
   };
 }
 
-export { StringPrototype, NumberPrototype, JsonPrototype, ArrayPrototype };
+const isNullOrUndefined = (s: any) => s === undefined || s === null;
+
+export {
+  StringPrototype,
+  NumberPrototype,
+  JsonPrototype,
+  ArrayPrototype,
+  isNullOrUndefined,
+};

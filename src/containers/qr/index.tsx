@@ -1,4 +1,4 @@
-import React, { useState, memo, useEffect } from 'react';
+import React, { useState, memo, useEffect, useCallback } from 'react';
 import { StyleSheet } from 'react-native';
 import { IStack } from 'screen-props';
 import { mConfigSchema } from '@database/schemas';
@@ -17,6 +17,11 @@ const QR = memo((props: Props) => {
   const db = useDatabase();
   const [qr, setQr] = useState('');
 
+  const onReFetch = useCallback(() => {
+    PopupPrototype.showOverlay();
+    silentFetch(() => PopupPrototype.dismissOverlay());
+  }, []);
+
   useEffect(() => {
     mConfigSchema.findConfigByName(db, configs.qr).then((value) => {
       if (value) {
@@ -24,16 +29,16 @@ const QR = memo((props: Props) => {
         if (json) {
           setQr(JsonPrototype.tryParse(json));
         } else {
-          PopupPrototype.showOverlay();
-          silentFetch(() => PopupPrototype.dismissOverlay());
+          onReFetch();
         }
       }
     });
-  }, []);
+  }, [onReFetch]);
 
-  const uri = qr ? `data:image/png;base64,${qr}` : '';
+  const uri = qr ? `data:image/png;base64,${qr}` : 'https://';
+
   return (
-    <UIKit.Container PADDING alignItems justifyContent>
+    <UIKit.Container padding style={styles.container}>
       <UIKit.Image source={{ uri }} resizeMode="cover" style={styles.qr} />
       <UIKit.Text style={styles.label}>BABAZA - QRCODE</UIKit.Text>
     </UIKit.Container>
@@ -44,8 +49,8 @@ export default QR;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: colors.background,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   label: {
     fontSize: variants.h4,

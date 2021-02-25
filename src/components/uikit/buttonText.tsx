@@ -15,9 +15,7 @@ import {
 } from 'custom-ui-kit';
 import Text from './text';
 import Touchable from './touchable';
-
-import { variants, colors, constants } from '@values';
-
+import { constants } from '@values';
 import { destructPropsToStyle } from './helper';
 
 export interface Props
@@ -59,8 +57,6 @@ const FuncComponent = memo((props: PropsWithChildren<Props>) => {
 
 (FuncComponent as ComponentType<Props>).defaultProps = {
   br: 2,
-  fontSize: variants.normal,
-  color: colors.textColor,
   paddingV: constants.halfPadding,
 };
 

@@ -1,17 +1,11 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { StyleSheet, ImageBackground } from 'react-native';
-import { IStack } from 'screen-props';
-import {
-  mBaseSchema,
-  mConfigSchema,
-  mFeatureSchema,
-  mPostSchema,
-} from '@database/schemas';
+import { mConfigSchema } from '@database/schemas';
 import { _t } from '@i18n';
 import { assets } from '@assets';
-import { colors, configs, constants } from '@values';
+import { colors, configs } from '@values';
 import { UIKit } from '@uikit';
-import { StackHeaderProps, useHeaderHeight } from '@react-navigation/stack';
+import { StackHeaderProps } from '@react-navigation/stack';
 import { routes } from '@navigator/routes';
 import { useDatabase } from '@nozbe/watermelondb/hooks';
 import { JsonPrototype, PopupPrototype } from '@utils';
@@ -25,7 +19,7 @@ interface Props extends StackHeaderProps {}
 
 const Header = memo((props: Props) => {
   const db = useDatabase();
-  const { left, right, top, bottom } = props.insets;
+  const { top } = props.insets;
   const [localUser, setLocalUser] = useState<any>({});
 
   useEffect(() => {
@@ -45,11 +39,13 @@ const Header = memo((props: Props) => {
   }, [props.navigation]);
 
   const onAvatar = useCallback(() => {
-    if (localUser) {
-      PopupPrototype.showCameraSheet().then((val) => console.log('valll', val));
-      localUser.shop.status_str = 'abc' + new Date().getTime();
-      mConfigSchema.addOrUpdateConfig(db, configs.user, localUser);
-    }
+    // if (localUser) {
+    //   PopupPrototype.showCameraSheetSingle().then((val) =>
+    //     console.log('valll', val),
+    //   );
+    //   localUser.shop.status_str = 'abc' + new Date().getTime();
+    //   mConfigSchema.addOrUpdateConfig(db, configs.user, localUser);
+    // }
   }, [props.navigation, localUser]);
 
   return (

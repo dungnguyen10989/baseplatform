@@ -1,4 +1,4 @@
-import { colors, constants } from '@values';
+import { colors, constants, variants } from '@values';
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
@@ -6,6 +6,12 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'flex-end',
     marginRight: constants.dfPadding,
+  },
+  topButtonText: {
+    color: colors.brightRed,
+    fontSize: variants.subTitle,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   titleStatistical: {
     fontWeight: 'bold',

@@ -12,7 +12,7 @@ import Text from './text';
 import { colors, constants } from '@values';
 
 interface Props {
-  message?: string;
+  message?: any;
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   color?: string;
@@ -43,7 +43,7 @@ const FuncComponent = (props: Props) => {
 
       <Text numberOfLines={2} style={[styles.text, textStyle]} color={color}>
         {'  '}
-        {message}
+        {`${message}`}
       </Text>
     </View>
   );

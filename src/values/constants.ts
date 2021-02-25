@@ -27,6 +27,7 @@ const constants = {
   bottomSpace: isIphoneX ? 34 : 0,
   dfPadding: 16,
   halfPadding: 8,
+  quarterPadding: 4,
   width,
   height,
   isIphoneX,
@@ -47,6 +48,8 @@ const constants = {
 const colors = {
   bg: '#0F262E',
   primary: '#2E302F',
+  primaryBlue: '#2980b9',
+  primaryGreen: 'rgb(144,185,181)',
   primaryYellow: '#FEDE10',
   primaryGrayYellow: '#937129',
   primaryGrayYellow61: 'rgba(147, 113, 41, 0.61)',
@@ -67,6 +70,7 @@ const colors = {
   white8: 'rgba(255,255,255,0.8)',
   white9: 'rgba(255,255,255,0.9)',
 
+  black333: '#333',
   black: 'rgba(0,0,0,1)',
   black1: 'rgba(0,0,0,0.1)',
   black2: 'rgba(0,0,0,0.2)',

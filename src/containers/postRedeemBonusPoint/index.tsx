@@ -80,7 +80,7 @@ const ProductDetail = memo((props: Props) => {
       PopupPrototype.showOverlay();
       fetchAPI('auth/login', 'post', values).then((val) => {
         PopupPrototype.dismissOverlay();
-        if (val.data) {
+        if (val.success) {
           // updateLocalAuth(db, val.data.user);
         } else {
           formikHelpers.setFieldError('username', _t('unAuthorization'));
@@ -139,6 +139,8 @@ const ProductDetail = memo((props: Props) => {
       }
     });
   }, []);
+
+  console.log('form', form.values);
 
   return (
     <UIKit.Container>
@@ -231,7 +233,6 @@ const ProductDetail = memo((props: Props) => {
             <UIKit.FastImage
               style={styles.image}
               source={{ uri: form.values.imageUri }}
-              withSandWatch={false}
             />
             <UIKit.VectorIcons name="ios-camera" style={styles.camera} />
           </UIKit.Touchable>

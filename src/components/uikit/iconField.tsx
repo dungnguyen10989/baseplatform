@@ -5,7 +5,7 @@ import { ITextFieldProps } from './input';
 import { colors, constants } from '@values';
 import FastImage from './fastImage';
 import View from './view';
-import TextField from './input';
+import TextField from './textField';
 import { ImageStyle } from 'react-native-fast-image';
 
 interface Props extends ITextFieldProps {
@@ -14,7 +14,7 @@ interface Props extends ITextFieldProps {
   containerStyle?: StyleProp<ViewStyle>;
 }
 
-const IconInput = memo(
+const IconField = memo(
   forwardRef<TextInput, Props>((props, ref) => {
     const {
       iconSource: source,
@@ -33,7 +33,7 @@ const IconInput = memo(
         <TextField
           {...rest}
           ref={ref as any}
-          containerStyle={styles.input}
+          style={styles.input}
           borderWidth={0}
         />
       </View>
@@ -41,7 +41,7 @@ const IconInput = memo(
   }),
 );
 
-export default IconInput;
+export default IconField;
 
 const styles = StyleSheet.create({
   container: {

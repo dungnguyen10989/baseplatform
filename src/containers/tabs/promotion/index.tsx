@@ -1,4 +1,11 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { UIKit } from '@uikit';
 import { PopupPrototype, StringPrototype } from '@utils';
 import styles from './styles';
@@ -6,43 +13,89 @@ import { _t } from '@i18n';
 import { fetchAPI, HttpResponse } from '@services';
 import { IStack } from 'screen-props';
 import { colors, constants, variants } from '@values';
+import { assets } from '@assets';
+import { routes } from '@navigator/routes';
 
 interface Props extends IStack {}
 
-const Homepage = memo((props: Props) => {
-  const [products, setProducts] = useState<HttpResponse>();
+const api = (params?: any) =>
+  fetchAPI('get/auth/app/shop/promotion', 'get', params);
 
-  const getData = useCallback(() => {
-    PopupPrototype.showOverlay();
-    fetchAPI('get/auth/app/shop/product', 'get').then((response) => {
-      setProducts(response);
-      PopupPrototype.dismissOverlay();
+const Homepage = memo((props: Props) => {
+  const [promos, setPromos] = useState<Array<any>>([]);
+  const [error, setError] = useState<any>();
+  const [refreshing, setRefreshing] = useState(false);
+  const loadingMore = useRef(false);
+
+  const initFetch = useCallback((showLoading?: boolean) => {
+    showLoading ? PopupPrototype.showOverlay() : setRefreshing(true);
+    api().then((val) => {
+      showLoading ? PopupPrototype.dismissOverlay() : setRefreshing(false);
+      if (val.data) {
+        setPromos(val.data.promotions.data);
+        setError(undefined);
+      } else {
+        setError(val.error);
+      }
     });
   }, []);
 
-  useEffect(getData, []);
+  useEffect(initFetch.bind(null, true), [initFetch]);
+  const onRefresh = useCallback(initFetch, [initFetch]);
 
-  const renderItem = useCallback((info: { item: any; index: number }) => {
-    return (
-      <UIKit.Touchable
-        style={[
-          styles.item,
-          info.index % 2 === 0 ? styles.itemLeft : styles.itemRight,
-        ]}>
-        <UIKit.FastImage
-          source={{ uri: info.item.medias?.[0].source }}
-          style={styles.img}
-        />
-        <UIKit.Text style={styles.name}>{info.item.name}</UIKit.Text>
-        <UIKit.Text style={styles.amount}>
-          {StringPrototype.toCurrency(info.item.amount)}
-        </UIKit.Text>
-      </UIKit.Touchable>
-    );
+  const onLoadMore = useCallback(() => {
+    if (!loadingMore.current) {
+      loadingMore.current = true;
+      const len = promos?.length;
+      const page = Math.ceil(len / constants.pageSize) + 1;
+      api({ page }).then((val) => {
+        loadingMore.current = false;
+        if (val.data) {
+          val.data.promotions?.data?.forEach((i: any) => {
+            if (!promos.find((cus) => cus.id === i.id)) {
+              promos.push(i);
+            }
+          });
+          setPromos(promos);
+          setError(undefined);
+        }
+      });
+    }
+  }, [promos, loadingMore.current]);
+
+  const onItemPress = useCallback((item: any) => {
+    props.navigation.navigate(routes.promoDetail, {
+      data: item,
+      title: item.name,
+    });
   }, []);
 
+  const renderItem = useCallback(
+    (info: { item: any; index: number }) => {
+      return (
+        <UIKit.Touchable
+          onPress={onItemPress.bind(null, info.item)}
+          style={[
+            styles.item,
+            info.index % 2 === 0 ? styles.itemLeft : styles.itemRight,
+          ]}>
+          <UIKit.FastImage
+            source={{ uri: info.item.medias?.[0]?.source }}
+            withSandWatch
+            style={styles.img}
+          />
+          <UIKit.Text style={styles.name}>{info.item.name}</UIKit.Text>
+          <UIKit.Text style={styles.amount}>
+            {StringPrototype.toCurrency(info.item.amount)}
+          </UIKit.Text>
+        </UIKit.Touchable>
+      );
+    },
+    [onItemPress],
+  );
+
   const renderHeader = useCallback(
-    () => <UIKit.Text style={styles.title}>{_t('_nav.tab1')}</UIKit.Text>,
+    () => <UIKit.Text style={styles.title}>{_t('_nav.tab2')}</UIKit.Text>,
     [],
   );
 
@@ -52,6 +105,9 @@ const Homepage = memo((props: Props) => {
         data={data}
         renderItem={renderItem}
         ListHeaderComponent={renderHeader}
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        onEndReached={onLoadMore}
         numColumns={2}
         contentContainerStyle={styles.list}
         separator={
@@ -65,25 +121,22 @@ const Homepage = memo((props: Props) => {
   }, []);
 
   const renderContent = useMemo(() => {
-    if (!products) {
-      return null;
-    }
-    if (!products.success) {
+    if (error) {
       return (
         <UIKit.View style={styles.errorFetching}>
-          <UIKit.Touchable onPress={getData}>
+          <UIKit.Touchable onPress={initFetch}>
             <UIKit.Empty label={_t('errorFetching')} />
           </UIKit.Touchable>
         </UIKit.View>
       );
     }
-    return renderInfo(products.data?.products?.data);
-  }, [products, renderInfo]);
+    return renderInfo(promos);
+  }, [promos, renderInfo]);
 
   return (
-    <UIKit.Container PADDING_H>
+    <UIKit.Container paddingH>
       <UIKit.ButtonText
-        title={_t('postProduct')}
+        title={_t('postPromotion')}
         underline
         color={colors.brightRed}
         fontSize={variants.subTitle}

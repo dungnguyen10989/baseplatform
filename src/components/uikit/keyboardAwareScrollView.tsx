@@ -1,17 +1,30 @@
-import React, { ComponentType, memo, PropsWithChildren } from 'react';
+import React, {
+  ComponentType,
+  forwardRef,
+  memo,
+  PropsWithChildren,
+  useMemo,
+} from 'react';
 import {
   KeyboardAwareScrollView,
   KeyboardAwareScrollViewProps,
 } from 'react-native-keyboard-aware-scroll-view';
-import { IModifiersSpacing } from 'custom-ui-kit';
+
+import { generateStyle, IContainerProps } from './container';
 
 type IKeyboardAwareScrollViewProps = PropsWithChildren<
-  Partial<KeyboardAwareScrollViewProps> & IModifiersSpacing & {}
+  Partial<KeyboardAwareScrollViewProps> & IContainerProps & {}
 >;
 
-const FuncComponent = (props: IKeyboardAwareScrollViewProps) => {
-  return <KeyboardAwareScrollView {...props} />;
-};
+const FuncComponent = forwardRef<
+  KeyboardAwareScrollView,
+  IKeyboardAwareScrollViewProps
+>((props, ref) => {
+  const { padding, paddingH, paddingV, color, style, safe, ...rest } = props;
+  const _style = useMemo(() => generateStyle(props), [props]);
+
+  return <KeyboardAwareScrollView {...rest} ref={ref} style={_style} />;
+});
 
 export const defaultKeyboardAwareProps: KeyboardAwareScrollViewProps = {
   enableAutomaticScroll: true,
@@ -21,7 +34,6 @@ export const defaultKeyboardAwareProps: KeyboardAwareScrollViewProps = {
   keyboardShouldPersistTaps: 'handled',
   showsVerticalScrollIndicator: false,
   showsHorizontalScrollIndicator: false,
-  extraHeight: 200,
   keyboardDismissMode: 'interactive',
 };
 

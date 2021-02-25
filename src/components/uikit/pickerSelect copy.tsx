@@ -1,14 +1,12 @@
 import React, {
   ComponentType,
   createRef,
-  MutableRefObject,
   PropsWithChildren,
   PureComponent,
   RefObject,
 } from 'react';
 import {
   Keyboard,
-  Modal,
   Platform,
   TouchableOpacity,
   View,
@@ -18,21 +16,17 @@ import {
   StyleProp,
   TextStyle,
 } from 'react-native';
+import Text from './text';
 import { Modalize } from 'react-native-modalize';
 import commonStyles from './styles';
-import Text from './text';
-import Touchable from './touchable';
-
 import { Picker } from '@react-native-picker/picker';
 import {
   PickerProps,
   PickerItemProps,
-  ItemValue,
 } from '@react-native-picker/picker/typings/Picker';
 import { isEqual } from 'lodash';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { variants, colors } from '@values';
-import { _t } from '@i18n';
 
 export interface IPickerSelectProps
   extends Partial<PickerProps>,
@@ -127,11 +121,15 @@ export default class PickerSelect extends PureComponent<
     });
 
     this.modalRef = createRef<Modalize>();
+
     this.state = {
       selectedItem,
       showPicker: false,
       orientation: 'portrait',
     };
+
+    this.onUpArrow = this.onUpArrow.bind(this);
+    this.onDownArrow = this.onDownArrow.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
     this.onOrientationChange = this.onOrientationChange.bind(this);
     this.togglePicker = this.togglePicker.bind(this);
@@ -150,21 +148,13 @@ export default class PickerSelect extends PureComponent<
 
   getValue = () => this.state.selectedItem;
 
+  onUpArrow = () => this.togglePicker(this.props.onUpArrow);
+  onDownArrow = () => this.togglePicker(this.props.onDownArrow);
+
   onValueChange = (value: any, index: number) => {
     const { onValueChange } = this.props;
     onValueChange && onValueChange(value, index);
     this.setState({ selectedItem: this.props.items[index] });
-  };
-
-  onDone = () => {
-    const { items, onValueChange } = this.props;
-    const { selectedItem } = this.state;
-    const result = selectedItem?.value ? selectedItem : items[0];
-
-    const index = items.findIndex((i) => i.value === result.value);
-    this.setState({ selectedItem: result });
-    onValueChange?.(result.value as ItemValue, index);
-    this.togglePicker();
   };
 
   onOrientationChange(e: NativeSyntheticEvent<any>) {
@@ -217,8 +207,7 @@ export default class PickerSelect extends PureComponent<
 
   renderIOSPicker() {
     const { native, custom } = destructProps(this.props);
-    const { selectedItem, showPicker } = this.state;
-
+    const { selectedItem } = this.state;
     return (
       <View style={styles.viewContainer}>
         <TouchableOpacity
@@ -227,39 +216,30 @@ export default class PickerSelect extends PureComponent<
           <View
             pointerEvents="box-only"
             style={[custom.labelContainerStyle, styles.labelContainer]}>
-            <Text style={[custom.labelStyle, commonStyles.flex1]}>
-              {selectedItem?.label}
+            <Text
+              style={[custom.labelStyle, commonStyles.flex1]}
+              numberOfLines={1}>
+              {selectedItem ? selectedItem.label : undefined}
             </Text>
             <FontAwesome name="caret-down" size={this.props.caretSize} />
           </View>
         </TouchableOpacity>
 
-        <Modal
-          visible={showPicker}
-          transparent
-          animationType="slide"
-          supportedOrientations={['portrait', 'landscape']}
-          onOrientationChange={this.onOrientationChange}
-          {...custom.modalProps}>
-          <View style={styles.modal}>
-            <View style={styles.modalViewMiddle}>
-              <TouchableOpacity
-                // onPress={this.togglePicker.bind(this, undefined)}
-                onPress={this.onDone}>
-                <Text style={styles.done}>{_t('done').toLowerCase()}</Text>
-              </TouchableOpacity>
-            </View>
-            <Picker
-              onValueChange={this.onValueChange}
-              selectedValue={
-                selectedItem ? selectedItem.value : this.props.items[0].value
-              }
-              {...native}
-              style={[styles.picker, native.style]}>
-              {this.renderPickerItems()}
-            </Picker>
-          </View>
-        </Modal>
+        <Modalize
+          ref={this.modalRef}
+          adjustToContentHeight
+          handlePosition="inside"
+          useNativeDriver
+          withHandle
+          withOverlay
+          withReactModal>
+          <Picker
+            onValueChange={this.onValueChange}
+            selectedValue={selectedItem ? selectedItem.value : undefined}
+            {...native}>
+            {this.renderPickerItems()}
+          </Picker>
+        </Modalize>
       </View>
     );
   }
@@ -311,24 +291,20 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
   },
-  modalViewTop: {
-    flex: 1,
-    // backgroundColor: colors.overlay,
-  },
   modal: {
     flex: 1,
+    backgroundColor: colors.overlay,
     justifyContent: 'flex-end',
-  },
-  picker: {
-    backgroundColor: colors.silver,
   },
   modalViewMiddle: {
     height: 44,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 10,
-    backgroundColor: colors.black333,
+    backgroundColor: colors.background,
+    borderTopWidth: 0.5,
+    borderTopColor: colors.borders,
     zIndex: 2,
   },
   chevronContainer: {
@@ -354,9 +330,11 @@ export const styles = StyleSheet.create({
     borderColor: colors.button,
   },
   done: {
-    color: colors.white,
+    color: colors.button,
     fontWeight: 'bold',
-    fontSize: variants.title,
+    fontSize: 15,
+    paddingTop: 1,
+    paddingRight: 2,
   },
   modalViewBottom: {
     justifyContent: 'center',

@@ -105,12 +105,18 @@ const TextField = forwardRef<TextInput, ITextFieldProps>((props, ref) => {
 
   // local value for input
   const [localValue, setLocalValue] = useState(
-    formID && formProps ? formProps.values[formID] : value,
+    formID && formProps
+      ? formProps.values[formID]
+        ? `${formProps.values[formID]}`
+        : ''
+      : value
+      ? `${value}`
+      : '',
   );
 
   useEffect(() => {
     if (!formID && !formProps) {
-      setLocalValue(value);
+      setLocalValue(value ? `${value}` : '');
     }
   }, [value]);
 
@@ -266,6 +272,7 @@ const TextField = forwardRef<TextInput, ITextFieldProps>((props, ref) => {
           returnKeyType={nextRef && nextRef.current ? 'next' : returnKeyType}
           onSubmitEditing={_onSubmitEditing}
         />
+
         {renderClearButton}
       </View>
       {withError && withError !== 'none' ? (
@@ -280,7 +287,7 @@ const TextField = forwardRef<TextInput, ITextFieldProps>((props, ref) => {
 
 (TextField as ComponentType<ITextFieldProps>).defaultProps = {
   borderColor: colors.silver,
-  borderWidth: StyleSheet.hairlineWidth,
+  borderWidth: 0,
   withError: 'none',
   errorColor: colors.error,
   placeholderTextColor: colors.gray,

@@ -150,115 +150,104 @@ const Register = memo((props: Props) => {
   }, []);
 
   return (
-    <ImageBackground
-      style={styles.bg}
-      source={assets.image.register_background}>
-      <KeyboardAwareScrollView
-        contentContainerStyle={styles.container}
-        keyboardDismissMode="interactive"
-        extraHeight={200}
-        keyboardShouldPersistTaps="handled">
-        <UIKit.View style={styles.form}>
-          <UIKit.View style={styles.absolute}>
-            <UIKit.Text style={styles.slogan}>{_t('register')}</UIKit.Text>
-          </UIKit.View>
-          <UIKit.TextField
-            containerStyle={styles.inputContainer}
-            style={styles.input}
-            placeholderTextColor={colors.skyBlue5}
-            color={colors.skyBlue}
-            placeholder={_t('phUsername')}
-            clearButtonMode="while-editing"
-            clearButtonColor={colors.gray}
-            fontSize={variants.title}
-            nextRef={pswRef}
-            returnKeyType="next"
-            formProps={form}
-            formID="username"
-            autoCapitalize="none"
-            autoCorrect={false}
-            autoCompleteType="username"
-            autoFocus
-          />
-
-          <UIKit.TextField
-            ref={pswRef}
-            containerStyle={styles.inputContainer}
-            style={styles.input}
-            placeholderTextColor={colors.skyBlue5}
-            color={colors.skyBlue}
-            placeholder={_t('password')}
-            clearButtonMode="while-editing"
-            clearButtonColor={colors.gray}
-            fontSize={variants.title}
-            secureTextEntry
-            nextRef={rePswRef}
-            returnKeyType="next"
-            formProps={form}
-            formID="password"
-            textContentType="oneTimeCode"
-          />
-
-          <UIKit.TextField
-            ref={rePswRef}
-            containerStyle={styles.inputContainer}
-            style={styles.input}
-            placeholderTextColor={colors.skyBlue5}
-            color={colors.skyBlue}
-            placeholder={_t('rePassword')}
-            clearButtonMode="while-editing"
-            clearButtonColor={colors.gray}
-            fontSize={variants.title}
-            secureTextEntry
-            onSubmitEditing={form.submitForm}
-            returnKeyType="go"
-            formProps={form}
-            formID="rePassword"
-            textContentType="oneTimeCode"
-          />
-          <UIKit.View style={styles.privacyWrapper}>
-            <CheckBox
-              boxType="square"
-              value={form.values.checked}
-              onValueChange={onCheck}
-              style={styles.checkbox}
-              tintColor={colors.gray}
-              onCheckColor={colors.skyBlue}
-              onTintColor={colors.skyBlue}
+    <UIKit.Container>
+      <ImageBackground
+        style={styles.bg}
+        source={assets.image.register_background}>
+        <UIKit.KeyboardAwareScrollView contentContainerStyle={styles.container}>
+          <UIKit.View style={styles.form}>
+            <UIKit.View style={styles.absolute}>
+              <UIKit.Text style={styles.slogan}>{_t('register')}</UIKit.Text>
+            </UIKit.View>
+            <UIKit.FormField
+              style={styles.input}
+              placeholderTextColor={colors.skyBlue5}
+              color={colors.skyBlue}
+              placeholder={_t('phUsername')}
+              fontSize={variants.title}
+              nextRef={pswRef}
+              returnKeyType="next"
+              form={form}
+              formID="username"
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoCompleteType="username"
+              autoFocus
             />
-            <UIKit.Text style={styles.privacyText}>
-              {_t('privacy1')}
-              <UIKit.Text color={colors.skyBlue} onPress={onPrivacy}>{` ${_t(
-                'privacy2',
-              )} `}</UIKit.Text>
-              {`${_t('and')} `}
-              <UIKit.Text color={colors.skyBlue} onPress={onAgreement}>{`${_t(
-                'privacy3',
-              )} `}</UIKit.Text>
-              {_t('privacy4')}
-            </UIKit.Text>
+
+            <UIKit.FormField
+              ref={pswRef}
+              style={styles.input}
+              placeholderTextColor={colors.skyBlue5}
+              color={colors.skyBlue}
+              placeholder={_t('password')}
+              fontSize={variants.title}
+              secureTextEntry
+              nextRef={rePswRef}
+              returnKeyType="next"
+              form={form}
+              formID="password"
+              textContentType="oneTimeCode"
+            />
+
+            <UIKit.FormField
+              ref={rePswRef}
+              style={styles.input}
+              placeholderTextColor={colors.skyBlue5}
+              color={colors.skyBlue}
+              placeholder={_t('rePassword')}
+              fontSize={variants.title}
+              secureTextEntry
+              onSubmitEditing={form.submitForm}
+              returnKeyType="go"
+              form={form}
+              formID="rePassword"
+              textContentType="oneTimeCode"
+            />
+            <UIKit.View style={styles.privacyWrapper}>
+              <CheckBox
+                boxType="square"
+                value={form.values.checked}
+                onValueChange={onCheck}
+                style={styles.checkbox}
+                tintColor={colors.gray}
+                onCheckColor={colors.skyBlue}
+                onTintColor={colors.skyBlue}
+              />
+              <UIKit.Text style={styles.privacyText}>
+                {_t('privacy1')}
+                <UIKit.Text color={colors.skyBlue} onPress={onPrivacy}>{` ${_t(
+                  'privacy2',
+                )} `}</UIKit.Text>
+                {`${_t('and')} `}
+                <UIKit.Text color={colors.skyBlue} onPress={onAgreement}>{`${_t(
+                  'privacy3',
+                )} `}</UIKit.Text>
+                {_t('privacy4')}
+              </UIKit.Text>
+            </UIKit.View>
+
+            <UIKit.FormError message={Object.values(form.errors)[0]} />
+
+            <UIKit.Button
+              style={styles.buttonLogin}
+              bg={colors.green}
+              color={colors.white}
+              title={_t('register')}
+              onPress={form.submitForm}
+            />
+
+            <UIKit.Button
+              style={styles.buttonBack}
+              bg={colors.transparent}
+              color={colors.textColor}
+              title={_t('back')}
+              onPress={onBack}
+            />
           </UIKit.View>
-
-          <UIKit.FormError message={Object.values(form.errors)[0]} />
-
-          <UIKit.Button
-            style={styles.buttonLogin}
-            bg={colors.green}
-            color={colors.white}
-            title={_t('register')}
-            onPress={form.submitForm}
-          />
-
-          <UIKit.Button
-            style={styles.buttonBack}
-            bg={colors.transparent}
-            color={colors.textColor}
-            title={_t('back')}
-            onPress={onBack}
-          />
-        </UIKit.View>
-      </KeyboardAwareScrollView>
-    </ImageBackground>
+        </UIKit.KeyboardAwareScrollView>
+      </ImageBackground>
+    </UIKit.Container>
   );
 });
 

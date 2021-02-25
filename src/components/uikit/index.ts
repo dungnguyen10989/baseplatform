@@ -15,10 +15,8 @@ import Error from './error';
 import FlatList from './flattList';
 import FormError from './formError';
 import ScrollView from './scrollview';
-
 import Image from './image';
 import FastImage from './fastImage';
-
 import ImageViewer from './imageViewer';
 import KeyboardAvoidingView from './keyboardAvoidingView';
 import KeyboardAwareScrollView from './keyboardAwareScrollView';
@@ -29,15 +27,18 @@ import Shimmer from './shimmer';
 import commonStyles from './styles';
 import Text from './text';
 import HighlightText from './highlightText';
-import TextField, { focusToTextField } from './input';
+import Input, { focusToTextField } from './input';
 import Touchable from './touchable';
 import VectorIcons from './vectorIcons';
 import View from './view';
 import LineItem from './lineItem';
 import ListItem from './listItem';
-import LabelInput from './labelnput';
-import IconInput from './iconInput';
+import LabelField from './labelField';
+import IconField from './iconField';
 import ButtonText from './buttonText';
+import CurrencyField from './currencyField';
+import TextField from './textField';
+import FormField from './formField';
 
 export const UIKit = {
   ActivityIndicator,
@@ -75,7 +76,10 @@ export const UIKit = {
   View,
   LineItem,
   ListItem,
-  LabelInput,
-  IconInput,
+  LabelField,
+  IconField,
   ButtonText,
+  CurrencyField,
+  Input,
+  FormField,
 };

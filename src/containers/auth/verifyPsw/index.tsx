@@ -32,7 +32,7 @@ const VerifyPsw = memo((props: Props) => {
       password: values.password,
     }).then((val) => {
       PopupPrototype.dismissOverlay();
-      if (val.success && val.data.user) {
+      if (val.data && val.data.user) {
         updateLocalAuth(db, val.data.user);
         PopupPrototype.showToastWithGravity(
           _t('recoverSuccess'),
@@ -76,18 +76,15 @@ const VerifyPsw = memo((props: Props) => {
   });
 
   return (
-    <ImageBackground style={styles.bg} source={assets.image.login_background}>
-      <KeyboardAwareScrollView
-        scrollEnabled={false}
-        keyboardDismissMode="interactive"
-        keyboardShouldPersistTaps="handled">
-        <UIKit.Container style={styles.container} PADDING>
+    <UIKit.Container>
+      <ImageBackground style={styles.bg} source={assets.image.login_background}>
+        <UIKit.KeyboardAwareScrollView scrollEnabled={false} padding>
           <UIKit.FastImage
             source={assets.image.logo}
             style={styles.logo}
             resizeMode="contain"
           />
-          <UIKit.IconInput
+          <UIKit.IconField
             iconSource={assets.icon.ic_lock}
             containerStyle={styles.input}
             iconStyle={styles.icon}
@@ -103,7 +100,7 @@ const VerifyPsw = memo((props: Props) => {
             textContentType="oneTimeCode"
           />
 
-          <UIKit.IconInput
+          <UIKit.IconField
             iconSource={assets.icon.ic_lock}
             containerStyle={styles.input}
             iconStyle={styles.icon}
@@ -137,9 +134,9 @@ const VerifyPsw = memo((props: Props) => {
             title={_t('backToHome')}
             onPress={onBack}
           />
-        </UIKit.Container>
-      </KeyboardAwareScrollView>
-    </ImageBackground>
+        </UIKit.KeyboardAwareScrollView>
+      </ImageBackground>
+    </UIKit.Container>
   );
 });
 

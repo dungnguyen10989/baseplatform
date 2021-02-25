@@ -1,5 +1,6 @@
-import { constants } from '@values';
-import React, { ComponentType, memo, PropsWithChildren } from 'react';
+import { useHeaderHeight } from '@react-navigation/stack';
+import { isNumber } from 'lodash';
+import React, { memo, PropsWithChildren } from 'react';
 import { KeyboardAvoidingView } from 'react-native';
 import commonStyles from './styles';
 
@@ -8,22 +9,17 @@ interface IKeyboardAvoidingViewProps extends PropsWithChildren<any> {
 }
 
 const FuncComponent = memo((props: IKeyboardAvoidingViewProps) => {
+  const height = useHeaderHeight();
+  const _offset = props.keyboardVerticalOffset;
+  const offset = isNumber(_offset) ? _offset : height;
   return (
     <KeyboardAvoidingView
-      keyboardVerticalOffset={props.keyboardVerticalOffset || 0}
+      keyboardVerticalOffset={offset}
       behavior="padding"
       style={commonStyles.flex1}>
       {props.children}
     </KeyboardAvoidingView>
   );
 });
-
-(FuncComponent as ComponentType<IKeyboardAvoidingViewProps>).defaultProps = {
-  keyboardVerticalOffset: constants.isAndroid
-    ? 61
-    : constants.isIphoneX
-    ? 93
-    : 69,
-};
 
 export default FuncComponent;

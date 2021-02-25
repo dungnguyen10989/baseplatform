@@ -43,7 +43,7 @@ const Login = memo((props: Props) => {
         password: values.password,
       }).then((val) => {
         PopupPrototype.dismissOverlay();
-        if (val.success) {
+        if (val.data) {
           updateLocalAuth(db, val.data.user);
         } else {
           formikHelpers.setFieldError('username', _t('unAuthorization'));
@@ -81,7 +81,7 @@ const Login = memo((props: Props) => {
           PopupPrototype.showOverlay();
           fetchAPI('get/auth/app/userinfo', 'get').then((val) => {
             PopupPrototype.dismissOverlay();
-            if (val.success) {
+            if (val.data) {
               updateLocalAuth(db, val.data.user);
             } else {
               mConfigSchema.deleteConfig(db, configs.user);
@@ -104,19 +104,16 @@ const Login = memo((props: Props) => {
   }, []);
 
   return (
-    <ImageBackground style={styles.bg} source={assets.image.login_background}>
-      <KeyboardAwareScrollView
-        scrollEnabled={false}
-        keyboardDismissMode="interactive"
-        keyboardShouldPersistTaps="handled">
-        <UIKit.Container PADDING>
+    <UIKit.Container>
+      <ImageBackground style={styles.bg} source={assets.image.login_background}>
+        <UIKit.KeyboardAwareScrollView padding scrollEnabled={false}>
           <UIKit.FastImage
             source={assets.image.logo}
             style={styles.logo}
             resizeMode="contain"
           />
 
-          <UIKit.IconInput
+          <UIKit.IconField
             iconSource={assets.icon.ic_account}
             containerStyle={[styles.input, styles.form]}
             iconStyle={styles.icon}
@@ -133,7 +130,7 @@ const Login = memo((props: Props) => {
             autoCompleteType="username"
           />
 
-          <UIKit.IconInput
+          <UIKit.IconField
             ref={pswRef}
             iconSource={assets.icon.ic_lock}
             containerStyle={styles.input}
@@ -178,9 +175,9 @@ const Login = memo((props: Props) => {
               paddingV={3}
             />
           </UIKit.View>
-        </UIKit.Container>
-      </KeyboardAwareScrollView>
-    </ImageBackground>
+        </UIKit.KeyboardAwareScrollView>
+      </ImageBackground>
+    </UIKit.Container>
   );
 });
 

@@ -18,12 +18,12 @@ export default StyleSheet.create({
     paddingBottom: constants.dfPadding,
   },
   item: {
-    flex: 1,
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: 2,
     borderColor: colors.gray,
     padding: constants.halfPadding,
+    width: constants.width / 2 - constants.dfPadding * 1.5,
   },
   itemLeft: {
     marginRight: constants.halfPadding,

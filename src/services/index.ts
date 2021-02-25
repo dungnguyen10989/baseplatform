@@ -27,7 +27,6 @@ const apisauceInstance = create({
 });
 
 export type HttpResponse = {
-  success: boolean;
   data?: any;
   error?: any;
 };
@@ -60,14 +59,14 @@ const fetchAPI = async function <T>(
         ConsoleUtils.l(':::API RESPONSE:::', res);
         if (res.status === 200 && res.data?.success) {
           delete res.data.success;
-          resolve({ success: true, data: res.data });
+          resolve({ data: res.data });
         } else {
-          resolve({ success: false, error: res.data });
+          resolve({ error: res.data });
         }
       })
       .catch((error: Error) => {
         ConsoleUtils.le(':::API RESPONSE:::', error);
-        resolve({ success: false, error });
+        resolve({ error });
       });
   });
 };

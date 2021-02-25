@@ -19,7 +19,11 @@ const routes = {
   register: '',
   forgotPassword: '',
   productDetail: '',
+  promoDetail: '',
   qr: '',
+  postRedeemBonusPoint: '',
+  pushNotification: '',
+  customerDetail: '',
 };
 
 for (const key in routes) {

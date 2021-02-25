@@ -27,6 +27,7 @@ interface Props {
   titleStyle?: StyleProp<TextStyle>;
   subTitleStyle?: StyleProp<TextStyle>;
   captionStyle?: StyleProp<TextStyle>;
+  centerStyle?: StyleProp<ViewStyle>;
 }
 
 const LineItem = (props: Props) => {
@@ -45,6 +46,7 @@ const LineItem = (props: Props) => {
     titleStyle,
     subTitleStyle,
     captionStyle,
+    centerStyle,
   } = props;
 
   const borderStyle = useMemo(
@@ -67,7 +69,7 @@ const LineItem = (props: Props) => {
           }
           style={[styles.icon, iconStyle]}
         />
-        <View style={styles.center}>
+        <View style={[styles.center, centerStyle]}>
           <Text style={[styles.title, titleStyle]} numberOfLines={1}>
             {title}
           </Text>
@@ -118,8 +120,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
-    padding: constants.dfPadding,
-    backgroundColor: colors.background2,
+    paddingVertical: constants.halfPadding,
   },
   flex: {
     flex: 1,

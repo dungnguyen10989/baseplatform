@@ -1,6 +1,5 @@
 import React, { memo, useCallback } from 'react';
 import { ImageBackground } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { FormikHelpers, useFormik } from 'formik';
 import * as yup from 'yup';
 import { UIKit } from '@uikit';
@@ -15,7 +14,6 @@ import { colors, variants } from '@values';
 import styles from './styles';
 import { _t } from '@i18n';
 import { fetchAPI } from '@services';
-import { mConfigSchema } from '@database/schemas';
 import { IStack } from 'screen-props';
 import { routes } from '@navigator/routes';
 
@@ -100,19 +98,15 @@ const ForgotPassword = memo((props: Props) => {
   });
 
   return (
-    <ImageBackground style={styles.bg} source={assets.image.login_background}>
-      <KeyboardAwareScrollView
-        scrollEnabled={false}
-        keyboardDismissMode="interactive"
-        keyboardShouldPersistTaps="handled">
-        <UIKit.Container style={styles.container} PADDING>
-          {/* <HeaderText onBack={onBack} title={_t('forgotPsw')} /> */}
+    <UIKit.Container>
+      <ImageBackground style={styles.bg} source={assets.image.login_background}>
+        <UIKit.KeyboardAwareScrollView padding scrollEnabled={false}>
           <UIKit.FastImage
             source={assets.image.logo}
             style={styles.logo}
             resizeMode="contain"
           />
-          <UIKit.IconInput
+          <UIKit.IconField
             iconSource={assets.icon.ic_account}
             containerStyle={styles.input}
             iconStyle={styles.icon}
@@ -147,9 +141,9 @@ const ForgotPassword = memo((props: Props) => {
             title={_t('back')}
             onPress={onBack}
           />
-        </UIKit.Container>
-      </KeyboardAwareScrollView>
-    </ImageBackground>
+        </UIKit.KeyboardAwareScrollView>
+      </ImageBackground>
+    </UIKit.Container>
   );
 });
 

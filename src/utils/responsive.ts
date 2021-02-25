@@ -4,6 +4,7 @@ const pixelRatio = PixelRatio.get();
 const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window');
 
 export const normalize = (size: number, factor = 1): number => {
+  return size;
   if (pixelRatio >= 2 && pixelRatio < 3) {
     // iphone 5s and older Androids
     if (deviceWidth < 360) {

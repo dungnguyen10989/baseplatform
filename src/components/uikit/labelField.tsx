@@ -5,7 +5,7 @@ import View from './view';
 import Touchable from './touchable';
 import Text from './text';
 import Image from './fastImage';
-import TextField, { ITextFieldProps } from './input';
+import TextField, { ITextFieldProps } from './textField';
 import { assets } from '@assets';
 
 interface Props extends ITextFieldProps {
@@ -15,44 +15,16 @@ interface Props extends ITextFieldProps {
   onPress?: () => void;
 }
 
-const LabelInput = forwardRef<TextInput, Props>((props, ref) => {
-  const {
-    label,
-    labelStyle,
-    containerStyle,
-    disabled,
-    onPress,
-    ...rest
-  } = props;
-
-  const children = (
-    <>
-      <TextField
-        editable={!disabled}
-        containerStyle={styles.container}
-        {...rest}
-        ref={ref}
-        borderWidth={0}
-      />
-      {disabled ? (
-        <View style={styles.lockWrapper}>
-          <Image
-            source={assets.icon.ic_lock}
-            style={styles.lock}
-            tintColor={colors.black7}
-          />
-        </View>
-      ) : null}
-    </>
-  );
+const LabelField = forwardRef<TextInput, Props>((props, ref) => {
+  const { label, labelStyle, disabled, onPress, ...rest } = props;
 
   return (
-    <View style={containerStyle}>
+    <View>
       <Text style={styles.label}>{label}</Text>
       <View style={disabled ? styles.disabled : undefined}>
         <TextField
           editable={!disabled}
-          containerStyle={styles.container}
+          style={styles.container}
           {...rest}
           ref={ref}
           borderWidth={0}
@@ -74,7 +46,7 @@ const LabelInput = forwardRef<TextInput, Props>((props, ref) => {
   );
 });
 
-export default LabelInput;
+export default LabelField;
 
 const styles = StyleSheet.create({
   label: {

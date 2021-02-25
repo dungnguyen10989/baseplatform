@@ -1,27 +1,66 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { UIKit } from '@uikit';
 import { PopupPrototype, StringPrototype } from '@utils';
 import styles from './styles';
 import { _t } from '@i18n';
-import { fetchAPI, HttpResponse } from '@services';
+import { fetchAPI } from '@services';
 import { IStack } from 'screen-props';
 import { colors, constants, variants } from '@values';
 import { routes } from '@navigator/routes';
 
 interface Props extends IStack {}
 
-const Product = memo((props: Props) => {
-  const [products, setProducts] = useState<HttpResponse>();
+const api = (params?: any) =>
+  fetchAPI('get/auth/app/shop/product', 'get', params);
 
-  const getData = useCallback(() => {
-    PopupPrototype.showOverlay();
-    fetchAPI('get/auth/app/shop/product', 'get').then((response) => {
-      setProducts(response);
-      PopupPrototype.dismissOverlay();
+const Product = memo((props: Props) => {
+  const [products, setProducts] = useState<Array<any>>([]);
+  const [error, setError] = useState<any>();
+  const [refreshing, setRefreshing] = useState(false);
+  const loadingMore = useRef(false);
+
+  const initFetch = useCallback((showLoading?: boolean) => {
+    showLoading ? PopupPrototype.showOverlay() : setRefreshing(true);
+    api().then((val) => {
+      showLoading ? PopupPrototype.dismissOverlay() : setRefreshing(false);
+      if (val.data) {
+        setProducts(val.data.products?.data);
+        setError(undefined);
+      } else {
+        setError(val.error);
+      }
     });
   }, []);
 
-  useEffect(getData, []);
+  useEffect(initFetch.bind(null, true), [initFetch]);
+  const onRefresh = useCallback(initFetch, [initFetch]);
+
+  const onLoadMore = useCallback(() => {
+    if (!loadingMore.current) {
+      loadingMore.current = true;
+      const len = products?.length;
+      const page = Math.ceil(len / constants.pageSize) + 1;
+      api({ page }).then((val) => {
+        loadingMore.current = false;
+        if (val.data) {
+          val.data.products?.data?.forEach((i: any) => {
+            if (!products.find((cus) => cus.id === i.id)) {
+              products.push(i);
+            }
+          });
+          setProducts(products);
+          setError(undefined);
+        }
+      });
+    }
+  }, [products, loadingMore.current]);
 
   const onItemPress = useCallback((item: any) => {
     props.navigation.navigate(routes.productDetail, {
@@ -43,7 +82,7 @@ const Product = memo((props: Props) => {
           info.index % 2 === 0 ? styles.itemLeft : styles.itemRight,
         ]}>
         <UIKit.FastImage
-          source={{ uri: info.item.medias?.[0].source }}
+          source={{ uri: info.item.medias?.[0]?.source }}
           style={styles.img}
         />
         <UIKit.Text style={styles.name}>{info.item.name}</UIKit.Text>
@@ -67,6 +106,9 @@ const Product = memo((props: Props) => {
         ListHeaderComponent={renderHeader}
         numColumns={2}
         contentContainerStyle={styles.list}
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        onEndReached={onLoadMore}
         separator={
           <UIKit.Divider
             color={colors.transparent}
@@ -78,23 +120,20 @@ const Product = memo((props: Props) => {
   }, []);
 
   const renderContent = useMemo(() => {
-    if (!products) {
-      return null;
-    }
-    if (!products.success) {
+    if (error) {
       return (
         <UIKit.View style={styles.errorFetching}>
-          <UIKit.Touchable onPress={getData}>
+          <UIKit.Touchable onPress={initFetch}>
             <UIKit.Empty label={_t('errorFetching')} />
           </UIKit.Touchable>
         </UIKit.View>
       );
     }
-    return renderInfo(products.data?.products?.data);
+    return renderInfo(products);
   }, [products, renderInfo]);
 
   return (
-    <UIKit.Container PADDING_H>
+    <UIKit.Container paddingH>
       <UIKit.ButtonText
         title={_t('postProduct')}
         underline

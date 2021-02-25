@@ -17,7 +17,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { IStack } from 'screen-props';
-import { mBaseSchema, mFeatureSchema, mPostSchema } from '@database/schemas';
 import { _t } from '@i18n';
 import { assets } from '@assets';
 import { colors, constants, variants } from '@values';

@@ -101,14 +101,14 @@ const FuncComponent = memo((props: PropsWithChildren<Props>) => {
 
 (FuncComponent as ComponentType<Props>).defaultProps = {
   indicatorSize: 'small',
-  br: 5,
+  br: 2,
   disabledBg: colors.gray,
   disabledColor: colors.white,
   indicatorColor: colors.white,
   fontSize: variants.title,
-  bg: colors.white,
+  bg: colors.primaryBlue,
   bold: false,
-  color: colors.black,
+  color: colors.white,
   paddingV: constants.dfPadding * 0.75,
 };
 

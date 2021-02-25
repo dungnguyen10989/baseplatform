@@ -1,6 +1,5 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { ImageBackground, StyleSheet, TextInput } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { FormikHelpers, useFormik } from 'formik';
 import * as yup from 'yup';
 import { UIKit } from '@uikit';
@@ -49,7 +48,7 @@ const OTP = memo((props: Props) => {
           password,
         }).then((val) => {
           PopupPrototype.dismissOverlay();
-          if (val.success && val.data.user) {
+          if (val.data && val.data.user) {
             updateLocalAuth(db, val.data.user);
             PopupPrototype.showToastWithGravity(
               _t('registerSuccess'),
@@ -122,12 +121,9 @@ const OTP = memo((props: Props) => {
   }, []);
 
   return (
-    <ImageBackground style={styles.bg} source={assets.image.login_background}>
-      <KeyboardAwareScrollView
-        keyboardDismissMode="interactive"
-        keyboardShouldPersistTaps="handled">
-        <UIKit.Container style={styles.container} PADDING>
-          {/* <HeaderText onBack={onBack} title={_t('confirmOtp')} /> */}
+    <UIKit.Container>
+      <ImageBackground style={styles.bg} source={assets.image.login_background}>
+        <UIKit.KeyboardAwareScrollView padding scrollEnabled={false}>
           <UIKit.FastImage
             source={assets.image.logo}
             style={styles.logo}
@@ -180,9 +176,9 @@ const OTP = memo((props: Props) => {
             title={_t('backToHome')}
             onPress={onBack}
           />
-        </UIKit.Container>
-      </KeyboardAwareScrollView>
-    </ImageBackground>
+        </UIKit.KeyboardAwareScrollView>
+      </ImageBackground>
+    </UIKit.Container>
   );
 });
 

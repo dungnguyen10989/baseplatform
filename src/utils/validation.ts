@@ -58,7 +58,7 @@ const validateOtp = () => {
 };
 
 const validateRequireField = (field: string) => {
-  return yup.string().required(_t('vdRequiredField', { field }));
+  return yup.mixed().required(_t('vdRequiredField', { field }));
 };
 
 export {

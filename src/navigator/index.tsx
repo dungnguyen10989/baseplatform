@@ -15,7 +15,6 @@ import { assets } from '@assets';
 import { UIKit } from '@uikit';
 import { _t } from '@i18n';
 
-import Main from '@containers/main';
 import { Overlay } from '@containers/_nav';
 import Login from '@containers/auth/login';
 import Register from '@containers/auth/register';
@@ -23,13 +22,17 @@ import ForgotPassword from '@containers/auth/forgotPsw';
 import OTP from '@containers/auth/otp';
 import VerifyPsw from '@containers/auth/verifyPsw';
 import ProductDetail from '@containers/productDetail';
+import PromoDetail from '@containers/promoDetail';
 import Webview from '@containers/webview';
 import CustomHeader from '@containers/header';
 import QR from '@containers/qr';
 import Homepage from '@containers/tabs/homepage';
 import Product from '@containers/tabs/product';
 import Promotion from '@containers/tabs/promotion';
-import Account from '@containers/tabs/account';
+import Customers from '@containers/tabs/customers';
+import PostRedeemBonusPoint from '@containers/postRedeemBonusPoint';
+import PushNotification from '@containers/pushNotification';
+import CustomerDetail from '@containers/customerDetail';
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -49,6 +52,7 @@ const navStyles = StyleSheet.create({
     fontWeight: 'bold',
     marginHorizontal: constants.halfPadding,
   },
+  header: { backgroundColor: '#dfe6e9' },
 });
 
 export const headerBackImage = ({ tintColor }: { tintColor: string }) => (
@@ -133,13 +137,14 @@ const TabsScreen = memo(() => {
     },
     {
       name: routes.tab3,
-      component: Account,
+      component: Customers,
       icon: assets.icon.tab_3,
       label: _t('_nav.tab3'),
     },
   ];
   return (
     <Tabs.Navigator
+      initialRouteName={routes.tab1}
       tabBarOptions={{
         activeTintColor: colors.textColor,
         inactiveTintColor: colors.gray,
@@ -176,6 +181,7 @@ const RootTabs = memo(() => {
         headerBackImage,
         headerTitleStyle: navStyles.title,
         headerTitle: p.route.params?.title || _t(`_nav.${p.route.name}`),
+        headerStyle: navStyles.header,
       })}>
       <Stack.Screen
         name={routes.tabsScreen}
@@ -192,7 +198,18 @@ const RootTabs = memo(() => {
         }}
       />
       <Stack.Screen name={routes.productDetail} component={ProductDetail} />
+      <Stack.Screen name={routes.promoDetail} component={PromoDetail} />
+      <Stack.Screen
+        name={routes.pushNotification}
+        component={PushNotification}
+      />
+      <Stack.Screen
+        name={routes.postRedeemBonusPoint}
+        component={PostRedeemBonusPoint}
+      />
+
       <Stack.Screen name={routes.qr} component={QR} />
+      <Stack.Screen name={routes.customerDetail} component={CustomerDetail} />
     </Stack.Navigator>
   );
 });

@@ -10,16 +10,18 @@ export interface IFlatListProps extends FlatListProps<any>, IModifiersTest {
 }
 
 export default class _FlatList extends PureComponent<IFlatListProps> {
-  private listRef = createRef<FlatList<any>>();
+  onEndReachedCalledDuringMomentum = true;
 
-  private _keyExtractor = (item: any, index: number): string => {
+  listRef = createRef<FlatList<any>>();
+
+  _keyExtractor = (item: any, index: number): string => {
     if (this.props.keyExtractor) {
       return this.props.keyExtractor(item, index);
     }
     return getOr(`key-${index}`, 'keyEx', item);
   };
 
-  public scrollToEnd = (
+  scrollToEnd = (
     params?: { animated?: boolean | null | undefined } | undefined,
   ) => {
     if (this.listRef.current) {
@@ -27,7 +29,7 @@ export default class _FlatList extends PureComponent<IFlatListProps> {
     }
   };
 
-  public scrollToIndex = (params: {
+  scrollToIndex = (params: {
     animated?: boolean | null | undefined;
     index: number;
     viewOffset?: number | undefined;
@@ -38,7 +40,7 @@ export default class _FlatList extends PureComponent<IFlatListProps> {
     }
   };
 
-  public scrollToItem = (params: {
+  scrollToItem = (params: {
     animated?: boolean | null | undefined;
     item: any;
     viewPosition?: number | undefined;
@@ -48,7 +50,7 @@ export default class _FlatList extends PureComponent<IFlatListProps> {
     }
   };
 
-  public scrollToOffset = (params: {
+  scrollToOffset = (params: {
     animated?: boolean | null | undefined;
     offset: number;
   }) => {
@@ -57,33 +59,44 @@ export default class _FlatList extends PureComponent<IFlatListProps> {
     }
   };
 
-  public flashScrollIndicators = () => {
+  flashScrollIndicators = () => {
     if (this.listRef.current) {
       return this.listRef.current.flashScrollIndicators();
     }
   };
 
-  public recordInteraction = () => {
+  recordInteraction = () => {
     if (this.listRef.current) {
       this.listRef.current.recordInteraction();
     }
   };
 
-  public getNativeScrollRef = () => {
+  getNativeScrollRef = () => {
     if (this.listRef.current) {
       return this.listRef.current.getNativeScrollRef();
     }
   };
 
-  public getScrollResponder = () => {
+  getScrollResponder = () => {
     if (this.listRef.current) {
       return this.listRef.current.getScrollResponder();
     }
   };
 
-  public getScrollableNode = () => {
+  getScrollableNode = () => {
     if (this.listRef.current) {
       return this.listRef.current.getScrollableNode();
+    }
+  };
+
+  onMomentumScrollBegin = () => {
+    this.onEndReachedCalledDuringMomentum = false;
+  };
+
+  onEndReached = (e: any) => {
+    if (!this.onEndReachedCalledDuringMomentum && e.distanceFromEnd > 0) {
+      this.props.onEndReached?.(e);
+      this.onEndReachedCalledDuringMomentum = true;
     }
   };
 
@@ -104,6 +117,7 @@ export default class _FlatList extends PureComponent<IFlatListProps> {
         keyExtractor={this._keyExtractor}
         ref={this.listRef}
         ItemSeparatorComponent={this.renderSeparator}
+        onMomentumScrollBegin={this.onMomentumScrollBegin}
         ListEmptyComponent={
           this.props.separator
             ? this.renderEmpty()

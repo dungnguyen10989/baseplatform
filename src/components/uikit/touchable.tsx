@@ -15,11 +15,13 @@ import {
 import { destructPropsToStyle } from './helper';
 
 interface ITouchableProps
-  extends TouchableOpacityProps,
+  extends Omit<TouchableOpacityProps, 'onPress'>,
     IModifiersSpacing,
     IModifiersStyling,
     IModifiersLayout,
-    IModifiersTest {}
+    IModifiersTest {
+  onPress?: (e: any) => void;
+}
 
 const FuncComponent = (props: PropsWithChildren<ITouchableProps>) => {
   const { children, style, ...rest } = props;

@@ -7,6 +7,7 @@ export default {
   ic_lock: require('./ic-lock.png'),
   ic_make_call: require('./ic-make-call.png'),
   ic_qr: require('./ic-qr.png'),
+  ic_reload: require('./ic-reload.png'),
   ic_sand_watch: require('./ic-sand-watch.png'),
   ic_search: require('./ic-search.png'),
   ic_shield: require('./ic-shield.png'),
