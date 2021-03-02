@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
   icon: {
     width: size,
     height: size,
+    borderRadius: 5,
   },
   center: {
     flex: 1,

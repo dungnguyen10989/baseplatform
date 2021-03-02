@@ -44,7 +44,7 @@ const setCustomTextInput = (customProps) => {
   TextInput.render = function render(props) {
     const oldProps = props;
     const style = StyleSheet.flatten([{}, customProps.style, props.style]);
-    const fontSize = normalize(style.fontSize || variants.normal);
+    const fontSize = normalize(style.fontSize || variants.title);
     style.fontSize = fontSize;
     props = { ...props, style };
     try {

@@ -1,5 +1,4 @@
 import React, {
-  useState,
   MutableRefObject,
   useCallback,
   memo,
@@ -13,13 +12,12 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { IStack } from 'screen-props';
 import { _t } from '@i18n';
 import { UIKit } from '@uikit';
-import { JsonPrototype, PopupPrototype, validateRequireField } from '@utils';
+import { PopupPrototype, validateRequireField } from '@utils';
 import { Form, FormikHelpers, useFormik } from 'formik';
 import { fetchAPI, silentFetch } from '@services';
 import { styles } from './styles';
-import { useDatabase } from '@nozbe/watermelondb/hooks';
-import { mConfigSchema } from '@database/schemas';
-import { configs } from '@values';
+import { useSelector } from 'react-redux';
+import { RootState } from '@state/';
 
 interface Props extends IStack {}
 
@@ -34,15 +32,17 @@ interface Form {
 }
 
 const ProductDetail = memo((props: Props) => {
-  const db = useDatabase();
-
   const scrollRef = useRef<KeyboardAwareScrollView>() as MutableRefObject<KeyboardAwareScrollView>;
   const amountRef = useRef<TextInput>() as MutableRefObject<TextInput>;
   const dataImage = useRef<string>('');
 
   const data = useRef(props.route.params?.data);
-  const [units, setUnits] = useState<string[]>();
-  const [branches, setBranches] = useState<any[]>();
+  const units = useSelector((state: RootState) =>
+    state.values.units?.asMutable(),
+  );
+  const branches = useSelector((state: RootState) =>
+    state.values.branches?.asMutable(),
+  );
 
   const pickerUnits = useMemo(() => {
     return units ? units.map((i) => ({ label: i, value: i })) : [];
@@ -53,27 +53,6 @@ const ProductDetail = memo((props: Props) => {
       ? branches.map((i) => ({ label: i.name, value: i.id }))
       : [];
   }, [branches]);
-
-  const onReFetch = useCallback(() => {
-    PopupPrototype.showOverlay();
-    silentFetch(() => PopupPrototype.dismissOverlay());
-  }, []);
-
-  useEffect(() => {
-    mConfigSchema.findConfigByName(db, configs.unit).then((value) => {
-      if (value) {
-        const { json } = value;
-        json ? setUnits(JsonPrototype.tryParse(json)) : onReFetch();
-      }
-    });
-
-    mConfigSchema.findConfigByName(db, configs.branch).then((value) => {
-      if (value) {
-        const { json } = value;
-        json ? setBranches(JsonPrototype.tryParse(json)) : onReFetch();
-      }
-    });
-  }, [onReFetch]);
 
   const onSubmit = useCallback(
     (values: Form, formikHelpers: FormikHelpers<Form>) => {

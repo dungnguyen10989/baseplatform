@@ -4,6 +4,7 @@ import Reactotron, {
   networking,
   asyncStorage,
 } from 'reactotron-react-native';
+import { reactotronRedux } from 'reactotron-redux';
 // import AsyncStorage from '@react-native-community/async-storage';
 
 const configs = {
@@ -18,7 +19,7 @@ Reactotron.configure({
   name: 'Base-Platform',
 })
   .useReactNative({
-    asyncStorage: true, // there are more options to the async storage.
+    // asyncStorage: true, // there are more options to the async storage.
     networking: {
       // optionally, you can turn it off with false.
       ignoreUrls: /symbolicate/,
@@ -34,7 +35,7 @@ Reactotron.configure({
   .use(trackGlobalErrors({}))
   .use(openInEditor())
   .use(networking())
-  // .use(reactotronRedux())
+  .use(reactotronRedux())
   .use(
     asyncStorage({
       ignore: ['secret'],

@@ -10,58 +10,50 @@ import { UIKit } from '@uikit';
 import { PopupPrototype, StringPrototype } from '@utils';
 import styles from './styles';
 import { _t } from '@i18n';
-import { fetchAPI, HttpResponse } from '@services';
 import { IStack } from 'screen-props';
 import { colors, constants, variants } from '@values';
-import { assets } from '@assets';
 import { routes } from '@navigator/routes';
+import { RootState, useAppDispatch } from '@state/';
+import { useSelector, shallowEqual } from 'react-redux';
+import { promotionActions } from '@state/promotion';
+import { memoize } from 'lodash';
 
 interface Props extends IStack {}
 
-const api = (params?: any) =>
-  fetchAPI('get/auth/app/shop/promotion', 'get', params);
+const dataSelector = memoize((state: RootState) =>
+  state.promotion.data?.asMutable(),
+);
+const errorSelector = memoize((state: RootState) => state.promotion.error);
 
-const Homepage = memo((props: Props) => {
-  const [promos, setPromos] = useState<Array<any>>([]);
-  const [error, setError] = useState<any>();
+const Promotion = memo((props: Props) => {
+  const dispatch = useAppDispatch();
+  const data = useSelector(dataSelector, shallowEqual);
+  const error = useSelector(errorSelector, shallowEqual);
   const [refreshing, setRefreshing] = useState(false);
   const loadingMore = useRef(false);
 
-  const initFetch = useCallback((showLoading?: boolean) => {
-    showLoading ? PopupPrototype.showOverlay() : setRefreshing(true);
-    api().then((val) => {
-      showLoading ? PopupPrototype.dismissOverlay() : setRefreshing(false);
-      if (val.data) {
-        setPromos(val.data.promotions.data);
-        setError(undefined);
-      } else {
-        setError(val.error);
-      }
-    });
+  const init = useCallback(() => {
+    const callback = () => PopupPrototype.dismissOverlay();
+    PopupPrototype.showOverlay();
+    dispatch(promotionActions.getList.start(undefined, callback, callback));
   }, []);
 
-  useEffect(initFetch.bind(null, true), [initFetch]);
-  const onRefresh = useCallback(initFetch, [initFetch]);
+  useEffect(init, [init]);
+
+  const onRefresh = useCallback(() => {
+    const callback = () => setRefreshing(false);
+    setRefreshing(true);
+    dispatch(promotionActions.getList.start(undefined, callback, callback));
+  }, []);
 
   const onLoadMore = useCallback(() => {
     if (!loadingMore.current) {
       loadingMore.current = true;
-      const len = promos?.length;
+      const len = data.length;
       const page = Math.ceil(len / constants.pageSize) + 1;
-      api({ page }).then((val) => {
-        loadingMore.current = false;
-        if (val.data) {
-          val.data.promotions?.data?.forEach((i: any) => {
-            if (!promos.find((cus) => cus.id === i.id)) {
-              promos.push(i);
-            }
-          });
-          setPromos(promos);
-          setError(undefined);
-        }
-      });
+      dispatch(promotionActions.getList.start({ page }));
     }
-  }, [promos, loadingMore.current]);
+  }, [data, loadingMore.current]);
 
   const onItemPress = useCallback((item: any) => {
     props.navigation.navigate(routes.promoDetail, {
@@ -70,46 +62,46 @@ const Homepage = memo((props: Props) => {
     });
   }, []);
 
-  const renderItem = useCallback(
-    (info: { item: any; index: number }) => {
-      return (
-        <UIKit.Touchable
-          onPress={onItemPress.bind(null, info.item)}
-          style={[
-            styles.item,
-            info.index % 2 === 0 ? styles.itemLeft : styles.itemRight,
-          ]}>
-          <UIKit.FastImage
-            source={{ uri: info.item.medias?.[0]?.source }}
-            withSandWatch
-            style={styles.img}
-          />
-          <UIKit.Text style={styles.name}>{info.item.name}</UIKit.Text>
-          <UIKit.Text style={styles.amount}>
-            {StringPrototype.toCurrency(info.item.amount)}
-          </UIKit.Text>
-        </UIKit.Touchable>
-      );
-    },
-    [onItemPress],
-  );
+  const onCreatePromo = useCallback(() => {
+    props.navigation.navigate(routes.promoDetail);
+  }, []);
+
+  const renderItem = useCallback((info: { item: any; index: number }) => {
+    return (
+      <UIKit.Touchable
+        onPress={onItemPress.bind(null, info.item)}
+        style={[
+          styles.item,
+          info.index % 2 === 0 ? styles.itemLeft : styles.itemRight,
+        ]}>
+        <UIKit.FastImage
+          source={{ uri: info.item.medias?.[0]?.source }}
+          style={styles.img}
+        />
+        <UIKit.Text style={styles.name}>{info.item.name}</UIKit.Text>
+        <UIKit.Text style={styles.amount}>
+          {StringPrototype.toCurrency(info.item.amount)}
+        </UIKit.Text>
+      </UIKit.Touchable>
+    );
+  }, []);
 
   const renderHeader = useCallback(
     () => <UIKit.Text style={styles.title}>{_t('_nav.tab2')}</UIKit.Text>,
     [],
   );
 
-  const renderInfo = useCallback((data: any[]) => {
+  const renderInfo = useCallback(() => {
     return (
       <UIKit.FlatList
         data={data}
         renderItem={renderItem}
         ListHeaderComponent={renderHeader}
+        numColumns={2}
+        contentContainerStyle={styles.list}
         refreshing={refreshing}
         onRefresh={onRefresh}
         onEndReached={onLoadMore}
-        numColumns={2}
-        contentContainerStyle={styles.list}
         separator={
           <UIKit.Divider
             color={colors.transparent}
@@ -118,20 +110,20 @@ const Homepage = memo((props: Props) => {
         }
       />
     );
-  }, []);
+  }, [data]);
 
   const renderContent = useMemo(() => {
     if (error) {
       return (
         <UIKit.View style={styles.errorFetching}>
-          <UIKit.Touchable onPress={initFetch}>
+          <UIKit.Touchable onPress={init}>
             <UIKit.Empty label={_t('errorFetching')} />
           </UIKit.Touchable>
         </UIKit.View>
       );
     }
-    return renderInfo(promos);
-  }, [promos, renderInfo]);
+    return renderInfo();
+  }, [error, renderInfo]);
 
   return (
     <UIKit.Container paddingH>
@@ -142,10 +134,11 @@ const Homepage = memo((props: Props) => {
         fontSize={variants.subTitle}
         style={styles.postProduct}
         bold
+        onPress={onCreatePromo}
       />
       {renderContent}
     </UIKit.Container>
   );
 });
 
-export default Homepage;
+export default Promotion;

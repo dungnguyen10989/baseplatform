@@ -7,7 +7,12 @@ import { ConsoleUtils } from './log';
 class ArrayPrototype {
   static standardizedByUnique = (arr: Array<any>, uniqueId = 'id') => {
     return arr.reduce<Array<any>>((result, item) => {
-      if (!result.find((i) => i[uniqueId] === item[uniqueId])) {
+      if (
+        !result.find(
+          (i) =>
+            !isNullOrUndefined(i[uniqueId]) && i[uniqueId] === item[uniqueId],
+        )
+      ) {
         result.push(item);
       }
       return result;
@@ -188,7 +193,9 @@ class JsonPrototype {
   };
 }
 
-const isNullOrUndefined = (s: any) => s === undefined || s === null;
+const isNullOrUndefined = (s: any) => {
+  return s === undefined || s === null;
+};
 
 export {
   StringPrototype,

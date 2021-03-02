@@ -11,6 +11,8 @@ import { isNumber } from 'lodash';
 import { destructPropsToStyle } from './helper';
 import Touchable from './touchable';
 import { assets } from '@assets';
+import { colors } from '@values';
+import { color } from 'react-native-reanimated';
 
 interface IImageProps
   extends FastImageProps,

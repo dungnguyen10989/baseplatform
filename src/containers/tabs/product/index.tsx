@@ -10,57 +10,50 @@ import { UIKit } from '@uikit';
 import { PopupPrototype, StringPrototype } from '@utils';
 import styles from './styles';
 import { _t } from '@i18n';
-import { fetchAPI } from '@services';
 import { IStack } from 'screen-props';
 import { colors, constants, variants } from '@values';
 import { routes } from '@navigator/routes';
+import { RootState, useAppDispatch } from '@state/';
+import { useSelector, shallowEqual } from 'react-redux';
+import { productActions } from '@state/product';
+import { memoize } from 'lodash';
 
 interface Props extends IStack {}
 
-const api = (params?: any) =>
-  fetchAPI('get/auth/app/shop/product', 'get', params);
+const dataSelector = memoize((state: RootState) =>
+  state.product.data?.asMutable(),
+);
+const errorSelector = memoize((state: RootState) => state.product.error);
 
 const Product = memo((props: Props) => {
-  const [products, setProducts] = useState<Array<any>>([]);
-  const [error, setError] = useState<any>();
+  const dispatch = useAppDispatch();
+  const data = useSelector(dataSelector, shallowEqual);
+  const error = useSelector(errorSelector, shallowEqual);
   const [refreshing, setRefreshing] = useState(false);
   const loadingMore = useRef(false);
 
-  const initFetch = useCallback((showLoading?: boolean) => {
-    showLoading ? PopupPrototype.showOverlay() : setRefreshing(true);
-    api().then((val) => {
-      showLoading ? PopupPrototype.dismissOverlay() : setRefreshing(false);
-      if (val.data) {
-        setProducts(val.data.products?.data);
-        setError(undefined);
-      } else {
-        setError(val.error);
-      }
-    });
+  const init = useCallback(() => {
+    const callback = () => PopupPrototype.dismissOverlay();
+    PopupPrototype.showOverlay();
+    dispatch(productActions.getList.start(undefined, callback, callback));
   }, []);
 
-  useEffect(initFetch.bind(null, true), [initFetch]);
-  const onRefresh = useCallback(initFetch, [initFetch]);
+  useEffect(init, [init]);
+
+  const onRefresh = useCallback(() => {
+    const callback = () => setRefreshing(false);
+    setRefreshing(true);
+    dispatch(productActions.getList.start(undefined, callback, callback));
+  }, []);
 
   const onLoadMore = useCallback(() => {
     if (!loadingMore.current) {
       loadingMore.current = true;
-      const len = products?.length;
+      const len = data.length;
       const page = Math.ceil(len / constants.pageSize) + 1;
-      api({ page }).then((val) => {
-        loadingMore.current = false;
-        if (val.data) {
-          val.data.products?.data?.forEach((i: any) => {
-            if (!products.find((cus) => cus.id === i.id)) {
-              products.push(i);
-            }
-          });
-          setProducts(products);
-          setError(undefined);
-        }
-      });
+      dispatch(productActions.getList.start({ page }));
     }
-  }, [products, loadingMore.current]);
+  }, [data, loadingMore.current]);
 
   const onItemPress = useCallback((item: any) => {
     props.navigation.navigate(routes.productDetail, {
@@ -98,7 +91,7 @@ const Product = memo((props: Props) => {
     [],
   );
 
-  const renderInfo = useCallback((data: any[]) => {
+  const renderInfo = useCallback(() => {
     return (
       <UIKit.FlatList
         data={data}
@@ -117,20 +110,20 @@ const Product = memo((props: Props) => {
         }
       />
     );
-  }, []);
+  }, [data]);
 
   const renderContent = useMemo(() => {
     if (error) {
       return (
         <UIKit.View style={styles.errorFetching}>
-          <UIKit.Touchable onPress={initFetch}>
+          <UIKit.Touchable onPress={init}>
             <UIKit.Empty label={_t('errorFetching')} />
           </UIKit.Touchable>
         </UIKit.View>
       );
     }
-    return renderInfo(products);
-  }, [products, renderInfo]);
+    return renderInfo();
+  }, [error, renderInfo]);
 
   return (
     <UIKit.Container paddingH>

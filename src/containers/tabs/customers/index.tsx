@@ -3,59 +3,51 @@ import { UIKit } from '@uikit';
 import { PopupPrototype, StringPrototype } from '@utils';
 import styles from './styles';
 import { _t } from '@i18n';
-import { fetchAPI } from '@services';
 import { IStack } from 'screen-props';
 import { constants } from '@values';
 import { routes } from '@navigator/routes';
-import { assets } from '@assets';
+import { RootState, useAppDispatch } from '@state/';
+import { customerActions } from '@state/customer';
+import { shallowEqual, useSelector } from 'react-redux';
+import { memoize } from 'lodash';
 
 interface Props extends IStack {}
 
-const api = (params?: any) =>
-  fetchAPI('get/auth/app/shop/customer', 'get', params);
+const dataSelector = memoize((state: RootState) =>
+  state.customer.data?.asMutable(),
+);
+const errorSelector = memoize((state: RootState) => state.customer.error);
 
 const Customers = memo((props: Props) => {
-  const [customers, setCustomers] = useState<Array<any>>([]);
-  const [error, setError] = useState<any>();
+  const dispatch = useAppDispatch();
+  const data = useSelector(dataSelector, shallowEqual);
+  const error = useSelector(errorSelector, shallowEqual);
   const [refreshing, setRefreshing] = useState(false);
   const { navigate } = props.navigation;
   const loadingMore = useRef(false);
 
-  const initFetch = useCallback((showLoading?: boolean) => {
-    showLoading ? PopupPrototype.showOverlay() : setRefreshing(true);
-    api().then((val) => {
-      showLoading ? PopupPrototype.dismissOverlay() : setRefreshing(false);
-      if (val.data) {
-        setCustomers(val.data.customers);
-        setError(undefined);
-      } else {
-        setError(val.error);
-      }
-    });
+  const init = useCallback(() => {
+    const callback = () => PopupPrototype.dismissOverlay();
+    PopupPrototype.showOverlay();
+    dispatch(customerActions.getList.start(undefined, callback, callback));
   }, []);
 
-  useEffect(initFetch.bind(null, true), [initFetch]);
-  const onRefresh = useCallback(initFetch, [initFetch]);
+  useEffect(init, [init]);
+
+  const onRefresh = useCallback(() => {
+    const callback = () => setRefreshing(false);
+    setRefreshing(true);
+    dispatch(customerActions.getList.start(undefined, callback, callback));
+  }, []);
 
   const onLoadMore = useCallback(() => {
     if (!loadingMore.current) {
       loadingMore.current = true;
-      const len = customers?.length;
+      const len = data.length;
       const page = Math.ceil(len / constants.pageSize) + 1;
-      api({ page }).then((val) => {
-        loadingMore.current = false;
-        if (val.data) {
-          val.data.customers?.forEach((i: any) => {
-            if (!customers.find((cus) => cus.id === i.id)) {
-              customers.push(i);
-            }
-          });
-          setCustomers(customers);
-          setError(undefined);
-        }
-      });
+      dispatch(customerActions.getList.start({ page }));
     }
-  }, [customers, loadingMore.current]);
+  }, [data, loadingMore.current]);
 
   const onPostRedeem = useCallback(
     () => navigate(routes.postRedeemBonusPoint),
@@ -84,7 +76,7 @@ const Customers = memo((props: Props) => {
           title={item.fullname}
           subTitle={item.text}
           caption={item.updated_at}
-          source={assets.icon.ic_account}
+          source={item.avatar}
           titleStyle={styles.itemTitle}
           onPress={onItemPress.bind(null, item)}
           borderBottomWidth={0}
@@ -126,13 +118,13 @@ const Customers = memo((props: Props) => {
       </UIKit.View>
       {error ? (
         <UIKit.View style={styles.errorFetching}>
-          <UIKit.Touchable onPress={initFetch}>
+          <UIKit.Touchable onPress={init}>
             <UIKit.Empty label={_t('errorFetching')} />
           </UIKit.Touchable>
         </UIKit.View>
       ) : (
         <UIKit.FlatList
-          data={customers}
+          data={data}
           renderItem={renderItem}
           ListHeaderComponent={renderHeader}
           refreshing={refreshing}

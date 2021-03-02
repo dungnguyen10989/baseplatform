@@ -43,6 +43,7 @@ const constants = {
   pageSize: 15,
   pswMinLength: 6,
   otpLength: 6,
+  maxCurrency: 99999999999,
 };
 
 const colors = {

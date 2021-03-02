@@ -12,7 +12,7 @@ import {
 import { Form, FormikHelpers, useFormik } from 'formik';
 import { fetchAPI } from '@services';
 import { styles } from './styles';
-import { configs, constants } from '@values';
+import { colors, configs, constants } from '@values';
 import { mConfigSchema } from '@database/schemas';
 import { useDatabase } from '@nozbe/watermelondb/hooks';
 

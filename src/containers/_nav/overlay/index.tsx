@@ -17,12 +17,17 @@ export default memo((props: Props) => {
   const params: IOverlay | undefined = props.route.params;
   const { style, img, label } = params || {};
 
-  // const dismissOverlay = useCallback(() => props.navigation.pop(), []);
-  // useEffect(() => {
-  //   DeviceEventEmitter.addListener(events.dismissOverlay, dismissOverlay);
-  //   return () =>
-  //     DeviceEventEmitter.removeListener(events.dismissOverlay, dismissOverlay);
-  // }, []);
+  const dismissOverlay = useCallback(() => props.navigation.goBack(), [
+    props.navigation,
+  ]);
+
+  useEffect(() => {
+    const sub = DeviceEventEmitter.addListener(
+      events.dismissOverlay,
+      dismissOverlay,
+    );
+    return () => sub.remove();
+  }, []);
 
   return (
     <View style={styles.container}>

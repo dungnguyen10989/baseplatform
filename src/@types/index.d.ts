@@ -272,6 +272,7 @@ declare module 'react-native-onesignal' {
 }
 
 declare module 'local-redux' {
+  import { AnyAction } from 'redux';
   /**
    * @return Override redux action, add onSuccess and onError to default property of all asynchronous actions, this methods will be invoke in saga
    *
@@ -279,10 +280,10 @@ declare module 'local-redux' {
    * @interface P required to define, payload interface(DTO)
    * @interface S  required to define, apiResponse data interface(DTO)
    */
-  export interface IAction<P = {}, S = {}> {
+  export interface IAction<P = any> extends AnyAction {
     type: string;
     payload: P | any;
-    onSuccess: (data?: S) => void;
+    onSuccess: (data?: any) => void;
     onError: (error?: any) => void;
   }
 }

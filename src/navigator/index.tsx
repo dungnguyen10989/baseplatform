@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
+import { Provider } from 'react-redux';
 import {
   CardStyleInterpolators,
   createStackNavigator,
@@ -14,6 +15,7 @@ import { colors, constants } from '@values';
 import { assets } from '@assets';
 import { UIKit } from '@uikit';
 import { _t } from '@i18n';
+import store from '../stateManagement';
 
 import { Overlay } from '@containers/_nav';
 import Login from '@containers/auth/login';
@@ -52,7 +54,7 @@ const navStyles = StyleSheet.create({
     fontWeight: 'bold',
     marginHorizontal: constants.halfPadding,
   },
-  header: { backgroundColor: '#dfe6e9' },
+  header: { backgroundColor: colors.primaryBlue },
 });
 
 export const headerBackImage = ({ tintColor }: { tintColor: string }) => (
@@ -144,7 +146,8 @@ const TabsScreen = memo(() => {
   ];
   return (
     <Tabs.Navigator
-      initialRouteName={routes.tab1}
+      initialRouteName={routes.tab0}
+      backBehavior="firstRoute"
       tabBarOptions={{
         activeTintColor: colors.textColor,
         inactiveTintColor: colors.gray,
@@ -175,7 +178,7 @@ const RootTabs = memo(() => {
     <Stack.Navigator
       headerMode="screen"
       screenOptions={(p: any) => ({
-        headerTintColor: colors.textColor,
+        headerTintColor: colors.white,
         headerBackTitleVisible: false,
         // headerTitleAllowFontScaling: true,
         headerBackImage,
@@ -217,16 +220,18 @@ const RootTabs = memo(() => {
 export default memo(() => {
   return (
     <SafeAreaProvider>
-      <NavigationContainer ref={containerNav}>
-        <Stack.Navigator
-          headerMode="none"
-          mode="modal"
-          screenOptions={commonModalOptions}>
-          <Stack.Screen name={routes._authStack} component={RootAuth} />
-          <Stack.Screen name={routes._rootTabs} component={RootTabs} />
-          <Stack.Screen name={routes._overlay} component={Overlay} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer ref={containerNav}>
+          <Stack.Navigator
+            headerMode="none"
+            mode="modal"
+            screenOptions={commonModalOptions}>
+            <Stack.Screen name={routes._authStack} component={RootAuth} />
+            <Stack.Screen name={routes._rootTabs} component={RootTabs} />
+            <Stack.Screen name={routes._overlay} component={Overlay} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     </SafeAreaProvider>
   );
 });

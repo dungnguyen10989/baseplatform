@@ -36,7 +36,7 @@ target 'BasePlatform' do
   pod 'Permission-StoreKit', :path => "#{permissions_path}/StoreKit"
   # end  react-native-permissions
 
-
+  pod 'SVProgressHUD'
 end
 
 

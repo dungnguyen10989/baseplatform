@@ -18,7 +18,6 @@ export default StyleSheet.create({
     paddingBottom: constants.dfPadding,
   },
   item: {
-    // flex: 1,
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: 2,

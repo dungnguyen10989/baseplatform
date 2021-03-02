@@ -23,6 +23,7 @@ import KeyboardAwareScrollView from './keyboardAwareScrollView';
 import Loading from './loading';
 import ModalAccessory from './modalAccessory';
 import PickerSelect from './pickerSelect';
+import DatePicker from './datePicker';
 import Shimmer from './shimmer';
 import commonStyles from './styles';
 import Text from './text';
@@ -66,6 +67,7 @@ export const UIKit = {
   Loading,
   ModalAccessory,
   PickerSelect,
+  DatePicker,
   Shimmer,
   commonStyles,
   Text,

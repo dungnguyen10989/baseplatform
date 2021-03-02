@@ -1,40 +1,20 @@
-import React, { useState, memo, useEffect, useCallback } from 'react';
+import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import { IStack } from 'screen-props';
-import { mConfigSchema } from '@database/schemas';
 import { _t } from '@i18n';
-import { colors, configs, constants, variants } from '@values';
+import { colors, constants, variants } from '@values';
 import { UIKit } from '@uikit';
-import { useDatabase } from '@nozbe/watermelondb/hooks';
-import { JsonPrototype, PopupPrototype } from '@utils';
-import { silentFetch } from '@services';
+import { useSelector } from 'react-redux';
+import { RootState } from '@state/';
+import { memoize } from 'lodash';
 
 interface Props extends IStack {}
 
 const size = Math.min(constants.width, constants.height) * 0.8;
+const qrSelector = memoize((state: RootState) => state.values.qr);
 
 const QR = memo((props: Props) => {
-  const db = useDatabase();
-  const [qr, setQr] = useState('');
-
-  const onReFetch = useCallback(() => {
-    PopupPrototype.showOverlay();
-    silentFetch(() => PopupPrototype.dismissOverlay());
-  }, []);
-
-  useEffect(() => {
-    mConfigSchema.findConfigByName(db, configs.qr).then((value) => {
-      if (value) {
-        const { json } = value;
-        if (json) {
-          setQr(JsonPrototype.tryParse(json));
-        } else {
-          onReFetch();
-        }
-      }
-    });
-  }, [onReFetch]);
-
+  const qr = useSelector(qrSelector);
   const uri = qr ? `data:image/png;base64,${qr}` : 'https://';
 
   return (

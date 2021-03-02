@@ -24,6 +24,8 @@ import { IStack } from 'screen-props';
 import { routes } from '@navigator/routes';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { containerNav } from '@navigator/helper';
+import { useAppDispatch } from '@state/';
+import { authActions } from '@state/auth';
 
 interface Form {
   username: string;
@@ -34,6 +36,21 @@ interface Props extends IStack {}
 const Login = memo((props: Props) => {
   const db = useDatabase();
   const pswRef = useRef<TextInput>() as React.MutableRefObject<TextInput>;
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    mConfigSchema.findConfigByName(db, configs.user).then((response) => {
+      if (response) {
+        const { id, json } = response;
+        if (json) {
+          const obj = JsonPrototype.tryParse(json);
+          const { name, token } = obj;
+          setHttpAuthorizationToken(token);
+          dispatch(authActions.getInfo.start());
+        }
+      }
+    });
+  }, []);
 
   const onSubmit = useCallback(
     (values: Form, formikHelpers: formik.FormikHelpers<Form>) => {
@@ -69,29 +86,29 @@ const Login = memo((props: Props) => {
       }),
   });
 
-  useEffect(() => {
-    const sub = mConfigSchema.getConfigJson(db, configs.user);
-    sub.then((response) => {
-      if (response) {
-        const { id, json } = response;
-        if (json) {
-          const obj = JsonPrototype.tryParse(json);
-          const { name, token } = obj;
-          setHttpAuthorizationToken(token);
-          PopupPrototype.showOverlay();
-          fetchAPI('get/auth/app/userinfo', 'get').then((val) => {
-            PopupPrototype.dismissOverlay();
-            if (val.data) {
-              updateLocalAuth(db, val.data.user);
-            } else {
-              mConfigSchema.deleteConfig(db, configs.user);
-            }
-          });
-        }
-      }
-    });
-    return () => sub.cancel();
-  }, []);
+  // useEffect(() => {
+  //   const sub = mConfigSchema.getConfigJson(db, configs.user);
+  //   sub.then((response) => {
+  //     if (response) {
+  //       const { id, json } = response;
+  //       if (json) {
+  //         const obj = JsonPrototype.tryParse(json);
+  //         const { name, token } = obj;
+  //         setHttpAuthorizationToken(token);
+  //         PopupPrototype.showOverlay();
+  //         fetchAPI('get/auth/app/userinfo', 'get').then((val) => {
+  //           PopupPrototype.dismissOverlay();
+  //           if (val.data) {
+  //             updateLocalAuth(db, val.data.user);
+  //           } else {
+  //             mConfigSchema.deleteConfig(db, configs.user);
+  //           }
+  //         });
+  //       }
+  //     }
+  //   });
+  //   return () => sub.cancel();
+  // }, []);
 
   const onForgot = useCallback(() => {
     props.navigation.push(routes.forgotPassword, {
@@ -119,11 +136,10 @@ const Login = memo((props: Props) => {
             iconStyle={styles.icon}
             placeholder={_t('phUsername')}
             clearButtonMode="while-editing"
-            clearButtonColor={colors.gray}
             fontSize={variants.title}
             nextRef={pswRef}
             returnKeyType="next"
-            formProps={form}
+            form={form}
             formID="username"
             autoCapitalize="none"
             autoCorrect={false}
@@ -137,12 +153,11 @@ const Login = memo((props: Props) => {
             iconStyle={styles.icon}
             placeholder={_t('password')}
             clearButtonMode="while-editing"
-            clearButtonColor={colors.gray}
             fontSize={variants.title}
             secureTextEntry
             onSubmitEditing={form.submitForm}
             returnKeyType="go"
-            formProps={form}
+            form={form}
             formID="password"
           />
 
@@ -150,8 +165,6 @@ const Login = memo((props: Props) => {
 
           <UIKit.Button
             style={styles.buttonLogin}
-            // disabled={!form.isValid}
-            // bg={!form.isValid ? colors.disabledButton : colors.green}
             bg={colors.green}
             color={colors.white}
             title={_t('login')}

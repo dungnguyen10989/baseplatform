@@ -3,74 +3,62 @@ import { UIKit } from '@uikit';
 import { PopupPrototype, StringPrototype } from '@utils';
 import styles from './styles';
 import { _t } from '@i18n';
-import { fetchAPI } from '@services';
 import { IStack } from 'screen-props';
 import { constants } from '@values';
 import { routes } from '@navigator/routes';
-import { assets } from '@assets';
+import { RootState, useAppDispatch } from '@state/';
+import { shallowEqual, useSelector } from 'react-redux';
+import { customerHisActions } from '@state/customerHis';
 
 interface Props extends IStack {}
 
-const api = (id: string, params?: any) =>
-  fetchAPI(`get/auth/app/customer/${id}`, 'get', params);
-
 const CustomerDetail = memo((props: Props) => {
-  const customer = useRef<any>(props.route.params?.data);
-  const [histories, setHistories] = useState<Array<any>>([]);
-  const [error, setError] = useState<any>();
+  const customer = useRef<any>(props.route.params?.data).current;
+  const dispatch = useAppDispatch();
+  const data = useSelector(
+    (state: RootState) => state.customerHis.data?.asMutable(),
+    shallowEqual,
+  );
+  const error = useSelector(
+    (state: RootState) => state.customer.error,
+    shallowEqual,
+  );
   const [refreshing, setRefreshing] = useState(false);
   const { navigate } = props.navigation;
   const loadingMore = useRef(false);
 
-  const initFetch = useCallback(
-    (showLoading?: boolean) => {
-      if (!customer.current) {
-        return;
-      }
-      showLoading ? PopupPrototype.showOverlay() : setRefreshing(true);
-      api(customer.current.id).then((val) => {
-        showLoading ? PopupPrototype.dismissOverlay() : setRefreshing(false);
-        if (val.data) {
-          setHistories(val.data.histories);
-          setError(undefined);
-        } else {
-          setError(val.error);
-        }
-      });
-    },
-    [customer.current],
-  );
+  const init = useCallback(() => {
+    const callback = () => PopupPrototype.dismissOverlay();
+    PopupPrototype.showOverlay();
+    dispatch(
+      customerHisActions.getList.start({ id: customer.id }, callback, callback),
+    );
+  }, []);
 
-  useEffect(initFetch.bind(null, true), [initFetch]);
-  const onRefresh = useCallback(initFetch, [initFetch]);
+  useEffect(init, [init]);
+
+  const onRefresh = useCallback(() => {
+    const callback = () => setRefreshing(false);
+    setRefreshing(true);
+    dispatch(
+      customerHisActions.getList.start({ id: customer.id }, callback, callback),
+    );
+  }, []);
 
   const onLoadMore = useCallback(() => {
     if (!loadingMore.current) {
       loadingMore.current = true;
-      const len = histories?.length;
+      const len = data.length;
       const page = Math.ceil(len / constants.pageSize) + 1;
-      api(customer.current?.id, { page }).then((val) => {
-        loadingMore.current = false;
-        if (val.data) {
-          val.data.histories?.forEach((i: any) => {
-            if (!histories.find((cus) => cus.id === i.id)) {
-              histories.push(i);
-            }
-          });
-          setHistories(histories);
-          setError(undefined);
-        }
-      });
+      dispatch(customerHisActions.getList.start({ id: customer.id, page }));
     }
-  }, [histories, loadingMore.current]);
+  }, [data, loadingMore.current]);
 
   const renderHeader = useCallback(
     () => (
       <UIKit.View style={styles.title}>
         <UIKit.Text>{_t('_nav.tab3')}:</UIKit.Text>
-        <UIKit.Text style={styles.name}>
-          {customer.current?.fullname}
-        </UIKit.Text>
+        <UIKit.Text style={styles.name}>{customer.fullname}</UIKit.Text>
       </UIKit.View>
     ),
     [customer.current],
@@ -111,13 +99,13 @@ const CustomerDetail = memo((props: Props) => {
     <UIKit.Container>
       {error ? (
         <UIKit.View style={styles.errorFetching}>
-          <UIKit.Touchable onPress={initFetch}>
+          <UIKit.Touchable onPress={init}>
             <UIKit.Empty label={_t('errorFetching')} />
           </UIKit.Touchable>
         </UIKit.View>
       ) : (
         <UIKit.FlatList
-          data={histories}
+          data={data}
           renderItem={renderItem}
           ListHeaderComponent={renderHeader}
           refreshing={refreshing}

@@ -1,8 +1,7 @@
-import { colors } from '@values';
+import { colors, constants } from '@values';
 import * as React from 'react';
 import { TextInput, TextInputProps } from 'react-native';
 import TextField from './textField';
-import FormField, { FormProps } from './formField';
 import { FormikProps } from 'formik';
 
 const formatNumber = (input: number, options?: any) => {
@@ -163,6 +162,7 @@ const CurrencyField = React.forwardRef<TextInput, CurrencyFieldProps>(
   placeholderTextColor: colors.gray,
   clearButtonMode: 'never',
   underlineColorAndroid: colors.transparent,
+  maxValue: constants.maxCurrency,
 };
 
 export default CurrencyField;

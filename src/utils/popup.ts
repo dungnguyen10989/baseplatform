@@ -7,7 +7,9 @@ import {
   AlertButton,
   AlertOptions,
   AlertType,
+  DeviceEventEmitter,
   KeyboardType,
+  NativeModules,
   Platform,
 } from 'react-native';
 import { IOverlay } from 'screen-props';
@@ -25,8 +27,7 @@ import ImageCropPicker, {
 } from 'react-native-image-crop-picker';
 import { ConsoleUtils } from './log';
 import { StackActions } from '@react-navigation/native';
-
-type PossibleArray<S, T> = S extends { multiple: true } ? T[] : T;
+import { events } from '@values';
 
 type Response =
   | { success: true; images: Image[] }
@@ -37,18 +38,22 @@ type ResponseSingle =
   | { success: false; error: string | Error };
 
 const showOverlay = (params?: IOverlay) => {
-  const currentRoute = containerNav.current?.getCurrentRoute();
-  if (currentRoute?.name !== routes._overlay) {
-    containerNav.current?.dispatch(StackActions.push(routes._overlay, params));
-  }
+  console.log('Native', NativeModules.Utils);
+
+  // NativeModules.Utils.showOverlay();
+  // const currentRoute = containerNav.current?.getCurrentRoute();
+  // if (currentRoute?.name !== routes._overlay) {
+  //   containerNav.current?.dispatch(StackActions.push(routes._overlay, params));
+  // }
 };
 
 const dismissOverlay = () => {
-  // DeviceEventEmitter.emit(events.dismissOverlay);
-  // return;
-  containerNav.current?.canGoBack()
-    ? containerNav.current?.goBack()
-    : undefined;
+  // NativeModules.Utils.dismissOverlay();
+  DeviceEventEmitter.emit(events.dismissOverlay);
+  return;
+  // containerNav.current?.canGoBack()
+  //   ? containerNav.current?.goBack()
+  //   : undefined;
 };
 
 const DURATION = {

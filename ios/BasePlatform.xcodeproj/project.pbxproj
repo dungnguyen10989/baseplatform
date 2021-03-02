@@ -15,6 +15,7 @@
 		2259E61825C05F130042455F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2259E61725C05F130042455F /* GoogleService-Info.plist */; };
 		2294D93D25C809EB0018F1D7 /* logo_1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 2294D93C25C809EB0018F1D7 /* logo_1024.png */; };
 		2294D94025C80BC50018F1D7 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2294D93F25C80BC50018F1D7 /* bg.png */; };
+		22AD397725E9FFC30054DE5D /* Modules in Resources */ = {isa = PBXBuildFile; fileRef = 22AD397625E9FFC30054DE5D /* Modules */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8C5E15579218EF89CA8646D3 /* libPods-BasePlatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31B17B4F322E91D58C54B05A /* libPods-BasePlatform.a */; };
 /* End PBXBuildFile section */
@@ -37,6 +38,7 @@
 		2259E61725C05F130042455F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "production/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2294D93C25C809EB0018F1D7 /* logo_1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo_1024.png; path = BasePlatform/Images.xcassets/AppIcon.appiconset/logo_1024.png; sourceTree = "<group>"; };
 		2294D93F25C80BC50018F1D7 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		22AD397625E9FFC30054DE5D /* Modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Modules; sourceTree = "<group>"; };
 		31B17B4F322E91D58C54B05A /* libPods-BasePlatform.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BasePlatform.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		787EF046CA22B1A167DE842F /* Pods-BasePlatform-BasePlatformTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasePlatform-BasePlatformTests.release.xcconfig"; path = "Target Support Files/Pods-BasePlatform-BasePlatformTests/Pods-BasePlatform-BasePlatformTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BasePlatform/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				22AD397625E9FFC30054DE5D /* Modules */,
 				2294D93F25C80BC50018F1D7 /* bg.png */,
 				2294D93C25C809EB0018F1D7 /* logo_1024.png */,
 				2259E61725C05F130042455F /* GoogleService-Info.plist */,
@@ -138,6 +141,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A8B4E3F0B03948D5909F750A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		C76DC773690430960746F699 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,14 +158,6 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		A8B4E3F0B03948D5909F750A /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -220,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				22AD397725E9FFC30054DE5D /* Modules in Resources */,
 				2259E61825C05F130042455F /* GoogleService-Info.plist in Resources */,
 				2294D94025C80BC50018F1D7 /* bg.png in Resources */,
 				221B86FF25BE5BAC00DE41E4 /* InfoPlist.strings in Resources */,
@@ -302,6 +305,7 @@
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TOCropViewController/TOCropViewControllerBundle.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -324,6 +328,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TOCropViewControllerBundle.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

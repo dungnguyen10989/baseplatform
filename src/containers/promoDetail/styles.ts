@@ -1,4 +1,4 @@
-import { colors, constants } from '@values';
+import { colors, constants, variants } from '@values';
 import { StyleSheet } from 'react-native';
 
 const imageSize = constants.width / 2 - constants.dfPadding * 1.25;
@@ -21,13 +21,30 @@ export const styles = StyleSheet.create({
   divider: {
     width: constants.halfPadding,
   },
-
   input: {
     backgroundColor: colors.black1,
     borderRadius: 2,
-    padding: constants.halfPadding,
+    paddingHorizontal: constants.halfPadding,
     height: 44,
     justifyContent: 'center',
+  },
+  inputTransparent: {
+    height: 44,
+    lineHeight: 44,
+  },
+  calendar: {
+    fontSize: variants.h4,
+    color: colors.primaryBlue,
+  },
+  branches: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  datePicker: {
+    flex: 1,
+    color: colors.textColor,
+    backgroundColor: colors.transparent,
   },
   amount: {
     flexDirection: 'row',
@@ -71,5 +88,24 @@ export const styles = StyleSheet.create({
   },
   btn: {
     marginVertical: constants.dfPadding,
+  },
+  branchSelectWrapper: {
+    padding: constants.dfPadding,
+    paddingVertical: constants.dfPadding * 2,
+    backgroundColor: colors.white,
+  },
+  checkItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: constants.halfPadding,
+  },
+  checkbox: {
+    width: variants.h4,
+    height: variants.h4,
+    marginTop: constants.isAndroid ? 6 : 3,
+  },
+  checkLabel: {
+    fontSize: variants.title,
+    marginLeft: constants.halfPadding,
   },
 });

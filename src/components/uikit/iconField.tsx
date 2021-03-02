@@ -1,14 +1,14 @@
 import React, { forwardRef, memo } from 'react';
 import { StyleProp, StyleSheet, ViewStyle, TextInput } from 'react-native';
 import { isNumber } from 'lodash/fp';
-import { ITextFieldProps } from './input';
 import { colors, constants } from '@values';
 import FastImage from './fastImage';
 import View from './view';
-import TextField from './textField';
+import FormField, { FormProps } from './formField';
 import { ImageStyle } from 'react-native-fast-image';
+import { ITextFieldProps } from './textField';
 
-interface Props extends ITextFieldProps {
+interface Props extends FormProps, ITextFieldProps {
   iconSource: string | number;
   iconStyle?: StyleProp<ImageStyle>;
   containerStyle?: StyleProp<ViewStyle>;
@@ -16,13 +16,7 @@ interface Props extends ITextFieldProps {
 
 const IconField = memo(
   forwardRef<TextInput, Props>((props, ref) => {
-    const {
-      iconSource: source,
-      iconStyle,
-      containerStyle,
-      style,
-      ...rest
-    } = props;
+    const { iconSource: source, iconStyle, containerStyle, ...rest } = props;
     return (
       <View style={[styles.container, containerStyle]}>
         <FastImage
@@ -30,7 +24,7 @@ const IconField = memo(
           style={[styles.icon, iconStyle]}
           tintColor={colors.textColor}
         />
-        <TextField
+        <FormField
           {...rest}
           ref={ref as any}
           style={styles.input}

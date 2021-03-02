@@ -9,7 +9,6 @@ import { Database } from '@nozbe/watermelondb';
 import { containerNav } from '@navigator/helper';
 import { StackActions } from '@react-navigation/native';
 import { routes } from '@navigator/routes';
-import database from '@database';
 
 type Method =
   | 'get'
@@ -102,28 +101,29 @@ const handleApiError = (error: any, callback?: () => void) => {
 };
 
 export const silentFetch = async (callback = () => {}) => {
-  const values = await Promise.all([
-    fetchAPI('get/auth/app/unit', 'get'),
-    fetchAPI('get/auth/app/shop/branch', 'get'),
-    fetchAPI('get/auth/app/shop/qrcode', 'get'),
-  ]);
-  const unit = values[0].data;
-  const branch = values[1].data;
-  const qr = values[2].data;
-  const jobs = [];
-
-  if (unit) {
-    jobs.push({ name: configs.unit, value: unit.units });
-  }
-  if (branch) {
-    jobs.push({ name: configs.branch, value: branch.branch });
-  }
-  if (qr) {
-    jobs.push({ name: configs.qr, value: qr.qrcode });
-  }
-
-  mConfigSchema.addOrUpdateMulti(database, jobs);
-  callback();
+  // store.dispatch(
+  //   valuesActions.silentFetch.start(undefined, callback, callback),
+  // );
+  // const values = await Promise.all([
+  //   fetchAPI('get/auth/app/unit', 'get'),
+  //   fetchAPI('get/auth/app/shop/branch', 'get'),
+  //   fetchAPI('get/auth/app/shop/qrcode', 'get'),
+  // ]);
+  // const unit = values[0].data;
+  // const branch = values[1].data;
+  // const qr = values[2].data;
+  // const jobs = [];
+  // if (unit) {
+  //   jobs.push({ name: configs.unit, value: unit.units });
+  // }
+  // if (branch) {
+  //   jobs.push({ name: configs.branch, value: branch.branch });
+  // }
+  // if (qr) {
+  //   jobs.push({ name: configs.qr, value: qr.qrcode });
+  // }
+  // mConfigSchema.addOrUpdateMulti(database, jobs);
+  // callback();
 };
 
 const setHttpAuthorizationToken = (token: string) =>

@@ -86,7 +86,9 @@
       "@uikit/*": ["src/components/uikit/*"],
       "@utils": ["src/utils"],
       "@utils/*": ["src/utils/*"],
-      "@values": ["src/values"]
+      "@values": ["src/values"],
+      "@state/*": ["src/stateManagement/*"],
+      "@state/": ["src/stateManagement"]
     }
   },
   "exclude": [
