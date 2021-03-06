@@ -48,15 +48,24 @@ const Homepage = memo((props: Props) => {
     [],
   );
 
+  const onItemPress = useCallback((item: any) => {
+    props.navigation.navigate(routes.productDetail, {
+      data: item,
+      title: item.name,
+    });
+  }, []);
+
   const renderItem = useCallback((info: { item: any; index: number }) => {
     return (
-      <UIKit.View>
+      <UIKit.Touchable
+        onPress={onItemPress.bind(null, info.item)}
+        style={styles.carouselItem}>
         <UIKit.FastImage
           source={{ uri: info.item.medias?.[0]?.source }}
           style={styles.sliderImage}
-          resizeMode="contain"
+          resizeMode="cover"
         />
-      </UIKit.View>
+      </UIKit.Touchable>
     );
   }, []);
 

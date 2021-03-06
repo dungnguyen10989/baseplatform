@@ -28,6 +28,11 @@ export default StyleSheet.create({
   itemWrapper: {
     backgroundColor: colors.black2,
   },
+  carouselItem: {
+    borderWidth: 1,
+    borderColor: colors.borders,
+    borderRadius: 10,
+  },
   item: {
     flexDirection: 'row',
     paddingHorizontal: constants.halfPadding,
@@ -70,6 +75,6 @@ export default StyleSheet.create({
     width: constants.width * 0.8,
     height: constants.width * 0.4,
     borderRadius: 10,
-    resizeMode: 'contain',
+    backgroundColor: colors.black1,
   },
 });

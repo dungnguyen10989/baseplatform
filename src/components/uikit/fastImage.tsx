@@ -34,6 +34,7 @@ const FuncComponent = (props: IImageProps) => {
     containerStyle,
     source,
     withSandWatch,
+    resizeMode,
     ...rest
   } = props;
 
@@ -63,15 +64,33 @@ const FuncComponent = (props: IImageProps) => {
     ? source
     : assets.icon.ic_sand_watch;
 
+  const rsm = !withSandWatch
+    ? resizeMode
+    : _source === assets.icon.ic_sand_watch
+    ? 'contain'
+    : resizeMode;
+
   if (typeof onPress === 'function') {
     return (
       <Touchable onPress={onPress} style={containerStyle}>
-        <FastImage {...result.p} style={enhanceStyle} source={_source} />
+        <FastImage
+          {...result.p}
+          style={enhanceStyle}
+          source={_source}
+          resizeMode={rsm}
+        />
       </Touchable>
     );
   }
 
-  return <FastImage {...result.p} style={enhanceStyle} source={_source} />;
+  return (
+    <FastImage
+      {...result.p}
+      style={enhanceStyle}
+      source={_source}
+      resizeMode={rsm}
+    />
+  );
 };
 
 (FuncComponent as ComponentType<IImageProps>).defaultProps = {

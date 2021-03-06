@@ -1,6 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
+import codePush, { CodePushOptions } from 'react-native-code-push';
+
 import {
   CardStyleInterpolators,
   createStackNavigator,
@@ -35,6 +37,24 @@ import Customers from '@containers/tabs/customers';
 import PostRedeem from '@containers/postRedeem';
 import PushNotification from '@containers/pushNotification';
 import CustomerDetail from '@containers/customerDetail';
+
+const { SyncStatus } = codePush;
+
+const codePushOptions: CodePushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_START,
+  installMode: codePush.InstallMode.IMMEDIATE,
+  mandatoryInstallMode: codePush.InstallMode.IMMEDIATE,
+  updateDialog: {
+    title: _t('updateVerTitle'),
+    appendReleaseDescription: true,
+    mandatoryContinueButtonLabel: _t('updateNow'),
+    optionalIgnoreButtonLabel: _t('cancel'),
+    optionalInstallButtonLabel: _t('updateNow'),
+    optionalUpdateMessage: '',
+    mandatoryUpdateMessage: '',
+    descriptionPrefix: '',
+  },
+};
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -216,6 +236,31 @@ const RootTabs = memo(() => {
 });
 
 export default memo(() => {
+  useEffect(() => {
+    codePush.sync(
+      codePushOptions,
+      (status) => {
+        switch (status) {
+          case SyncStatus.CHECKING_FOR_UPDATE:
+            // PopupManager.showLoading();
+
+            break;
+          case SyncStatus.UNKNOWN_ERROR:
+          case SyncStatus.UPDATE_IGNORED:
+          case SyncStatus.UPDATE_INSTALLED:
+          case SyncStatus.UP_TO_DATE:
+            // PopupManager.dismissLoading();
+
+            break;
+          default:
+            return;
+        }
+      },
+      (progress) => {},
+      (update) => {},
+    );
+  }, []);
+
   return (
     <SafeAreaProvider>
       <Provider store={store}>
