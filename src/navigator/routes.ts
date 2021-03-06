@@ -21,7 +21,7 @@ const routes = {
   productDetail: '',
   promoDetail: '',
   qr: '',
-  postRedeemBonusPoint: '',
+  postRedeem: '',
   pushNotification: '',
   customerDetail: '',
 };

@@ -32,12 +32,39 @@ import Homepage from '@containers/tabs/homepage';
 import Product from '@containers/tabs/product';
 import Promotion from '@containers/tabs/promotion';
 import Customers from '@containers/tabs/customers';
-import PostRedeemBonusPoint from '@containers/postRedeemBonusPoint';
+import PostRedeem from '@containers/postRedeem';
 import PushNotification from '@containers/pushNotification';
 import CustomerDetail from '@containers/customerDetail';
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
+
+const resources = [
+  {
+    name: routes.tab0,
+    component: Homepage,
+    icon: assets.icon.tab_0,
+    label: _t('_nav.tab0'),
+  },
+  {
+    name: routes.tab1,
+    component: Product,
+    icon: assets.icon.tab_1,
+    label: _t('_nav.tab1'),
+  },
+  {
+    name: routes.tab2,
+    component: Promotion,
+    icon: assets.icon.tab_2,
+    label: _t('_nav.tab2'),
+  },
+  {
+    name: routes.tab3,
+    component: Customers,
+    icon: assets.icon.tab_3,
+    label: _t('_nav.tab3'),
+  },
+];
 
 const navStyles = StyleSheet.create({
   backIcon: {
@@ -118,32 +145,6 @@ const RootAuth = memo(() => {
 });
 
 const TabsScreen = memo(() => {
-  const resources = [
-    {
-      name: routes.tab0,
-      component: Homepage,
-      icon: assets.icon.tab_0,
-      label: _t('_nav.tab0'),
-    },
-    {
-      name: routes.tab1,
-      component: Product,
-      icon: assets.icon.tab_1,
-      label: _t('_nav.tab1'),
-    },
-    {
-      name: routes.tab2,
-      component: Promotion,
-      icon: assets.icon.tab_2,
-      label: _t('_nav.tab2'),
-    },
-    {
-      name: routes.tab3,
-      component: Customers,
-      icon: assets.icon.tab_3,
-      label: _t('_nav.tab3'),
-    },
-  ];
   return (
     <Tabs.Navigator
       initialRouteName={routes.tab0}
@@ -180,7 +181,7 @@ const RootTabs = memo(() => {
       screenOptions={(p: any) => ({
         headerTintColor: colors.white,
         headerBackTitleVisible: false,
-        // headerTitleAllowFontScaling: true,
+        headerTitleAllowFontScaling: true,
         headerBackImage,
         headerTitleStyle: navStyles.title,
         headerTitle: p.route.params?.title || _t(`_nav.${p.route.name}`),
@@ -206,10 +207,7 @@ const RootTabs = memo(() => {
         name={routes.pushNotification}
         component={PushNotification}
       />
-      <Stack.Screen
-        name={routes.postRedeemBonusPoint}
-        component={PostRedeemBonusPoint}
-      />
+      <Stack.Screen name={routes.postRedeem} component={PostRedeem} />
 
       <Stack.Screen name={routes.qr} component={QR} />
       <Stack.Screen name={routes.customerDetail} component={CustomerDetail} />

@@ -49,10 +49,7 @@ const Customers = memo((props: Props) => {
     }
   }, [data, loadingMore.current]);
 
-  const onPostRedeem = useCallback(
-    () => navigate(routes.postRedeemBonusPoint),
-    [],
-  );
+  const onPostRedeem = useCallback(() => navigate(routes.postRedeem), []);
   const onPushNotification = useCallback(
     () => navigate(routes.pushNotification),
     [],
@@ -101,7 +98,7 @@ const Customers = memo((props: Props) => {
     <UIKit.Container>
       <UIKit.View style={styles.topButtons}>
         <UIKit.ButtonText
-          title={_t('postRedeemBonusPoint')}
+          title={_t('postRedeem')}
           underline
           textStyle={styles.topButtonText}
           style={styles.topButton}

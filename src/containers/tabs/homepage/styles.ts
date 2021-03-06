@@ -70,5 +70,6 @@ export default StyleSheet.create({
     width: constants.width * 0.8,
     height: constants.width * 0.4,
     borderRadius: 10,
+    resizeMode: 'contain',
   },
 });

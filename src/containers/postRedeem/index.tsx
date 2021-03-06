@@ -6,9 +6,8 @@ import React, {
   useEffect,
   useMemo,
 } from 'react';
-import moment from 'moment';
 import * as yup from 'yup';
-import { View, TextInput } from 'react-native';
+import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { IStack } from 'screen-props';
 import { _t } from '@i18n';
@@ -18,71 +17,29 @@ import { Form, FormikHelpers, useFormik } from 'formik';
 import { styles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@state/';
-import { promotionActions } from '@state/promotion';
+import { redeemActions } from '@state/redeem';
 import { Modalize } from 'react-native-modalize';
 import CheckBox from '@react-native-community/checkbox';
 import { colors, variants } from '@values';
 
 interface Props extends IStack {}
 
-const generateDate = (date: any) => {
-  if (!date) {
-    return undefined;
-  }
-  try {
-    if (moment(date).isValid()) {
-      return moment(date).toDate();
-    }
-    return undefined;
-  } catch (error) {
-    return undefined;
-  }
-};
-
-const generateDateText = (date: any) => {
-  if (!date) {
-    return '';
-  }
-  try {
-    return moment(date)?.format('YYYY-MM-DD');
-  } catch (error) {
-    return '';
-  }
-};
-
 interface Form {
   name: string;
   branch: Array<any>;
   code: string;
-  amount: string;
-  promotion_amount: string;
+  point: number;
   unit: string;
+  quantity: number;
   description?: string;
   imageUri: string;
-  started_at: Date | undefined;
-  stoped_at: Date | undefined;
 }
 
-const PromotionDetail = memo((props: Props) => {
+const PostRedeem = memo((props: Props) => {
   const dispatch = useDispatch();
   const scrollRef = useRef<KeyboardAwareScrollView>() as MutableRefObject<KeyboardAwareScrollView>;
-  const amountRef = useRef<TextInput>() as MutableRefObject<TextInput>;
-  const preAmountRef = useRef<TextInput>() as MutableRefObject<TextInput>;
   const modalRef = useRef<Modalize>() as MutableRefObject<Modalize>;
   const dataImage = useRef<string>('');
-  const data = useRef<any>(props.route.params?.data);
-
-  useEffect(() => {
-    const params = props.route.params?.data;
-    const onSuccess = (res: any) => {
-      data.current = res;
-    };
-    params?.id &&
-      dispatch(promotionActions.getDetail.start(params.id, onSuccess));
-    return () => {
-      dispatch(promotionActions.clearDetail());
-    };
-  }, []);
 
   const units = useSelector((state: RootState) =>
     state.values.units?.asMutable(),
@@ -96,66 +53,32 @@ const PromotionDetail = memo((props: Props) => {
   }, [units]);
 
   const onSubmit = useCallback((values: Form, helper: FormikHelpers<Form>) => {
-    const { started_at, stoped_at } = values;
-    const field =
-      !started_at || !moment(started_at).isValid()
-        ? 'startDate'
-        : !stoped_at || !moment(started_at).isValid()
-        ? 'endDate'
-        : undefined;
-    if (field) {
-      return helper.setFieldError(
-        'stoped_at',
-        _t('vdRequiredField', { field: _t(field) }),
-      );
-    }
-    if (moment(started_at).add(1, 'day').isAfter(moment(stoped_at))) {
-      return helper.setFieldError('stoped_at', _t('vdInvalidDate'));
-    }
-
     const onSuccess = () =>
-      PopupPrototype.alert(
-        _t('success'),
-        _t(data.current?.id ? 'updatePromoSuccess' : 'createPromoSuccess'),
-        [
-          {
-            text: _t('ok'),
-            onPress: () => props.navigation.pop(),
-          },
-        ],
-      );
+      PopupPrototype.alert(_t('success'), _t('createRedeemSuccess'), [
+        {
+          text: _t('ok'),
+          onPress: () => props.navigation.pop(),
+        },
+      ]);
     const onError = () => PopupPrototype.alert(_t('unsuccess'), _t('error'));
     const payload: any = {
       ...values,
-      started_at: generateDateText(values.started_at),
-      stoped_at: generateDateText(values.stoped_at),
-      id: data.current?.id,
-      image: StringPrototype.genBase64(
-        dataImage.current,
-        data.current?.imageUri,
-      ),
+      image: StringPrototype.genBase64(dataImage.current),
+      index: 0,
     };
-    if (dataImage.current) {
-      delete payload.imageUri;
-      payload.index = 0;
-    }
-    dispatch(
-      promotionActions.createPromotion.start(payload, onSuccess, onError),
-    );
+    dispatch(redeemActions.createRedeem.start(payload, onSuccess, onError));
   }, []);
 
   const form = useFormik<Form>({
     initialValues: {
-      name: data.current?.name,
-      branch: data.current?.branch || [],
-      code: data.current?.code,
-      amount: data.current?.amount,
-      promotion_amount: data.current?.promotion_amount,
-      unit: data.current?.unit,
-      description: data.current?.description,
-      imageUri: data.current?.medias?.[0]?.source,
-      started_at: generateDate(data.current?.started_at),
-      stoped_at: generateDate(data.current?.stoped_at),
+      name: '',
+      branch: [],
+      code: '',
+      unit: '',
+      description: '',
+      imageUri: '',
+      point: 0,
+      quantity: 0,
     },
     onSubmit,
     validateOnMount: false,
@@ -164,12 +87,12 @@ const PromotionDetail = memo((props: Props) => {
     enableReinitialize: true,
     validationSchema: () =>
       yup.object().shape({
-        name: validateRequireField(_t('promoName')),
+        name: validateRequireField(_t('redeemName')),
         branch: validateRequireField(_t('branch')),
-        amount: validateRequireField(_t('promoAmount')),
-        promotion_amount: validateRequireField(_t('promoAmount')),
         unit: validateRequireField(_t('unit')),
         imageUri: validateRequireField(_t('image')),
+        point: validateRequireField(_t('point')),
+        quantity: validateRequireField(_t('quantity')),
       }),
   });
 
@@ -184,9 +107,6 @@ const PromotionDetail = memo((props: Props) => {
     (value: string | number) => form.setFieldValue('unit', value),
     [],
   );
-  const onAmountPress = useCallback(() => amountRef.current?.focus(), []);
-  const onPreAmountPress = useCallback(() => preAmountRef.current?.focus(), []);
-
   const onSelectImage = useCallback(() => {
     PopupPrototype.showCameraSheetSingle(_t('uploadImage')).then((value) => {
       if (value.success) {
@@ -209,12 +129,6 @@ const PromotionDetail = memo((props: Props) => {
     },
     [form.values.branch],
   );
-
-  const onStartDateChange = (_: any, d: any) =>
-    form.setFieldValue('started_at', d);
-
-  const onStopDateChange = (_: any, d: any) =>
-    form.setFieldValue('stoped_at', d);
 
   const branchText = useMemo(() => {
     const { branch } = form.values;
@@ -254,12 +168,12 @@ const PromotionDetail = memo((props: Props) => {
     <UIKit.Container>
       <UIKit.KeyboardAwareScrollView paddingH ref={scrollRef}>
         <View style={styles.section}>
-          <UIKit.Text style={styles.label}>{_t('promoName')}</UIKit.Text>
+          <UIKit.Text style={styles.label}>{_t('redeemName')}</UIKit.Text>
           <UIKit.FormField
             style={styles.input}
             formID="name"
             form={form}
-            autoFocus={!data.current}
+            autoFocus
           />
           <UIKit.FormError message={form.errors.name} />
         </View>
@@ -287,7 +201,6 @@ const PromotionDetail = memo((props: Props) => {
           <UIKit.View style={styles.flex}>
             <UIKit.Text style={styles.label}>{_t('promoCode')}</UIKit.Text>
             <UIKit.FormField
-              editable={!data.current}
               formID="code"
               form={form}
               style={styles.input}
@@ -299,81 +212,44 @@ const PromotionDetail = memo((props: Props) => {
 
         <UIKit.View style={[styles.section, styles.row]}>
           <UIKit.View style={styles.flex}>
-            <UIKit.Text style={styles.label}>{_t('promoPrice')}</UIKit.Text>
-            <UIKit.Touchable
-              activeOpacity={1}
-              style={[styles.input, styles.amount]}
-              onPress={onAmountPress}>
-              <UIKit.CurrencyField
-                ref={amountRef}
-                formID="promotion_amount"
-                form={form}
-                precision={0}
-                value={parseFloat(form.values.promotion_amount)}
-              />
-            </UIKit.Touchable>
-          </UIKit.View>
-          <UIKit.View style={styles.divider} />
-          <UIKit.View style={styles.flex}>
-            <UIKit.Text style={styles.label}>{_t('promoPrePrice')}</UIKit.Text>
-            <UIKit.Touchable
-              activeOpacity={1}
-              style={[styles.input, styles.amount]}
-              onPress={onPreAmountPress}>
-              <UIKit.CurrencyField
-                ref={preAmountRef}
-                formID="amount"
-                form={form}
-                precision={0}
-                value={parseFloat(form.values.amount)}
-              />
-            </UIKit.Touchable>
-          </UIKit.View>
-        </UIKit.View>
-        <UIKit.FormError
-          message={form.errors.amount || form.errors.promotion_amount}
-        />
-
-        <UIKit.View style={[styles.section, styles.row]}>
-          <UIKit.View style={styles.flex}>
-            <UIKit.Text style={styles.label}>{_t('startDate')}</UIKit.Text>
-            <UIKit.View style={[styles.input, styles.amount]}>
-              <UIKit.DatePicker
-                style={styles.flex}
-                date={form.values.started_at}
-                onChange={onStartDateChange}
-              />
-            </UIKit.View>
-          </UIKit.View>
-          <UIKit.View style={styles.divider} />
-          <UIKit.View style={styles.flex}>
-            <UIKit.Text style={styles.label}>{_t('endDate')}</UIKit.Text>
-            <UIKit.View style={[styles.input, styles.amount]}>
-              <UIKit.DatePicker
-                style={styles.flex}
-                date={form.values.stoped_at}
-                onChange={onStopDateChange}
-              />
-            </UIKit.View>
-          </UIKit.View>
-        </UIKit.View>
-        <UIKit.FormError
-          message={form.errors.started_at || form.errors.stoped_at}
-        />
-
-        <UIKit.View style={styles.section}>
-          <UIKit.Text style={styles.label}>{_t('unit')}</UIKit.Text>
-          <UIKit.View style={styles.input}>
-            <UIKit.PickerSelect
-              labelStyle={styles.inputTransparent}
-              items={pickerUnits}
-              value={form.values.unit}
-              selectedValue={form.values.unit}
-              onValueChange={onSelectUnit}
+            <UIKit.Text style={styles.label}>{_t('redeemPoints')}</UIKit.Text>
+            <UIKit.FormField
+              formID="point"
+              keyboardType="numeric"
+              form={form}
+              style={styles.input}
+              clearButtonMode="never"
             />
           </UIKit.View>
-          <UIKit.FormError message={form.errors.unit} />
+          <UIKit.View style={styles.divider} />
+          <UIKit.View style={styles.flex}>
+            <UIKit.Text style={styles.label}>{_t('unit')}</UIKit.Text>
+            <UIKit.View style={styles.input}>
+              <UIKit.PickerSelect
+                labelStyle={styles.inputTransparent}
+                items={pickerUnits}
+                value={form.values.unit}
+                selectedValue={form.values.unit}
+                onValueChange={onSelectUnit}
+              />
+            </UIKit.View>
+            <UIKit.FormError message={form.errors.unit} />
+          </UIKit.View>
         </UIKit.View>
+        <UIKit.FormError message={form.errors.point || form.errors.unit} />
+
+        <UIKit.View style={styles.section}>
+          <UIKit.Text style={styles.label}>{_t('quantity')}</UIKit.Text>
+          <UIKit.FormField
+            formID="quantity"
+            keyboardType="numeric"
+            form={form}
+            style={styles.input}
+            clearButtonMode="never"
+          />
+          <UIKit.FormError message={form.errors.quantity} />
+        </UIKit.View>
+        <UIKit.FormError />
 
         <UIKit.View style={styles.section}>
           <UIKit.Text style={styles.label}>{_t('description')}</UIKit.Text>
@@ -402,7 +278,7 @@ const PromotionDetail = memo((props: Props) => {
           <UIKit.FormError message={form.errors.imageUri} />
         </UIKit.View>
         <UIKit.Button
-          title={data.current ? _t('update') : _t('createPromo')}
+          title={_t('createRedeem')}
           style={styles.btn}
           onPress={form.submitForm}
         />
@@ -425,4 +301,4 @@ const PromotionDetail = memo((props: Props) => {
   );
 });
 
-export default PromotionDetail;
+export default PostRedeem;

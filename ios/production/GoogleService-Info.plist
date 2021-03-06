@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>637667981426-qhosah8rvu4r8icmb8n5pak2jae2p3e2.apps.googleusercontent.com</string>
+	<string>462129586194-jhm2v9s1piq1l8f0t621h9jjf0gv1mgu.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.637667981426-qhosah8rvu4r8icmb8n5pak2jae2p3e2</string>
+	<string>com.googleusercontent.apps.462129586194-jhm2v9s1piq1l8f0t621h9jjf0gv1mgu</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>462129586194-0scaj3p0ve8ce01a55lqr9rd3bibkfan.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDscaxxU2u0dyX7WF1W09rY8yld_OBbNWk</string>
+	<string>AIzaSyBsCyYIzR0A60xMga3RQ5ujuV2qF_kJGvs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>637667981426</string>
+	<string>462129586194</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.dungnguyen.baseplatform</string>
+	<string>vn.ftcjsc.babazashop</string>
 	<key>PROJECT_ID</key>
-	<string>baseplatform-f2661</string>
+	<string>vieclamviet-8421b</string>
 	<key>STORAGE_BUCKET</key>
-	<string>baseplatform-f2661.appspot.com</string>
+	<string>vieclamviet-8421b.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:637667981426:ios:a0b4f2761f02f5e336aaeb</string>
+	<string>1:462129586194:ios:c2191993fd926e2629b8cb</string>
+	<key>DATABASE_URL</key>
+	<string>https://vieclamviet-8421b.firebaseio.com</string>
 </dict>
 </plist>

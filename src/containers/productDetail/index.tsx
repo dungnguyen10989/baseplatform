@@ -70,6 +70,12 @@ const ProductDetail = memo((props: Props) => {
       PopupPrototype.alert(
         _t('success'),
         _t(data.current?.id ? 'updateProductSuccess' : 'createProductSuccess'),
+        [
+          {
+            text: _t('ok'),
+            onPress: () => props.navigation.pop(),
+          },
+        ],
       );
     const onError = () => PopupPrototype.alert(_t('unsuccess'), _t('error'));
     const payload: any = {
@@ -187,7 +193,12 @@ const ProductDetail = memo((props: Props) => {
       <UIKit.KeyboardAwareScrollView paddingH ref={scrollRef}>
         <View style={styles.section}>
           <UIKit.Text style={styles.label}>{_t('productName')}</UIKit.Text>
-          <UIKit.FormField style={styles.input} formID="name" form={form} />
+          <UIKit.FormField
+            style={styles.input}
+            formID="name"
+            form={form}
+            autoFocus={!data.current}
+          />
           <UIKit.FormError message={form.errors.name} />
         </View>
 

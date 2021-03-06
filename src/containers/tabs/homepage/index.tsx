@@ -1,11 +1,4 @@
-import React, {
-  Dispatch,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { UIKit } from '@uikit';
 import { DeviceManager, PopupPrototype } from '@utils';
 import styles from './styles';
@@ -13,26 +6,16 @@ import { _t } from '@i18n';
 import { fetchAPI, HttpResponse } from '@services';
 import Carousel from 'react-native-snap-carousel';
 import { IStack } from 'screen-props';
-import { colors, constants, variants } from '@values';
+import { colors, constants } from '@values';
 import { assets } from '@assets';
 import { routes } from '@navigator/routes';
-import { RootState, useAppDispatch } from '@state/';
-import { shallowEqual, useDispatch, useSelector, connect } from 'react-redux';
-import { shopActions } from '@state/shop';
 
 interface Props extends IStack {}
 
 const sliderWidth = constants.width;
 const itemWidth = constants.width * 0.8;
 
-const dataSelector = (state: RootState) => state.shop.data;
-
 const Homepage = memo((props: Props) => {
-  // const dispatch = useDispatch();
-  // const data = useSelector(dataSelector, shallowEqual);
-  // const info = useSelector(dataSelector, shallowEqual);
-  // const error = useSelector((state: any) => state.shop.error);
-
   const [shopInfo, setShopInfo] = useState<HttpResponse>();
 
   const getData = useCallback(() => {
@@ -44,12 +27,6 @@ const Homepage = memo((props: Props) => {
   }, []);
 
   useEffect(getData, []);
-  // useEffect(() => {
-  //   const callback = () => PopupPrototype.dismissOverlay();
-  //   PopupPrototype.showOverlay();
-  //   dispatch(shopActions.getInfo.start(undefined, callback, callback));
-  // }, []);
-
   const onPostProduct = useCallback(
     () => props.navigation.navigate(routes.productDetail),
     [],
@@ -77,6 +54,7 @@ const Homepage = memo((props: Props) => {
         <UIKit.FastImage
           source={{ uri: info.item.medias?.[0]?.source }}
           style={styles.sliderImage}
+          resizeMode="contain"
         />
       </UIKit.View>
     );

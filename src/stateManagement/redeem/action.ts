@@ -1,19 +1,13 @@
 import { createActions, createActionType } from '../helper';
 
-const prefix = 'PROMOTION';
+const prefix = 'REDEEM';
 
 const types = {
-  getList: createActionType('getList', prefix),
-  getDetail: createActionType('getDetail', prefix),
-  createPromotion: createActionType('createPromotion', prefix),
-  clearDetail: `${prefix}/CLEAR_DETAIL`,
+  createRedeem: createActionType('createRedeem', prefix),
 };
 
 const actions = {
-  getList: createActions(types.getList),
-  getDetail: createActions(types.getDetail),
-  createPromotion: createActions(types.createPromotion),
-  clearDetail: () => ({ type: types.clearDetail }),
+  createRedeem: createActions(types.createRedeem),
 };
 
 export { types, actions };
