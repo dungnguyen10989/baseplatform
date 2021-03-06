@@ -47,9 +47,18 @@
             BlueprintIdentifier = "220A663C25F383EC00BBC731"
             BuildableName = "development.app"
             BlueprintName = "development"
-            ReferencedContainer = "container:BasePlatform.xcodeproj">
+            ReferencedContainer = "container:BabazaShop.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "220A663C25F383EC00BBC731"
+            BuildableName = "development.app"
+            BlueprintName = "development"
+            ReferencedContainer = "container:BasePlatform.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -64,7 +73,7 @@
             BlueprintIdentifier = "220A663C25F383EC00BBC731"
             BuildableName = "development.app"
             BlueprintName = "development"
-            ReferencedContainer = "container:BasePlatform.xcodeproj">
+            ReferencedContainer = "container:BabazaShop.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

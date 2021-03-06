@@ -1,8 +1,6 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
-import codePush, { CodePushOptions } from 'react-native-code-push';
-
 import {
   CardStyleInterpolators,
   createStackNavigator,
@@ -38,53 +36,8 @@ import PostRedeem from '@containers/postRedeem';
 import PushNotification from '@containers/pushNotification';
 import CustomerDetail from '@containers/customerDetail';
 
-const { SyncStatus } = codePush;
-
-const codePushOptions: CodePushOptions = {
-  checkFrequency: codePush.CheckFrequency.ON_APP_START,
-  installMode: codePush.InstallMode.IMMEDIATE,
-  mandatoryInstallMode: codePush.InstallMode.IMMEDIATE,
-  updateDialog: {
-    title: _t('updateVerTitle'),
-    appendReleaseDescription: true,
-    mandatoryContinueButtonLabel: _t('updateNow'),
-    optionalIgnoreButtonLabel: _t('cancel'),
-    optionalInstallButtonLabel: _t('updateNow'),
-    optionalUpdateMessage: '',
-    mandatoryUpdateMessage: '',
-    descriptionPrefix: '',
-  },
-};
-
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
-
-const resources = [
-  {
-    name: routes.tab0,
-    component: Homepage,
-    icon: assets.icon.tab_0,
-    label: _t('_nav.tab0'),
-  },
-  {
-    name: routes.tab1,
-    component: Product,
-    icon: assets.icon.tab_1,
-    label: _t('_nav.tab1'),
-  },
-  {
-    name: routes.tab2,
-    component: Promotion,
-    icon: assets.icon.tab_2,
-    label: _t('_nav.tab2'),
-  },
-  {
-    name: routes.tab3,
-    component: Customers,
-    icon: assets.icon.tab_3,
-    label: _t('_nav.tab3'),
-  },
-];
 
 const navStyles = StyleSheet.create({
   backIcon: {
@@ -165,6 +118,33 @@ const RootAuth = memo(() => {
 });
 
 const TabsScreen = memo(() => {
+  const resources = [
+    {
+      name: routes.tab0,
+      component: Homepage,
+      icon: assets.icon.tab_0,
+      label: _t('_nav.tab0'),
+    },
+    {
+      name: routes.tab1,
+      component: Product,
+      icon: assets.icon.tab_1,
+      label: _t('_nav.tab1'),
+    },
+    {
+      name: routes.tab2,
+      component: Promotion,
+      icon: assets.icon.tab_2,
+      label: _t('_nav.tab2'),
+    },
+    {
+      name: routes.tab3,
+      component: Customers,
+      icon: assets.icon.tab_3,
+      label: _t('_nav.tab3'),
+    },
+  ];
+
   return (
     <Tabs.Navigator
       initialRouteName={routes.tab0}
@@ -236,31 +216,6 @@ const RootTabs = memo(() => {
 });
 
 export default memo(() => {
-  useEffect(() => {
-    codePush.sync(
-      codePushOptions,
-      (status) => {
-        switch (status) {
-          case SyncStatus.CHECKING_FOR_UPDATE:
-            // PopupManager.showLoading();
-
-            break;
-          case SyncStatus.UNKNOWN_ERROR:
-          case SyncStatus.UPDATE_IGNORED:
-          case SyncStatus.UPDATE_INSTALLED:
-          case SyncStatus.UP_TO_DATE:
-            // PopupManager.dismissLoading();
-
-            break;
-          default:
-            return;
-        }
-      },
-      (progress) => {},
-      (update) => {},
-    );
-  }, []);
-
   return (
     <SafeAreaProvider>
       <Provider store={store}>

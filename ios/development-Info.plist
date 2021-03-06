@@ -2,112 +2,112 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>CFBundleDevelopmentRegion</key>
-  <string>en</string>
-  <key>CFBundleDisplayName</key>
-  <string>Babaza Shop</string>
-  <key>CFBundleExecutable</key>
-  <string>$(EXECUTABLE_NAME)</string>
-  <key>CFBundleIdentifier</key>
-  <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-  <key>CFBundleInfoDictionaryVersion</key>
-  <string>6.0</string>
-  <key>CFBundleName</key>
-  <string>$(PRODUCT_NAME)</string>
-  <key>CFBundlePackageType</key>
-  <string>APPL</string>
-  <key>CFBundleShortVersionString</key>
-  <string>$(MARKETING_VERSION)</string>
-  <key>CFBundleSignature</key>
-  <string>????</string>
-  <key>CFBundleVersion</key>
-  <string>1</string>
-  <key>CodePushPublicKey</key>
-  <string>Re-uBkV7ek_TfNzC_xUG0x6535V-OXIogTXH5</string>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>mailto:</string>
-    <string>tel:</string>
-  </array>
-  <key>LSRequiresIPhoneOS</key>
-  <true/>
-  <key>NSAppTransportSecurity</key>
-    <dict>
-      <key>NSAllowsArbitraryLoads</key>
-      <true/>
-      <key>NSExceptionDomains</key>
-      <dict>
-        <key>NSExceptionAllowsInsecureHTTPLoads</key>
-        <true/>
-        <key>appcenter.ms</key>
-        <dict>
-          <key>NSExceptionAllowsInsecureHTTPLoads</key>
-          <true/>
-        </dict>
-        <key>codepush.appcenter.ms</key>
-        <dict>
-          <key>NSExceptionAllowsInsecureHTTPLoads</key>
-          <true/>
-        </dict>
-        <key>codepushupdates.azureedge.net</key>
-        <dict/>
-        <key>localhost</key>
-        <dict>
-          <key>NSExceptionAllowsInsecureHTTPLoads</key>
-          <true/>
-        </dict>
-      </dict>
-    </dict>
-  <key>NSBluetoothPeripheralUsageDescription</key>
-    <string>Babaza would like access to your bluetooth peripheral</string>
-    <key>NSCalendarsUsageDescription</key>
-    <string>Babaza would like access to your calendar</string>
-    <key>NSCameraUsageDescription</key>
-    <string>Ứng dụng Babaza mong muốn truy cập máy ảnh để có thể chụp ảnh cho ảnh đại diện</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>Babaza would like access to your location always</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Ứng dụng Babaza mong muốn lấy vị trí hiện hành của bạn để có thể tìm kiếm công việc gần bạn và lưu tọa độ cho công ty</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>Babaza would like to your microphone (for videos)</string>
-    <key>NSMotionUsageDescription</key>
-    <string>Babaza would like access to your motion</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Babaza would like to save photos to your photo gallery</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Ứng dụng Babaza mong muốn truy cập thư viện hình ảnh để bạn có thể chọn ảnh đại diện</string>
-    <key>NSSpeechRecognitionUsageDescription</key>
-    <string>Babaza would like access to your speech recognition</string>
-  <key>UIAppFonts</key>
-  <array>
-    <string>AntDesign.ttf</string>
-    <string>Entypo.ttf</string>
-    <string>EvilIcons.ttf</string>
-    <string>Feather.ttf</string>
-    <string>FontAwesome.ttf</string>
-    <string>FontAwesome5_Brands.ttf</string>
-    <string>FontAwesome5_Regular.ttf</string>
-    <string>FontAwesome5_Solid.ttf</string>
-    <string>Fontisto.ttf</string>
-    <string>Foundation.ttf</string>
-    <string>Ionicons.ttf</string>
-    <string>MaterialCommunityIcons.ttf</string>
-    <string>MaterialIcons.ttf</string>
-    <string>Octicons.ttf</string>
-    <string>SimpleLineIcons.ttf</string>
-    <string>Zocial.ttf</string>
-  </array>
-  <key>UILaunchStoryboardName</key>
-  <string>LaunchScreen</string>
-  <key>UIRequiredDeviceCapabilities</key>
-  <array>
-    <string>armv7</string>
-  </array>
-  <key>UISupportedInterfaceOrientations</key>
-  <array>
-    <string>UIInterfaceOrientationPortrait</string>
-  </array>
-  <key>UIViewControllerBasedStatusBarAppearance</key>
-  <false/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Babaza Shop Dev</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>CodePushDeploymentKey</key>
+	<string>Re-uBkV7ek_TfNzC_xUG0x6535V-OXIogTXH5</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>mailto:</string>
+		<string>tel:</string>
+	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<true/>
+			<key>appcenter.ms</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+			<key>codepush.appcenter.ms</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+			<key>codepushupdates.azureedge.net</key>
+			<dict/>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Babaza would like access to your bluetooth peripheral</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Babaza would like access to your calendar</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Ứng dụng Babaza mong muốn truy cập máy ảnh để có thể chụp ảnh cho ảnh đại diện</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Babaza would like access to your location always</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Ứng dụng Babaza mong muốn lấy vị trí hiện hành của bạn để có thể tìm kiếm công việc gần bạn và lưu tọa độ cho công ty</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Babaza would like to your microphone (for videos)</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Babaza would like access to your motion</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Babaza would like to save photos to your photo gallery</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Ứng dụng Babaza mong muốn truy cập thư viện hình ảnh để bạn có thể chọn ảnh đại diện</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Babaza would like access to your speech recognition</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AntDesign.ttf</string>
+		<string>Entypo.ttf</string>
+		<string>EvilIcons.ttf</string>
+		<string>Feather.ttf</string>
+		<string>FontAwesome.ttf</string>
+		<string>FontAwesome5_Brands.ttf</string>
+		<string>FontAwesome5_Regular.ttf</string>
+		<string>FontAwesome5_Solid.ttf</string>
+		<string>Fontisto.ttf</string>
+		<string>Foundation.ttf</string>
+		<string>Ionicons.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
+		<string>MaterialIcons.ttf</string>
+		<string>Octicons.ttf</string>
+		<string>SimpleLineIcons.ttf</string>
+		<string>Zocial.ttf</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

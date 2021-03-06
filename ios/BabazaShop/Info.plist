@@ -22,7 +22,7 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-  <key>CodePushPublicKey</key>
+  <key>CodePushDeploymentKey</key>
   <string>DVSHRz13akRSppqVo0vpM5XDiAsCNtvTEzZNi</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>

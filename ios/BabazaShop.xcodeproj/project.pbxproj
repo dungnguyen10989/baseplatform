@@ -32,34 +32,34 @@
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* BasePlatformTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasePlatformTests.m; sourceTree = "<group>"; };
-		02713BC4FE1BB23CCC69A218 /* Pods-BasePlatform-BasePlatformTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasePlatform-BasePlatformTests.debug.xcconfig"; path = "Target Support Files/Pods-BasePlatform-BasePlatformTests/Pods-BasePlatform-BasePlatformTests.debug.xcconfig"; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* BabazaShopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BabazaShopTests.m; sourceTree = "<group>"; };
+		02713BC4FE1BB23CCC69A218 /* Pods-BabazaShop-BabazaShopTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BabazaShop-BabazaShopTests.debug.xcconfig"; path = "Target Support Files/Pods-BabazaShop-BabazaShopTests/Pods-BabazaShop-BabazaShopTests.debug.xcconfig"; sourceTree = "<group>"; };
 		11B7701E4474750AF7768C70 /* libPods-development.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-development.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07F961A680F5B00A75B9A /* BasePlatform.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasePlatform.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = BasePlatform/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = BasePlatform/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BasePlatform/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BasePlatform/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BasePlatform/main.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* BabazaShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BabazaShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = BabazaShop/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = BabazaShop/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BabazaShop/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BabazaShop/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BabazaShop/main.m; sourceTree = "<group>"; };
 		220A665125F383EC00BBC731 /* development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = development.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		220A665225F383EC00BBC731 /* development-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "development-Info.plist"; path = "/Users/macos/Documents/Workspace/Babaza shop/ios/development-Info.plist"; sourceTree = "<absolute>"; };
 		220A665E25F386ED00BBC731 /* logo_fav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_fav.png; sourceTree = "<group>"; };
 		221B871D25BE5C4100DE41E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		221B872225BE5C6E00DE41E4 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		224B175825A0FA2B009A445D /* BasePlatform-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BasePlatform-Bridging-Header.h"; sourceTree = "<group>"; };
+		224B175825A0FA2B009A445D /* BabazaShop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BabazaShop-Bridging-Header.h"; sourceTree = "<group>"; };
 		224B175925A0FA2C009A445D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		2259E61725C05F130042455F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "production/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22AD397625E9FFC30054DE5D /* Modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Modules; sourceTree = "<group>"; };
 		22EF99C40FEB5310015EBAAA /* Pods-production.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-production.release.xcconfig"; path = "Target Support Files/Pods-production/Pods-production.release.xcconfig"; sourceTree = "<group>"; };
-		787EF046CA22B1A167DE842F /* Pods-BasePlatform-BasePlatformTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasePlatform-BasePlatformTests.release.xcconfig"; path = "Target Support Files/Pods-BasePlatform-BasePlatformTests/Pods-BasePlatform-BasePlatformTests.release.xcconfig"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BasePlatform/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		787EF046CA22B1A167DE842F /* Pods-BabazaShop-BabazaShopTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BabazaShop-BabazaShopTests.release.xcconfig"; path = "Target Support Files/Pods-BabazaShop-BabazaShopTests/Pods-BabazaShop-BabazaShopTests.release.xcconfig"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BabazaShop/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8739A3437BF5D65D23A4BC34 /* libPods-production.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-production.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A628EACE9D8A34B9B68D372B /* libPods-BasePlatform-BasePlatformTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BasePlatform-BasePlatformTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A628EACE9D8A34B9B68D372B /* libPods-BabazaShop-BabazaShopTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BabazaShop-BabazaShopTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7249159DE03CA8BCD9080E4 /* Pods-development.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-development.debug.xcconfig"; path = "Target Support Files/Pods-development/Pods-development.debug.xcconfig"; sourceTree = "<group>"; };
-		BB081A75DAEB592032DB8100 /* Pods-BasePlatform.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasePlatform.release.xcconfig"; path = "Target Support Files/Pods-BasePlatform/Pods-BasePlatform.release.xcconfig"; sourceTree = "<group>"; };
+		BB081A75DAEB592032DB8100 /* Pods-BabazaShop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BabazaShop.release.xcconfig"; path = "Target Support Files/Pods-BabazaShop/Pods-BabazaShop.release.xcconfig"; sourceTree = "<group>"; };
 		C1ECE909EBF921063A9A4E26 /* Pods-production.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-production.debug.xcconfig"; path = "Target Support Files/Pods-production/Pods-production.debug.xcconfig"; sourceTree = "<group>"; };
 		D8B3DDBFDE208D7F8A7160EC /* Pods-development.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-development.release.xcconfig"; path = "Target Support Files/Pods-development/Pods-development.release.xcconfig"; sourceTree = "<group>"; };
-		E1A612184A888270CF22FE82 /* Pods-BasePlatform.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasePlatform.debug.xcconfig"; path = "Target Support Files/Pods-BasePlatform/Pods-BasePlatform.debug.xcconfig"; sourceTree = "<group>"; };
+		E1A612184A888270CF22FE82 /* Pods-BabazaShop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BabazaShop.debug.xcconfig"; path = "Target Support Files/Pods-BabazaShop/Pods-BabazaShop.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -84,13 +84,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* BasePlatformTests */ = {
+		00E356EF1AD99517003FC87E /* BabazaShopTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* BasePlatformTests.m */,
+				00E356F21AD99517003FC87E /* BabazaShopTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = BasePlatformTests;
+			path = BabazaShopTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -101,7 +101,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* BasePlatform */ = {
+		13B07FAE1A68108700A75B9A /* BabazaShop */ = {
 			isa = PBXGroup;
 			children = (
 				221B86FD25BE5BAC00DE41E4 /* InfoPlist.strings */,
@@ -114,9 +114,9 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				224B175925A0FA2C009A445D /* File.swift */,
-				224B175825A0FA2B009A445D /* BasePlatform-Bridging-Header.h */,
+				224B175825A0FA2B009A445D /* BabazaShop-Bridging-Header.h */,
 			);
-			name = BasePlatform;
+			name = BabazaShop;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -124,7 +124,7 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				A628EACE9D8A34B9B68D372B /* libPods-BasePlatform-BasePlatformTests.a */,
+				A628EACE9D8A34B9B68D372B /* libPods-BabazaShop-BabazaShopTests.a */,
 				11B7701E4474750AF7768C70 /* libPods-development.a */,
 				8739A3437BF5D65D23A4BC34 /* libPods-production.a */,
 			);
@@ -144,9 +144,9 @@
 				220A665E25F386ED00BBC731 /* logo_fav.png */,
 				22AD397625E9FFC30054DE5D /* Modules */,
 				2259E61725C05F130042455F /* GoogleService-Info.plist */,
-				13B07FAE1A68108700A75B9A /* BasePlatform */,
+				13B07FAE1A68108700A75B9A /* BabazaShop */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* BasePlatformTests */,
+				00E356EF1AD99517003FC87E /* BabazaShopTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				C76DC773690430960746F699 /* Pods */,
@@ -160,7 +160,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* BasePlatform.app */,
+				13B07F961A680F5B00A75B9A /* BabazaShop.app */,
 				220A665125F383EC00BBC731 /* development.app */,
 			);
 			name = Products;
@@ -176,10 +176,10 @@
 		C76DC773690430960746F699 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E1A612184A888270CF22FE82 /* Pods-BasePlatform.debug.xcconfig */,
-				BB081A75DAEB592032DB8100 /* Pods-BasePlatform.release.xcconfig */,
-				02713BC4FE1BB23CCC69A218 /* Pods-BasePlatform-BasePlatformTests.debug.xcconfig */,
-				787EF046CA22B1A167DE842F /* Pods-BasePlatform-BasePlatformTests.release.xcconfig */,
+				E1A612184A888270CF22FE82 /* Pods-BabazaShop.debug.xcconfig */,
+				BB081A75DAEB592032DB8100 /* Pods-BabazaShop.release.xcconfig */,
+				02713BC4FE1BB23CCC69A218 /* Pods-BabazaShop-BabazaShopTests.debug.xcconfig */,
+				787EF046CA22B1A167DE842F /* Pods-BabazaShop-BabazaShopTests.release.xcconfig */,
 				A7249159DE03CA8BCD9080E4 /* Pods-development.debug.xcconfig */,
 				D8B3DDBFDE208D7F8A7160EC /* Pods-development.release.xcconfig */,
 				C1ECE909EBF921063A9A4E26 /* Pods-production.debug.xcconfig */,
@@ -209,8 +209,8 @@
 			dependencies = (
 			);
 			name = production;
-			productName = BasePlatform;
-			productReference = 13B07F961A680F5B00A75B9A /* BasePlatform.app */;
+			productName = BabazaShop;
+			productReference = 13B07F961A680F5B00A75B9A /* BabazaShop.app */;
 			productType = "com.apple.product-type.application";
 		};
 		220A663C25F383EC00BBC731 /* development */ = {
@@ -231,7 +231,7 @@
 			dependencies = (
 			);
 			name = development;
-			productName = BasePlatform;
+			productName = BabazaShop;
 			productReference = 220A665125F383EC00BBC731 /* development.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -252,7 +252,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "BasePlatform" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "BabazaShop" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -591,7 +591,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7B37J2J45P;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = BasePlatform/Info.plist;
+				INFOPLIST_FILE = BabazaShop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
@@ -600,8 +600,8 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = vn.ftcjsc.babazashop;
-				PRODUCT_NAME = BasePlatform;
-				SWIFT_OBJC_BRIDGING_HEADER = "BasePlatform-Bridging-Header.h";
+				PRODUCT_NAME = BabazaShop;
+				SWIFT_OBJC_BRIDGING_HEADER = "BabazaShop-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -616,7 +616,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7B37J2J45P;
-				INFOPLIST_FILE = BasePlatform/Info.plist;
+				INFOPLIST_FILE = BabazaShop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
@@ -625,8 +625,8 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = vn.ftcjsc.babazashop;
-				PRODUCT_NAME = BasePlatform;
-				SWIFT_OBJC_BRIDGING_HEADER = "BasePlatform-Bridging-Header.h";
+				PRODUCT_NAME = BabazaShop;
+				SWIFT_OBJC_BRIDGING_HEADER = "BabazaShop-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -651,7 +651,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = vn.ftcjsc.babazashop.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "BasePlatform-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BabazaShop-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -676,7 +676,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = vn.ftcjsc.babazashop.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "BasePlatform-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "BabazaShop-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -817,7 +817,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "BasePlatform" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "BabazaShop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
