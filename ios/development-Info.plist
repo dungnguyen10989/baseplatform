@@ -58,26 +58,34 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Babaza would like access to your bluetooth peripheral</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Babaza would like access to your calendar</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Ứng dụng Babaza mong muốn truy cập máy ảnh để có thể chụp ảnh cho ảnh đại diện</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Babaza would like access to your location always</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Ứng dụng Babaza mong muốn lấy vị trí hiện hành của bạn để có thể tìm kiếm công việc gần bạn và lưu tọa độ cho công ty</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Babaza would like to your microphone (for videos)</string>
-	<key>NSMotionUsageDescription</key>
-	<string>Babaza would like access to your motion</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Babaza would like to save photos to your photo gallery</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Ứng dụng Babaza mong muốn truy cập thư viện hình ảnh để bạn có thể chọn ảnh đại diện</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Babaza would like access to your speech recognition</string>
+  <key>NSAppleMusicUsageDescription</key>
+  <string>Babaza wants to play music</string>
+  <key>NSBluetoothPeripheralUsageDescription</key>
+  <string>Babaza would like access to your bluetooth peripheral</string>
+  <key>NSBluetoothAlwaysUsageDescription</key>
+  <string>Babaza would like access bluetooth</string>
+  <key>NSSiriUsageDescription</key>
+  <string>Babaza would like use Siri</string>
+  <key>kTCCServiceMediaLibrary</key>
+  <string>Babaza would like play music</string>
+  <key>NSCalendarsUsageDescription</key>
+  <string>Babaza would like access to your calendar</string>
+  <key>NSCameraUsageDescription</key>
+  <string>Ứng dụng Babaza mong muốn truy cập máy ảnh để có thể chụp ảnh cho ảnh đại diện</string>
+  <key>NSLocationAlwaysUsageDescription</key>
+  <string>Babaza would like access to your location always</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>Ứng dụng Babaza mong muốn lấy vị trí hiện hành của bạn để có thể tìm kiếm công việc gần bạn và lưu tọa độ cho công ty</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>Babaza would like to your microphone (for videos)</string>
+  <key>NSMotionUsageDescription</key>
+  <string>Babaza would like access to your motion</string>
+  <key>NSPhotoLibraryAddUsageDescription</key>
+  <string>Babaza would like to save photos to your photo gallery</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>Ứng dụng Babaza mong muốn truy cập thư viện hình ảnh để bạn có thể chọn ảnh đại diện</string>
+  <key>NSSpeechRecognitionUsageDescription</key>
+  <string>Babaza would like access to your speech recognition</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

@@ -4,9 +4,9 @@ import * as yup from 'yup';
 
 const validatePhone = (value: string | undefined) => {
   if (
-    value?.startsWith('0') &&
-    value?.startsWith('84') &&
-    value?.startsWith('+84')
+    !value?.startsWith('0') &&
+    !value?.startsWith('84') &&
+    !value?.startsWith('+84')
   ) {
     return false;
   }

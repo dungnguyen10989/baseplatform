@@ -173,6 +173,7 @@ const Register = memo((props: Props) => {
               autoCorrect={false}
               autoCompleteType="username"
               autoFocus
+              borderWidth={1}
             />
 
             <UIKit.FormField
@@ -188,6 +189,7 @@ const Register = memo((props: Props) => {
               form={form}
               formID="password"
               textContentType="oneTimeCode"
+              borderWidth={1}
             />
 
             <UIKit.FormField
@@ -203,6 +205,7 @@ const Register = memo((props: Props) => {
               form={form}
               formID="rePassword"
               textContentType="oneTimeCode"
+              borderWidth={1}
             />
             <UIKit.View style={styles.privacyWrapper}>
               <CheckBox

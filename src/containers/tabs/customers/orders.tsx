@@ -1,27 +1,15 @@
-import React, {
-  memo,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { UIKit } from '@uikit';
 import { PopupPrototype, StringPrototype } from '@utils';
 import styles from './styles';
 import { _t } from '@i18n';
 import { IStack } from 'screen-props';
-import { colors, constants, variants } from '@values';
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import { constants } from '@values';
 import { routes } from '@navigator/routes';
 import { RootState, useAppDispatch } from '@state/';
 import { customerActions } from '@state/customer';
 import { shallowEqual, useSelector } from 'react-redux';
-import { isNumber, memoize } from 'lodash';
-import Customers from './customers';
-import Orders from './orders';
-import json from '@nozbe/watermelondb/decorators/json';
+import { memoize } from 'lodash';
 
 interface Props extends IStack {}
 
@@ -30,7 +18,7 @@ const dataSelector = memoize((state: RootState) =>
 );
 const errorSelector = memoize((state: RootState) => state.customer.error);
 
-const Customer = memo((props: Props) => {
+const Orders = memo((props: Props) => {
   const dispatch = useAppDispatch();
   const data = useSelector(dataSelector, shallowEqual);
   const error = useSelector(errorSelector, shallowEqual);
@@ -60,12 +48,6 @@ const Customer = memo((props: Props) => {
       dispatch(customerActions.getList.start({ page }));
     }
   }, [data, loadingMore.current]);
-
-  const onPostRedeem = useCallback(() => navigate(routes.postRedeem), []);
-  const onPushNotification = useCallback(
-    () => navigate(routes.pushNotification),
-    [],
-  );
 
   const renderHeader = useCallback(
     () => <UIKit.Text style={styles.title}>{_t('customerList')}</UIKit.Text>,
@@ -106,26 +88,13 @@ const Customer = memo((props: Props) => {
     [onItemPress],
   );
 
-  return (
-    <UIKit.Container>
-      <UIKit.View style={styles.topButtons}>
-        <UIKit.ButtonText
-          title={_t('postRedeem')}
-          underline
-          textStyle={styles.topButtonText}
-          style={styles.topButton}
-          onPress={onPostRedeem}
-        />
-        <UIKit.ButtonText
-          title={_t('pushNotification')}
-          marginL={constants.dfPadding}
-          underline
-          textStyle={styles.topButtonText}
-          style={styles.topButton}
-          onPress={onPushNotification}
-        />
-      </UIKit.View>
+  const getConfig = useCallback(() => {
+    const { navigation } = props;
+    navigation.navigate(routes.tab1, { index: 1 });
+  }, []);
 
+  return (
+    <UIKit.View flex>
       {error ? (
         <UIKit.View style={styles.errorFetching}>
           <UIKit.Touchable onPress={init}>
@@ -136,71 +105,14 @@ const Customer = memo((props: Props) => {
         <UIKit.FlatList
           data={data}
           renderItem={renderItem}
-          ListHeaderComponent={renderHeader}
+          // ListHeaderComponent={renderHeader}
           refreshing={refreshing}
           onRefresh={onRefresh}
           onEndReached={onLoadMore}
         />
       )}
-    </UIKit.Container>
+    </UIKit.View>
   );
 });
 
-// export default Customers;
-
-const initialLayout = { width: constants.width };
-
-export default memo((props: Props) => {
-  const [index, setIndex] = React.useState(0);
-  const [scenes] = React.useState([
-    { key: 'first', title: _t('customerList') },
-    { key: 'second', title: _t('manageOrders') },
-  ]);
-
-  useEffect(() => {
-    const { index: _index } = props.route.params || {};
-    if (_index && isNumber(_index)) {
-      setIndex(_index);
-    }
-  }, [props]);
-
-  const renderScene = useMemo(
-    () =>
-      SceneMap({
-        first: () => <Customers {...props} />,
-        second: () => <Orders {...props} />,
-      }),
-    [props],
-  );
-
-  const renderTabBar = useCallback((p) => {
-    return (
-      <TabBar
-        style={styles.header}
-        labelStyle={styles.headerLabel}
-        // renderLabel={(p1: any) => {
-        //   return (
-        //     <UIKit.Text
-        //       style={{ backgroundColor: 'red', flex: 1 }}
-        //       bold={p1.focused}
-        //       fontSize={variants.title}
-        //       color={p1.color}>
-        //       {p1.route.title}
-        //     </UIKit.Text>
-        //   );
-        // }}
-        {...p}
-      />
-    );
-  }, []);
-
-  return (
-    <TabView
-      navigationState={{ index, routes: scenes }}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      initialLayout={initialLayout}
-      renderTabBar={renderTabBar}
-    />
-  );
-});
+export default Orders;

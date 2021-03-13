@@ -100,47 +100,53 @@ const ForgotPassword = memo((props: Props) => {
   return (
     <UIKit.Container>
       <ImageBackground style={styles.bg} source={assets.image.login_background}>
-        <UIKit.KeyboardAwareScrollView padding scrollEnabled={false}>
-          <UIKit.FastImage
-            source={assets.image.logo}
-            style={styles.logo}
-            resizeMode="contain"
-          />
-          <UIKit.IconField
-            iconSource={assets.icon.ic_account}
-            containerStyle={styles.input}
-            iconStyle={styles.icon}
-            placeholder={_t('phUsername')}
-            clearButtonMode="while-editing"
-            clearButtonColor={colors.gray}
-            fontSize={variants.title}
-            returnKeyType="go"
-            formProps={form}
-            formID="username"
-            autoFocus
-            onSubmitEditing={form.submitForm}
-            autoCapitalize="none"
-            autoCorrect={false}
-            autoCompleteType="username"
-          />
+        <UIKit.KeyboardAwareScrollView
+          padding
+          scrollEnabled={false}
+          contentContainerStyle={styles.container}>
+          <UIKit.View style={styles.top}>
+            <UIKit.FastImage
+              source={assets.image.logo}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+          </UIKit.View>
+          <UIKit.View style={styles.bottom}>
+            <UIKit.IconField
+              iconSource={assets.icon.ic_account}
+              containerStyle={styles.input}
+              iconStyle={styles.icon}
+              placeholder={_t('phUsername')}
+              clearButtonMode="while-editing"
+              fontSize={variants.title}
+              returnKeyType="go"
+              form={form}
+              formID="username"
+              autoFocus
+              onSubmitEditing={form.submitForm}
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoCompleteType="username"
+            />
 
-          <UIKit.FormError message={form.errors.username} />
+            <UIKit.FormError message={form.errors.username} />
 
-          <UIKit.Button
-            style={styles.buttonLogin}
-            bg={colors.green}
-            color={colors.white}
-            title={_t('confirm')}
-            onPress={form.submitForm}
-          />
+            <UIKit.Button
+              style={styles.buttonLogin}
+              bg={colors.green}
+              color={colors.white}
+              title={_t('confirm')}
+              onPress={form.submitForm}
+            />
 
-          <UIKit.Button
-            style={styles.buttonBack}
-            bg={colors.transparent}
-            color={colors.white}
-            title={_t('back')}
-            onPress={onBack}
-          />
+            <UIKit.Button
+              style={styles.buttonBack}
+              bg={colors.transparent}
+              color={colors.white}
+              title={_t('back')}
+              onPress={onBack}
+            />
+          </UIKit.View>
         </UIKit.KeyboardAwareScrollView>
       </ImageBackground>
     </UIKit.Container>

@@ -1,5 +1,3 @@
-import database from '@database';
-import { updateLocalAuth } from '@services';
 import { IAction } from 'local-redux';
 import Immutable from 'seamless-immutable';
 import { types } from './action';

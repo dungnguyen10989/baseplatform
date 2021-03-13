@@ -17,6 +17,13 @@ export default StyleSheet.create({
     alignSelf: 'center',
     marginVertical: constants.dfPadding * 2,
   },
+  top: {
+    flex: 3,
+    justifyContent: 'center',
+  },
+  bottom: {
+    flex: 7,
+  },
   error: {
     marginTop: 5,
   },

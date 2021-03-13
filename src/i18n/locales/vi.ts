@@ -93,7 +93,7 @@ export default {
   otpPhoneFailure:
     'Xác nhận số điện thoại thất bại vui lòng liên hệ bộ phận tư vấn để được hỗ trợ. Xin cảm ơn !!',
   registerSuccess: 'Đăng ký tài khoản thành công',
-  recoverSuccess: 'Đăng ký tài khoản thành công',
+  recoverSuccess: 'Đổi mật khẩu thành công, vui lòng đăng nhập lại để tiếp tục',
   postProduct: 'Đăng sản phẩm',
   postPromotion: 'Đăng khuyến mãi',
   postRedeem: 'Tạo chương trình đổi điểm',
@@ -118,7 +118,8 @@ export default {
   quantity: 'Số lượng',
   selectImage: 'Chọn hình ảnh',
   uploadImage: 'Tải lên hình ảnh',
-  customerList: 'Danh sách khách hàng',
+  customerList: 'Khách hàng',
+  manageOrders: 'Đơn hàng',
   labelPush: 'Tiêu đề thông báo',
   labelPushContent: 'Nội dung thông báo',
   labelPushNote:

@@ -7,14 +7,21 @@ export default StyleSheet.create({
     width: constants.width,
     height: constants.height,
   },
-  container: {
+  content: {
+    justifyContent: 'center',
     flex: 1,
+  },
+  top: {
+    flex: 3,
+    justifyContent: 'center',
+  },
+  bottom: {
+    flex: 7,
   },
   logo: {
     height: 80,
     width: constants.width,
     alignSelf: 'center',
-    marginTop: constants.dfPadding,
   },
   form: {
     marginTop: 50,

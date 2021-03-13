@@ -65,14 +65,15 @@ const Homepage = memo((props: Props) => {
           style={styles.sliderImage}
           resizeMode="cover"
         />
+        <UIKit.Text style={styles.productName}>{info.item.name}</UIKit.Text>
       </UIKit.Touchable>
     );
   }, []);
 
   const renderInfo = useCallback((info: any) => {
     const { shop = {}, email = '', phone = '' } = info || {};
-    const { info_array = [], value_array = [], products = [] } = shop;
-    const len = info_array.length;
+    const { products = [], menu = [] } = shop;
+    const len = menu.length;
 
     return (
       <UIKit.Container>
@@ -80,17 +81,33 @@ const Homepage = memo((props: Props) => {
           <UIKit.Text style={styles.titleStatistical}>
             {_t('statisticalShop')}
           </UIKit.Text>
-          {info_array.map((item: string, index: number) => (
-            <UIKit.View style={styles.itemWrapper} key={`${index}`}>
-              <UIKit.View style={styles.item}>
-                <UIKit.Text style={styles.titleLeft}>{item}</UIKit.Text>
-                <UIKit.Text style={styles.title}>
-                  {value_array[index]}
-                </UIKit.Text>
-              </UIKit.View>
-              {index < len - 1 ? <UIKit.View style={styles.line} /> : null}
-            </UIKit.View>
-          ))}
+          {menu.map((item: any, index: number) => {
+            const { label, value, redirectTo } = item;
+            const route =
+              redirectTo === 'products'
+                ? routes.tab1
+                : redirectTo === 'promotions'
+                ? routes.tab2
+                : redirectTo === 'orders'
+                ? routes.tab3
+                : undefined;
+            const params = route === routes.tab3 ? { index: 1 } : undefined;
+            const onPress = () =>
+              route && props.navigation.navigate(route, params);
+            return (
+              <UIKit.Touchable
+                style={styles.itemWrapper}
+                key={`${index}`}
+                onPress={onPress}
+                activeOpacity={route ? 0.7 : 1}>
+                <UIKit.View style={styles.item}>
+                  <UIKit.Text style={styles.titleLeft}>{label}</UIKit.Text>
+                  <UIKit.Text style={styles.title}>{value}</UIKit.Text>
+                </UIKit.View>
+                {index < len - 1 ? <UIKit.View style={styles.line} /> : null}
+              </UIKit.Touchable>
+            );
+          })}
           <UIKit.View style={styles.carousel}>
             <Carousel
               data={products}

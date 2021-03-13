@@ -15,7 +15,7 @@ import {
 } from 'custom-ui-kit';
 import Text from './text';
 import Touchable from './touchable';
-import { constants } from '@values';
+import { constants, variants } from '@values';
 import { destructPropsToStyle } from './helper';
 
 export interface Props

@@ -156,12 +156,10 @@ const ProductDetail = memo((props: Props) => {
 
   const branchText = useMemo(() => {
     const { branch } = form.values;
-    let result = branch.map((i, index) => {
-      const find = branches?.find((item) => item.id === i);
-      return find;
+    let result = branches?.filter((i) => {
+      return branch?.some((item) => item === i.id);
     });
-
-    return result.map((i) => i.name).join(', ');
+    return result.map((i) => i?.name).join(', ');
   }, [branches, form.values.branch]);
 
   const renderSelectedBranches = useMemo(() => {

@@ -9,7 +9,6 @@ export default StyleSheet.create({
   },
   topButtonText: {
     color: colors.brightRed,
-    fontSize: variants.subTitle,
     fontWeight: 'bold',
     textAlign: 'center',
   },
@@ -76,5 +75,14 @@ export default StyleSheet.create({
     height: constants.width * 0.4,
     borderRadius: 10,
     backgroundColor: colors.black1,
+  },
+  productName: {
+    color: colors.white,
+    fontWeight: 'bold',
+    position: 'absolute',
+    left: constants.dfPadding,
+    right: constants.dfPadding,
+    bottom: constants.dfPadding,
+    textAlign: 'center',
   },
 });

@@ -8,12 +8,22 @@ export default StyleSheet.create({
     paddingHorizontal: constants.dfPadding,
     alignItems: 'flex-start',
   },
+  header: {
+    backgroundColor: colors.primaryGreen,
+    marginTop: constants.quarterPadding,
+    marginHorizontal: constants.quarterPadding,
+    borderRadius: 1,
+  },
+  headerLabel: {
+    flex: 1,
+    textTransform: 'capitalize',
+    fontSize: variants.title,
+  },
   topButton: {
     flex: 1,
   },
   topButtonText: {
     color: colors.brightRed,
-    fontSize: variants.subTitle,
     fontWeight: 'bold',
     textAlign: 'center',
   },

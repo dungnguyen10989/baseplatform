@@ -38,7 +38,7 @@ type ResponseSingle =
   | { success: false; error: string | Error };
 
 const showOverlay = (params?: IOverlay) => {
-  console.log('Native', NativeModules.Utils);
+  DeviceEventEmitter.emit(events.showOverlay);
 
   // NativeModules.Utils.showOverlay();
   // const currentRoute = containerNav.current?.getCurrentRoute();

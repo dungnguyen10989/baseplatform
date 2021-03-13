@@ -11,6 +11,13 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  top: {
+    flex: 3,
+    justifyContent: 'center',
+  },
+  bottom: {
+    flex: 7,
+  },
   header: {
     color: colors.white,
     fontSize: variants.title,

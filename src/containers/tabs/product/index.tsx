@@ -130,10 +130,9 @@ const Product = memo((props: Props) => {
       <UIKit.ButtonText
         title={_t('postProduct')}
         underline
-        color={colors.brightRed}
-        fontSize={variants.subTitle}
-        style={styles.postProduct}
         bold
+        color={colors.brightRed}
+        style={styles.postProduct}
         onPress={onCreateProduct}
       />
       {renderContent}

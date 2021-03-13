@@ -13,6 +13,7 @@ export default StyleSheet.create({
     flex: 1,
     flexGrow: 1,
     paddingHorizontal: constants.dfPadding,
+    justifyContent: 'center',
   },
   logo: {
     height: 80,
@@ -22,7 +23,7 @@ export default StyleSheet.create({
   },
   form: {
     // flex: 1,
-    marginTop: 100,
+    marginTop: -100,
     borderRadius: 5,
     borderWidth: 2,
     borderColor: colors.skyBlue,
@@ -54,6 +55,9 @@ export default StyleSheet.create({
   input: {
     backgroundColor: colors.transparent,
     paddingVertical: constants.halfPadding,
+    borderBottomWidth: 1,
+    borderColor: colors.skyBlue5,
+    marginTop: constants.halfPadding,
   },
   icon: {
     width: 24,

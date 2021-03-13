@@ -24,7 +24,7 @@ const OTP = memo((props: Props) => {
   const params = props.route.params || {};
   const codeRef = useRef<string | undefined>(params?.code);
   const [resent, setResent] = useState(false);
-  const [timer, setTimer] = useState(6);
+  const [timer, setTimer] = useState(20);
 
   useEffect(() => {
     const timerRef = setTimeout(() => {
@@ -49,7 +49,7 @@ const OTP = memo((props: Props) => {
         }).then((val) => {
           PopupPrototype.dismissOverlay();
           if (val.data && val.data.user) {
-            updateLocalAuth(db, val.data.user);
+            updateLocalAuth(val.data.user);
             PopupPrototype.showToastWithGravity(
               _t('registerSuccess'),
               'long',
@@ -123,59 +123,66 @@ const OTP = memo((props: Props) => {
   return (
     <UIKit.Container>
       <ImageBackground style={styles.bg} source={assets.image.login_background}>
-        <UIKit.KeyboardAwareScrollView padding scrollEnabled={false}>
-          <UIKit.FastImage
-            source={assets.image.logo}
-            style={styles.logo}
-            resizeMode="contain"
-          />
-          <UIKit.View style={styles.inputWrapper}>
-            {!form.values.otp ? (
-              <UIKit.Text
-                style={[
-                  StyleSheet.absoluteFill,
-                  styles.input,
-                  styles.placeholder,
-                ]}>
-                OTP
-              </UIKit.Text>
-            ) : null}
-            <TextInput
-              style={styles.input}
-              clearButtonMode="never"
-              keyboardType="numeric"
-              autoFocus
-              onChangeText={onChangeText}
-              maxLength={constants.otpLength}
-              textContentType="oneTimeCode"
+        <UIKit.KeyboardAwareScrollView
+          padding
+          scrollEnabled={false}
+          contentContainerStyle={styles.container}>
+          <UIKit.View style={styles.top}>
+            <UIKit.FastImage
+              source={assets.image.logo}
+              style={styles.logo}
+              resizeMode="contain"
             />
           </UIKit.View>
+          <UIKit.View style={styles.bottom}>
+            <UIKit.View style={styles.inputWrapper}>
+              {!form.values.otp ? (
+                <UIKit.Text
+                  style={[
+                    StyleSheet.absoluteFill,
+                    styles.input,
+                    styles.placeholder,
+                  ]}>
+                  OTP
+                </UIKit.Text>
+              ) : null}
+              <TextInput
+                style={styles.input}
+                clearButtonMode="never"
+                keyboardType="numeric"
+                autoFocus
+                onChangeText={onChangeText}
+                maxLength={constants.otpLength}
+                textContentType="oneTimeCode"
+              />
+            </UIKit.View>
 
-          <UIKit.ButtonText
-            style={styles.resend}
-            color={resent || timer > 0 ? colors.gray : colors.white}
-            onPress={resendOtp}
-            disabled={resent || timer > 0}
-            title={`${_t('resendOtp')} ${timer > 0 ? `(${timer}s)` : ''}`}
-          />
+            <UIKit.ButtonText
+              style={styles.resend}
+              color={resent || timer > 0 ? colors.gray : colors.white}
+              onPress={resendOtp}
+              disabled={resent || timer > 0}
+              title={`${_t('resendOtp')} ${timer > 0 ? `(${timer}s)` : ''}`}
+            />
 
-          {<UIKit.FormError message={form.errors.otp} />}
+            {<UIKit.FormError message={form.errors.otp} />}
 
-          <UIKit.Button
-            style={styles.buttonLogin}
-            bg={colors.green}
-            color={colors.white}
-            title={_t('confirmOtp')}
-            onPress={form.submitForm}
-          />
+            <UIKit.Button
+              style={styles.buttonLogin}
+              bg={colors.green}
+              color={colors.white}
+              title={_t('confirmOtp')}
+              onPress={form.submitForm}
+            />
 
-          <UIKit.Button
-            style={styles.buttonBack}
-            bg={colors.transparent}
-            color={colors.white}
-            title={_t('backToHome')}
-            onPress={onBack}
-          />
+            <UIKit.Button
+              style={styles.buttonBack}
+              bg={colors.transparent}
+              color={colors.white}
+              title={_t('backToHome')}
+              onPress={onBack}
+            />
+          </UIKit.View>
         </UIKit.KeyboardAwareScrollView>
       </ImageBackground>
     </UIKit.Container>

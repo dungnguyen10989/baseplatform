@@ -21,9 +21,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
-  <key>CodePushDeploymentKey</key>
-  <string>DVSHRz13akRSppqVo0vpM5XDiAsCNtvTEzZNi</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>CodePushDeploymentKey</key>
+	<string>DVSHRz13akRSppqVo0vpM5XDiAsCNtvTEzZNi</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>mailto:</string>
@@ -31,53 +31,59 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-  <key>NSAppTransportSecurity</key>
-    <dict>
-      <key>NSAllowsArbitraryLoads</key>
-      <true/>
-      <key>NSExceptionDomains</key>
-      <dict>
-        <key>NSExceptionAllowsInsecureHTTPLoads</key>
-        <true/>
-        <key>appcenter.ms</key>
-        <dict>
-          <key>NSExceptionAllowsInsecureHTTPLoads</key>
-          <true/>
-        </dict>
-        <key>codepush.appcenter.ms</key>
-        <dict>
-          <key>NSExceptionAllowsInsecureHTTPLoads</key>
-          <true/>
-        </dict>
-        <key>codepushupdates.azureedge.net</key>
-        <dict/>
-        <key>localhost</key>
-        <dict>
-          <key>NSExceptionAllowsInsecureHTTPLoads</key>
-          <true/>
-        </dict>
-      </dict>
-    </dict>
-  <key>NSBluetoothPeripheralUsageDescription</key>
-    <string>Babaza would like access to your bluetooth peripheral</string>
-    <key>NSCalendarsUsageDescription</key>
-    <string>Babaza would like access to your calendar</string>
-    <key>NSCameraUsageDescription</key>
-    <string>Ứng dụng Babaza mong muốn truy cập máy ảnh để có thể chụp ảnh cho ảnh đại diện</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>Babaza would like access to your location always</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Ứng dụng Babaza mong muốn lấy vị trí hiện hành của bạn để có thể tìm kiếm công việc gần bạn và lưu tọa độ cho công ty</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>Babaza would like to your microphone (for videos)</string>
-    <key>NSMotionUsageDescription</key>
-    <string>Babaza would like access to your motion</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Babaza would like to save photos to your photo gallery</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Ứng dụng Babaza mong muốn truy cập thư viện hình ảnh để bạn có thể chọn ảnh đại diện</string>
-    <key>NSSpeechRecognitionUsageDescription</key>
-    <string>Babaza would like access to your speech recognition</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>NSExceptionAllowsInsecureHTTPLoads</key>
+			<true/>
+			<key>appcenter.ms</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+			<key>codepush.appcenter.ms</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+			<key>codepushupdates.azureedge.net</key>
+			<dict/>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Babaza wants to play music</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Babaza would like access bluetooth</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Babaza would like access to your bluetooth peripheral</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Babaza would like access to your calendar</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Ứng dụng Babaza mong muốn truy cập máy ảnh để có thể chụp ảnh cho ảnh đại diện</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Babaza would like access to your location always</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Ứng dụng Babaza mong muốn lấy vị trí hiện hành của bạn để có thể tìm kiếm công việc gần bạn và lưu tọa độ cho công ty</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Babaza would like to your microphone (for videos)</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Babaza would like access to your motion</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Babaza would like to save photos to your photo gallery</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Ứng dụng Babaza mong muốn truy cập thư viện hình ảnh để bạn có thể chọn ảnh đại diện</string>
+	<key>NSSiriUsageDescription</key>
+	<string>Babaza would like use Siri</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Babaza would like access to your speech recognition</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -109,5 +115,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>kTCCServiceMediaLibrary</key>
+	<string>Babaza would like play music</string>
 </dict>
 </plist>

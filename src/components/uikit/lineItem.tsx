@@ -134,7 +134,7 @@ const LineItem = (props: Props) => {
 
 (LineItem as React.ComponentType<Props>).defaultProps = {
   borderBottomWidth: 1,
-  borderTopWidth: 1,
+  // borderTopWidth: 1,
   borderColor: colors.silver,
   chevronSize: 12,
   chevronThickness: 2,
@@ -148,7 +148,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    flex: 1,
     padding: constants.dfPadding,
     backgroundColor: colors.background2,
   },

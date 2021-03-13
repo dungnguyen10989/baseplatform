@@ -1,5 +1,3 @@
-import database from '@database';
-import { updateLocalAuth } from '@services';
 import { IAction } from 'local-redux';
 import Immutable from 'seamless-immutable';
 import { types } from './action';
@@ -19,7 +17,7 @@ export default (state = initialState, action: IAction) => {
   switch (type) {
     case types.login.success:
     case types.getInfo.success:
-      updateLocalAuth(database, payload.user);
+    case types.register.success:
       return state.merge({ data: payload.user, error: undefined });
     case types.login.error:
       return state.merge({ data: undefined, error: payload });

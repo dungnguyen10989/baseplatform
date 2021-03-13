@@ -131,9 +131,8 @@ const Promotion = memo((props: Props) => {
         title={_t('postPromotion')}
         underline
         color={colors.brightRed}
-        fontSize={variants.subTitle}
-        style={styles.postProduct}
         bold
+        style={styles.postProduct}
         onPress={onCreatePromo}
       />
       {renderContent}
