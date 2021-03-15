@@ -34,7 +34,7 @@ interface Form {
   imageUri: string;
 }
 
-const ProductDetail = memo((props: Props) => {
+const ShopDetail = memo((props: Props) => {
   const dispatch = useDispatch();
   const scrollRef = useRef<KeyboardAwareScrollView>() as MutableRefObject<KeyboardAwareScrollView>;
   const amountRef = useRef<TextInput>() as MutableRefObject<TextInput>;
@@ -326,4 +326,4 @@ const ProductDetail = memo((props: Props) => {
   );
 });
 
-export default ProductDetail;
+export default ShopDetail;

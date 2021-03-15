@@ -11,7 +11,7 @@ export default StyleSheet.create({
   header: {
     backgroundColor: colors.primaryGreen,
     marginTop: constants.quarterPadding,
-    marginHorizontal: constants.quarterPadding,
+    // marginHorizontal: constants.quarterPadding,
     borderRadius: 1,
   },
   headerLabel: {
@@ -49,5 +49,15 @@ export default StyleSheet.create({
   },
   right: {
     alignItems: 'flex-end',
+  },
+  finished: {
+    paddingVertical: constants.halfPadding,
+    // borderRadius: 5,
+    // backgroundColor: colors.button,
+  },
+  unFinished: {
+    padding: constants.halfPadding,
+    borderRadius: 5,
+    backgroundColor: colors.button,
   },
 });

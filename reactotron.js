@@ -8,7 +8,7 @@ import { reactotronRedux } from 'reactotron-redux';
 // import AsyncStorage from '@react-native-community/async-storage';
 
 const configs = {
-  host: 'localhost', // change to your IP Address to debug in release mode
+  host: '10.20.133.66', // change to your IP Address to debug in release mode
   // host: 'localhost',
   port: 9090, // identify port for Reactotron, disabled if use default port
 };

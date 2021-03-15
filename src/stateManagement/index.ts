@@ -11,6 +11,7 @@ import { customerHisEpic, customerHisReducer } from './customerHis';
 import { productEpic, productReducer } from './product';
 import { promotionEpic, promotionReducer } from './promotion';
 import { redeemEpic, redeemReducer } from './redeem';
+import { orderEpic, orderReducer } from './orders';
 
 const epicMiddleware = createEpicMiddleware();
 
@@ -23,6 +24,7 @@ const rootEpic = combineEpics(
   shopEpic,
   valuesEpic,
   redeemEpic,
+  orderEpic,
 ) as any;
 
 const rootReducer = combineReducers({
@@ -34,6 +36,7 @@ const rootReducer = combineReducers({
   shop: shopReducer,
   values: valuesReducer,
   redeem: redeemReducer,
+  order: orderReducer,
 });
 
 const store = createStore(

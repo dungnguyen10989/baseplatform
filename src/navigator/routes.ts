@@ -24,6 +24,7 @@ const routes = {
   postRedeem: '',
   pushNotification: '',
   customerDetail: '',
+  shopDetail: '',
 };
 
 for (const key in routes) {

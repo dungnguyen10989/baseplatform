@@ -9,7 +9,7 @@ module.exports = {
     'no-case-declarations': 0,
     'no-catch-shadow': 0,
     '@typescript-eslint/no-unused-vars': 0,
-    'react-hooks/exhaustive-deps': 0,
+    // 'react-hooks/exhaustive-deps': 0,
     'no-unused-vars': 'off',
   },
 };

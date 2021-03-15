@@ -35,6 +35,7 @@ import Customers from '@containers/tabs/customers';
 import PostRedeem from '@containers/postRedeem';
 import PushNotification from '@containers/pushNotification';
 import CustomerDetail from '@containers/customerDetail';
+import ShopDetail from '@containers/shopDetail';
 
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -211,6 +212,7 @@ const RootTabs = memo(() => {
 
       <Stack.Screen name={routes.qr} component={QR} />
       <Stack.Screen name={routes.customerDetail} component={CustomerDetail} />
+      <Stack.Screen name={routes.shopDetail} component={ShopDetail} />
     </Stack.Navigator>
   );
 });

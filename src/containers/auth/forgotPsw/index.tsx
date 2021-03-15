@@ -76,12 +76,12 @@ const ForgotPassword = memo((props: Props) => {
       };
       sendOtp();
     },
-    [],
+    [props.navigation],
   );
 
   const onBack = useCallback(() => {
     props.navigation.goBack();
-  }, []);
+  }, [props.navigation]);
 
   const form = useFormik<Form>({
     initialValues: {

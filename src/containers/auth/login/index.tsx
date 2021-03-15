@@ -45,7 +45,7 @@ const Login = memo((props: Props) => {
         }
       }
     });
-  }, []);
+  }, [dispatch, db]);
 
   const onSubmit = useCallback(
     (values: Form, formikHelpers: formik.FormikHelpers<Form>) => {
@@ -61,15 +61,15 @@ const Login = memo((props: Props) => {
         ),
       );
     },
-    [],
+    [dispatch],
   );
 
   const form = useFormik<Form>({
     initialValues: {
-      // username: 'tainc@ftcjsc.com',
-      // password: 'ftc2018',
-      username: '',
-      password: '',
+      username: 'tainc@ftcjsc.com',
+      password: 'ftc2018',
+      // username: '',
+      // password: '',
     },
     onSubmit,
     validateOnMount: false,
@@ -86,12 +86,11 @@ const Login = memo((props: Props) => {
     props.navigation.push(routes.forgotPassword, {
       username: form.values.username,
     });
-  }, [form.values.username]);
+  }, [form.values.username, props.navigation]);
 
-  const onRegister = useCallback(
-    () => props.navigation.push(routes.register),
-    [],
-  );
+  const onRegister = useCallback(() => props.navigation.push(routes.register), [
+    props.navigation,
+  ]);
 
   return (
     <UIKit.Container>

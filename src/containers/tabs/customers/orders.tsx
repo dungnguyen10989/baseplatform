@@ -4,19 +4,19 @@ import { PopupPrototype, StringPrototype } from '@utils';
 import styles from './styles';
 import { _t } from '@i18n';
 import { IStack } from 'screen-props';
-import { constants } from '@values';
+import { colors, constants } from '@values';
 import { routes } from '@navigator/routes';
 import { RootState, useAppDispatch } from '@state/';
-import { customerActions } from '@state/customer';
+import { orderActions } from '@state/orders';
 import { shallowEqual, useSelector } from 'react-redux';
 import { memoize } from 'lodash';
 
 interface Props extends IStack {}
 
 const dataSelector = memoize((state: RootState) =>
-  state.customer.data?.asMutable(),
+  state.order.data?.asMutable(),
 );
-const errorSelector = memoize((state: RootState) => state.customer.error);
+const errorSelector = memoize((state: RootState) => state.order.error);
 
 const Orders = memo((props: Props) => {
   const dispatch = useAppDispatch();
@@ -29,34 +29,46 @@ const Orders = memo((props: Props) => {
   const init = useCallback(() => {
     const callback = () => PopupPrototype.dismissOverlay();
     PopupPrototype.showOverlay();
-    dispatch(customerActions.getList.start(undefined, callback, callback));
-  }, []);
+    dispatch(orderActions.getList.start(undefined, callback, callback));
+  }, [dispatch]);
 
   useEffect(init, [init]);
 
   const onRefresh = useCallback(() => {
-    const callback = () => setRefreshing(false);
+    const callback = () => {
+      setRefreshing(false);
+    };
     setRefreshing(true);
-    dispatch(customerActions.getList.start(undefined, callback, callback));
-  }, []);
+    dispatch(orderActions.getList.start(undefined, callback, callback));
+  }, [dispatch]);
 
   const onLoadMore = useCallback(() => {
     if (!loadingMore.current) {
       loadingMore.current = true;
       const len = data.length;
       const page = Math.ceil(len / constants.pageSize) + 1;
-      dispatch(customerActions.getList.start({ page }));
+      dispatch(orderActions.getList.start({ page }));
     }
-  }, [data, loadingMore.current]);
+  }, [data, dispatch]);
 
-  const renderHeader = useCallback(
-    () => <UIKit.Text style={styles.title}>{_t('customerList')}</UIKit.Text>,
-    [],
+  // const onItemPress = useCallback(
+  //   (item: any) => {
+  //     navigate(routes.customerDetail, { data: item });
+  //   },
+  //   [navigate],
+  // );
+
+  const onFinish = useCallback(
+    (item: any) => {
+      dispatch(
+        orderActions.updateStatus.start({
+          order_id: item.order_id,
+          total_amount: item.total_amount,
+        }),
+      );
+    },
+    [dispatch],
   );
-
-  const onItemPress = useCallback((item: any) => {
-    navigate(routes.customerDetail, { data: item });
-  }, []);
 
   const renderItem = useCallback(
     (info: { item: any; index: number }) => {
@@ -69,7 +81,7 @@ const Orders = memo((props: Props) => {
           caption={item.updated_at}
           source={item.avatar}
           titleStyle={styles.itemTitle}
-          onPress={onItemPress.bind(null, item)}
+          // onPress={onItemPress.bind(null, item)}
           borderBottomWidth={0}
           borderTopWidth={1}
           rightComponent={
@@ -80,18 +92,24 @@ const Orders = memo((props: Props) => {
               <UIKit.Text style={styles.amount}>
                 {StringPrototype.toCurrency(item.total_amount, 0)}
               </UIKit.Text>
+              {!item.is_success ? (
+                <UIKit.Touchable
+                  onPress={onFinish.bind(null, item)}
+                  style={styles.unFinished}>
+                  <UIKit.Text color={colors.white}>{item.status}</UIKit.Text>
+                </UIKit.Touchable>
+              ) : (
+                <UIKit.View style={styles.finished}>
+                  <UIKit.Text color={colors.skyBlue}>{item.status}</UIKit.Text>
+                </UIKit.View>
+              )}
             </UIKit.View>
           }
         />
       );
     },
-    [onItemPress],
+    [onFinish],
   );
-
-  const getConfig = useCallback(() => {
-    const { navigation } = props;
-    navigation.navigate(routes.tab1, { index: 1 });
-  }, []);
 
   return (
     <UIKit.View flex>

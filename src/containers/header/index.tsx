@@ -32,7 +32,7 @@ const Header = memo((props: Props) => {
       });
     };
     get();
-  }, []);
+  }, [db]);
 
   const onQR = useCallback(() => {
     props.navigation.navigate(routes.qr);
@@ -46,7 +46,8 @@ const Header = memo((props: Props) => {
     //   localUser.shop.status_str = 'abc' + new Date().getTime();
     //   mConfigSchema.addOrUpdateConfig(db, configs.user, localUser);
     // }
-  }, [props.navigation, localUser]);
+    props.navigation.push(routes.shopDetail);
+  }, [props.navigation]);
 
   return (
     <UIKit.View style={styles.container}>

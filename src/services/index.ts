@@ -10,6 +10,7 @@ import { containerNav } from '@navigator/helper';
 import { StackActions } from '@react-navigation/native';
 import { routes } from '@navigator/routes';
 import database from '@database';
+import messaging from '@react-native-firebase/messaging';
 
 type Method =
   | 'get'
@@ -111,6 +112,9 @@ const updateLocalAuth = (user: any) => {
   setHttpAuthorizationToken(user.token);
   mConfigSchema.addOrUpdateConfig(database, configs.user, user);
   containerNav.current?.dispatch(StackActions.replace(routes._rootTabs));
+  messaging().subscribeToTopic(`shoporder_${user?.shop?.id}`);
+  // GlobalEvents.events.forEach((e: any) => e?.());
+  // GlobalEvents.events = [];
 };
 
 const clearUserInfo = (db: Database) => {

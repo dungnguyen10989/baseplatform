@@ -10,10 +10,10 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		19C9DF35805B28946796402F /* libPods-development.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11B7701E4474750AF7768C70 /* libPods-development.a */; };
 		220A664025F383EC00BBC731 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		220A664125F383EC00BBC731 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224B175925A0FA2C009A445D /* File.swift */; };
 		220A664225F383EC00BBC731 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		220A664425F383EC00BBC731 /* libPods-production.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8739A3437BF5D65D23A4BC34 /* libPods-production.a */; };
 		220A664625F383EC00BBC731 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		220A664725F383EC00BBC731 /* Modules in Resources */ = {isa = PBXBuildFile; fileRef = 22AD397625E9FFC30054DE5D /* Modules */; };
 		220A664825F383EC00BBC731 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2259E61725C05F130042455F /* GoogleService-Info.plist */; };
@@ -26,6 +26,7 @@
 		2259E61825C05F130042455F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2259E61725C05F130042455F /* GoogleService-Info.plist */; };
 		22AD397725E9FFC30054DE5D /* Modules in Resources */ = {isa = PBXBuildFile; fileRef = 22AD397625E9FFC30054DE5D /* Modules */; };
 		32E08940CA3555598FB86B44 /* libPods-production.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8739A3437BF5D65D23A4BC34 /* libPods-production.a */; };
+		72BDFE0517C19D72C169B9C5 /* libPods-production.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA612FF7B019E0333317B8D /* libPods-production.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -55,12 +56,12 @@
 		22EF99C40FEB5310015EBAAA /* Pods-production.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-production.release.xcconfig"; path = "Target Support Files/Pods-production/Pods-production.release.xcconfig"; sourceTree = "<group>"; };
 		787EF046CA22B1A167DE842F /* Pods-BabazaShop-BabazaShopTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BabazaShop-BabazaShopTests.release.xcconfig"; path = "Target Support Files/Pods-BabazaShop-BabazaShopTests/Pods-BabazaShop-BabazaShopTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BabazaShop/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8739A3437BF5D65D23A4BC34 /* libPods-production.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-production.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A628EACE9D8A34B9B68D372B /* libPods-BabazaShop-BabazaShopTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BabazaShop-BabazaShopTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7249159DE03CA8BCD9080E4 /* Pods-development.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-development.debug.xcconfig"; path = "Target Support Files/Pods-development/Pods-development.debug.xcconfig"; sourceTree = "<group>"; };
 		BB081A75DAEB592032DB8100 /* Pods-BabazaShop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BabazaShop.release.xcconfig"; path = "Target Support Files/Pods-BabazaShop/Pods-BabazaShop.release.xcconfig"; sourceTree = "<group>"; };
 		C1ECE909EBF921063A9A4E26 /* Pods-production.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-production.debug.xcconfig"; path = "Target Support Files/Pods-production/Pods-production.debug.xcconfig"; sourceTree = "<group>"; };
 		D8B3DDBFDE208D7F8A7160EC /* Pods-development.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-development.release.xcconfig"; path = "Target Support Files/Pods-development/Pods-development.release.xcconfig"; sourceTree = "<group>"; };
+		DEA612FF7B019E0333317B8D /* libPods-production.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-production.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1A612184A888270CF22FE82 /* Pods-BabazaShop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BabazaShop.debug.xcconfig"; path = "Target Support Files/Pods-BabazaShop/Pods-BabazaShop.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -72,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32E08940CA3555598FB86B44 /* libPods-production.a in Frameworks */,
+				72BDFE0517C19D72C169B9C5 /* libPods-production.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,7 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				220A664425F383EC00BBC731 /* libPods-production.a in Frameworks */,
+				19C9DF35805B28946796402F /* libPods-development.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +130,7 @@
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				A628EACE9D8A34B9B68D372B /* libPods-BabazaShop-BabazaShopTests.a */,
 				11B7701E4474750AF7768C70 /* libPods-development.a */,
-				8739A3437BF5D65D23A4BC34 /* libPods-production.a */,
+				DEA612FF7B019E0333317B8D /* libPods-production.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -335,7 +337,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-production-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-development-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -381,7 +383,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-production/Pods-production-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-development/Pods-development-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/RNImageCropPicker/QBImagePicker.bundle",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
@@ -428,7 +430,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-production/Pods-production-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-development/Pods-development-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		220A664D25F383EC00BBC731 /* [CP-User] [RNFB] Core Configuration */ = {
@@ -640,7 +642,7 @@
 		};
 		220A664F25F383EC00BBC731 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C1ECE909EBF921063A9A4E26 /* Pods-production.debug.xcconfig */;
+			baseConfigurationReference = A7249159DE03CA8BCD9080E4 /* Pods-development.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -667,7 +669,7 @@
 		};
 		220A665025F383EC00BBC731 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22EF99C40FEB5310015EBAAA /* Pods-production.release.xcconfig */;
+			baseConfigurationReference = D8B3DDBFDE208D7F8A7160EC /* Pods-development.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
